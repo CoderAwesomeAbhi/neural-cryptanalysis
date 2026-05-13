@@ -11,3 +11,5 @@ venv/
 node_modules/
 *.log
 .ipynb_checkpoints/
+
+condensed_recent_math_research/
