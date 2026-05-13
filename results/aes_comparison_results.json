@@ -1,0 +1,7 @@
+{
+  "padic_test_acc": 0.02711864406779661,
+  "aes_test_acc": 0.008333333333333333,
+  "random_test_acc": 0.006666666666666667,
+  "padic_better": false,
+  "resistance_ratio": 0.3072916666666667
+}
