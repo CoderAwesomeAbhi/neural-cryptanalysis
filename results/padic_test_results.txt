@@ -1,0 +1,19 @@
+======================================================================
+P-ADIC ATTENTION HYPOTHESIS TEST
+======================================================================
+
+Testing p-adic attention hypothesis: p=5, L_in=64
+Traceback (most recent call last):
+  File "C:\Users\abhij\Downloads\neural-cryptanalysis\condensed_recent_math_research\test_padic_attention.py", line 119, in <module>
+    result = test_padic_hypothesis(p=5, m=125, L_in=64, N=8000)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abhij\Downloads\neural-cryptanalysis\condensed_recent_math_research\test_padic_attention.py", line 40, in test_padic_hypothesis
+    X = np.array([[seq[i+t]/m for t in range(L_in)] for i in range(N-L_in)], dtype=np.float32)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abhij\Downloads\neural-cryptanalysis\condensed_recent_math_research\test_padic_attention.py", line 40, in <listcomp>
+    X = np.array([[seq[i+t]/m for t in range(L_in)] for i in range(N-L_in)], dtype=np.float32)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abhij\Downloads\neural-cryptanalysis\condensed_recent_math_research\test_padic_attention.py", line 40, in <listcomp>
+    X = np.array([[seq[i+t]/m for t in range(L_in)] for i in range(N-L_in)], dtype=np.float32)
+                   ~~~^^^^^
+IndexError: list index out of range

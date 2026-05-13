@@ -1,0 +1,26 @@
+======================================================================
+COMPUTING MISSING PERIODS (p=11, p=13 at k=3)
+======================================================================
+
+Computing p=11, k=3, m=1331 (1,771,561 states)...
+  Using Brent's algorithm with 1000 random samples
+  T_sat(1331) = 14,801
+  Computed in 21.92 seconds
+  Growth ratio T(1331)/T(121) = 3.01�
+
+Computing p=13, k=3, m=2197 (4,826,809 states)...
+  Using Brent's algorithm with 1000 random samples
+  T_sat(2197) = 1,938,536
+  Computed in 41.65 seconds
+  Growth ratio T(2197)/T(169) = 94.68�
+
+======================================================================
+RESULTS SUMMARY
+======================================================================
+
+Updated Table 4 entries:
+  p=11, k=3, m=1331: T = 14,801
+  p=13, k=3, m=2197: T = 1,938,536
+
+[OK] All missing data computed
+[OK] No more 'sampling budget' excuse

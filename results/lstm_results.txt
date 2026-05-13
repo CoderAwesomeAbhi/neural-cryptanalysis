@@ -1,0 +1,20 @@
+======================================================================
+LSTM EXPERIMENTS
+======================================================================
+
+[1/2] Easy sequence (m=25, T=125)...
+  Val Acc: 100.0%
+  Params: 209,049
+
+[2/2] Hard sequence (m=125, T=7295)...
+  Val Acc: 3.1%
+  Params: 215,549
+
+======================================================================
+RESULTS SUMMARY
+======================================================================
+Easy (m=25):  LSTM 100.0%  (baseline 4.0%)
+Hard (m=125): LSTM 3.1%  (baseline 0.8%)
+
+[OK] LSTM experiments complete
+Result: LSTM also fails on hard sequence (same as MLP/Transformer)

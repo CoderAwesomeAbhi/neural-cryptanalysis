@@ -1,0 +1,22 @@
+=================================================================
+VERIFICATION: Canonical Parameter Setup
+=================================================================
+
+A0 =
+[[1 1]
+ [3 1]]
+b0 = [1 2]
+A1 =
+[[3 3]
+ [1 3]]
+b1 = [2 1]
+Traceback (most recent call last):
+  File "C:\Users\abhij\Downloads\neural-cryptanalysis\condensed_recent_math_research\verify_all.py", line 62, in <module>
+    checks_passed.append(check("det(A0) mod 5", det2x2_mod(A0_CANON, 5), 3))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abhij\Downloads\neural-cryptanalysis\condensed_recent_math_research\verify_all.py", line 47, in check
+    print(f"  {status}  {label}: got {got!r}  (expected {expected!r})")
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 2: character maps to <undefined>
