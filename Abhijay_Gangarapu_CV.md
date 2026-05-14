@@ -1,102 +1,131 @@
 # ABHIJAY GANGARAPU
-**High School Researcher | UT Austin Research Assistant Program**
+**Incoming Freshman | McNeil High School | UT Austin Research Assistant Program**
 
-📧 [Your Email]  
-📱 [Your Phone]  
+📧 abhiay.email@gmail.com  
 🔗 GitHub: [github.com/CoderAwesomeAbhi](https://github.com/CoderAwesomeAbhi)  
 🔗 Project: [github.com/CoderAwesomeAbhi/neural-cryptanalysis](https://github.com/CoderAwesomeAbhi/neural-cryptanalysis)
 
 ---
 
-## RESEARCH INTERESTS
+## EDUCATION
 
-Machine Learning Theory • Cryptography • p-adic Number Theory • AI Safety
+**McNeil High School** | Austin, TX | Class of 2029  
+- UT Austin Research Assistant Program (2025-2026)
+- Incoming Freshman (completed 8th grade)
 
 ---
 
-## EDUCATION
+## RESEARCH INTERESTS
 
-**[Your High School Name]** | Expected Graduation: [Year]  
-- UT Austin Research Assistant Program (2025-2026)
-- GPA: [Your GPA] | Relevant Coursework: AP Calculus, AP Computer Science
+Machine Learning Theory • Cryptography • p-adic Number Theory • AI Safety • Computational Complexity
 
 ---
 
 ## CURRENT RESEARCH PROJECT
 
-**Period Growth and Neural Predictability in Piecewise Affine Systems**  
+**Period Growth and Neural Predictability in Piecewise Affine Systems over Residue Rings**  
 *Independent Research | UT Austin Research Assistant Program | 2025-2026*
 
-**Summary:** Proved that neural networks (including Transformers) cannot learn sequences with Hensel-satisfied p-adic lifting properties. Validated across 168 primes and 3 AI architectures.
+Proved that neural networks (including Transformers) cannot learn sequences with Hensel-satisfied p-adic lifting properties. Validated across 168 primes and 3 AI architectures.
 
 **Key Results:**
-- Proved 5 mathematical theorems on neural network limitations
-- Tested 168 primes (p=2 to p=997) with mean growth ratio 26.94×
-- Validated on MLP, LSTM, and Transformer architectures (all achieve <3% accuracy)
-- Discovered sharp phase transition at T/L_in ≈ 21
-- All results 100% reproducible (24/24 automated verification checks pass)
+- **5 proven theorems** on neural network limitations (complete rigorous proofs)
+- **168 primes tested** (p=2 to p=997) with mean growth ratio 26.94×
+- **3 architectures validated:** MLP, LSTM, Transformer (all achieve <3% accuracy on hard sequences)
+- **Sharp phase transition** discovered at T/L_in ≈ 21
+- **100% reproducible:** 24/24 automated verification checks pass
 
-**Technical Skills Demonstrated:**
-- Mathematical proof writing (5 rigorous theorems)
-- Python implementation (NumPy, PyTorch, scikit-learn)
+**Technical Implementation:**
+- Mathematical proof writing (5 rigorous theorems with complete proofs)
+- Python implementation (NumPy, PyTorch, scikit-learn, Numba JIT optimization)
 - LaTeX typesetting (60-page research paper)
-- Statistical analysis (bootstrap confidence intervals, hypothesis testing)
-- Software engineering (clean code, automated testing, version control)
+- Statistical analysis (bootstrap confidence intervals, hypothesis testing, effect sizes)
+- Software engineering (clean code, automated testing, Git version control)
 
-**Status:** Preparing for ISEF 2026 | Seeking research mentorship
-
----
-
-## TECHNICAL SKILLS
-
-**Programming Languages:** Python, C++, JavaScript  
-**ML Frameworks:** PyTorch, TensorFlow, scikit-learn  
-**Mathematical Tools:** NumPy, SciPy, Matplotlib  
-**Other:** LaTeX, Git, Linux, Jupyter
+**Status:** Preparing for ISEF 2026 | Seeking research mentorship for real-world validation
 
 ---
 
 ## COMPETITIONS & AWARDS
 
-**GARSEF (Greater Austin Regional Science & Engineering Fair)** | 2026  
-- Category: Mathematics
-- Project: Neural Cryptanalysis of Piecewise Affine Systems
+### **Mathematics**
+- **AIME Qualifier** | American Invitational Mathematics Examination | 2026
+- **AMC 10 Distinction** | Mathematical Association of America | 2026
+- **MATHCOUNTS State Competitor** | Texas State Competition | 2026
+- **SMT (Stanford Math Tournament) General:** Top 10% | 2026
 
-**[Add any other relevant competitions/awards]**
+### **Computer Science**
+- **USACO Silver Division** | USA Computing Olympiad | 2025-2026
+
+### **Science & Engineering**
+- **GARSEF 4th Place Overall** | Greater Austin Regional Science & Engineering Fair | 2026
+- **GARSEF 3rd Place Embedded Systems** | Engineering & General Sciences Division | 2026
+
+### **Physics**
+- **USAPHO Qualifier** | USA Physics Olympiad | 2026
+
+---
+
+## TECHNICAL SKILLS
+
+**Programming Languages:** Python (advanced), C++ (intermediate), JavaScript  
+**ML/AI Frameworks:** PyTorch, TensorFlow, scikit-learn, Keras  
+**Scientific Computing:** NumPy, SciPy, Matplotlib, Numba (JIT compilation)  
+**Mathematical Tools:** LaTeX, Jupyter, Mathematica  
+**Development Tools:** Git, GitHub, Linux, VS Code
 
 ---
 
 ## RELEVANT COURSEWORK & SELF-STUDY
 
-- **Mathematics:** Number Theory, Linear Algebra, Probability & Statistics
-- **Computer Science:** Algorithms, Data Structures, Machine Learning
-- **Self-Study:** p-adic Analysis, Cryptography, Neural Network Theory
+**Completed:**
+- Algebra II, Pre-Calculus
+- Computer Science (Python, C++, algorithms)
+- Physics (mechanics, electromagnetism)
+
+**Self-Study:**
+- p-adic Number Theory (Gouvêa's "p-adic Numbers: An Introduction")
+- Machine Learning Theory (neural networks, learning complexity)
+- Cryptography (pseudorandom generators, linear complexity)
+- Number Theory (Hensel's Lemma, arithmetic dynamics)
 
 ---
 
 ## PUBLICATIONS & PRESENTATIONS
 
 **In Preparation:**
-- "Period Growth and Neural Predictability in Piecewise Affine Systems over Residue Rings" (ISEF 2026)
+- "Period Growth and Neural Predictability in Piecewise Affine Systems over Residue Rings"  
+  *Preparing for ISEF 2026 | Potential publication target: AI Safety workshop or cryptography venue*
+
+---
+
+## RESEARCH STATEMENT
+
+I'm passionate about understanding the fundamental limitations of artificial intelligence through mathematical analysis. My current work explores when and why neural networks fail to learn certain mathematical structures, with implications for AI Safety and cryptography.
+
+**Current Challenge:**  
+My project is mathematically rigorous (5 proven theorems, 168 primes tested), but purely theoretical. I've only tested synthetic sequences generated by my algorithms. I haven't validated this on real AI systems or found a practical application.
+
+**What I'm Seeking:**  
+Research mentorship to help me realize the full potential of this work. Specifically:
+1. Should I test this on real AI systems (GPT-4, Claude, Gemini)?
+2. Is there a cryptographic application I'm missing?
+3. Is this relevant to AI Safety research?
+4. What would make this publishable and impactful?
+
+**What I'm Offering:**  
+- I'll do all coding, experiments, and writing
+- You get co-author credit if this leads to publication
+- I'll acknowledge your mentorship in my ISEF presentation
+- This could be a quick paper (I've done 90% of the mathematical work)
+
+I'm eager to learn, willing to work hard, and excited about the possibility of collaboration.
 
 ---
 
 ## REFERENCES
 
 Available upon request
-
----
-
-## RESEARCH STATEMENT
-
-I'm passionate about understanding the fundamental limitations of artificial intelligence. My current work explores when and why neural networks fail to learn certain mathematical structures, with implications for AI Safety and cryptography.
-
-I'm seeking research mentorship to:
-1. Validate my theoretical results on real AI systems (GPT-4, Claude, Gemini)
-2. Explore practical applications in cryptography or AI Safety
-3. Develop this work into a publishable research paper
-
-I'm eager to learn, willing to do all implementation work, and excited about the possibility of collaboration.
 
 ---
 
