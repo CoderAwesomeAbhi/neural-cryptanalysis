@@ -108,8 +108,8 @@ neural-cryptanalysis/
 │   └── requirements.txt          # Python dependencies
 │
 ├── paper/                        # LaTeX source
-│   ├── Neural_Cryptanalysis_ISEF.tex
-│   └── Neural_Cryptanalysis_ISEF.pdf
+│   ├── Neural_Cryptanalysis.tex
+│   └── Neural_Cryptanalysis.pdf
 │
 └── results/                      # Experimental data + figures
     ├── prime_sweep_results.png
