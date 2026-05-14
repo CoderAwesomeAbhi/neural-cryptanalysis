@@ -93,7 +93,6 @@ Transformer attention mechanisms are **fundamentally invariant** to p-adic struc
 ```
 neural-cryptanalysis/
 ├── README.md                     # This file
-├── Neural_Cryptanalysis.pdf      # Research paper
 ├── Abhijay_Gangarapu_CV.html     # Curriculum Vitae
 │
 ├── code/                         # All Python code
@@ -138,7 +137,7 @@ pip install -r code/requirements.txt
 
 **Abstract:** We prove that piecewise affine maps over ℤ/p^k ℤ satisfying the Hensel Condition exhibit super-linear period growth. We demonstrate that neural networks (MLP, LSTM, Transformer) fundamentally cannot predict these sequences, achieving <3% accuracy. We establish a Neural Resistance Threshold and prove Transformer attention mechanisms are invariant to p-adic structure.
 
-**PDF:** [Neural_Cryptanalysis.pdf](Neural_Cryptanalysis.pdf)
+**PDF:** [paper/Neural_Cryptanalysis.pdf](paper/Neural_Cryptanalysis.pdf)
 
 ---
 
