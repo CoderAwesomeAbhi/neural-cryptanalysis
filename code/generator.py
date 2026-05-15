@@ -524,6 +524,55 @@ def compute_cross_prime_periods(
     return results
 
 
+class PiecewiseAffineGenerator:
+    """
+    Convenience wrapper around canonical piecewise-affine configurations.
+
+    This class is used by analysis scripts that need a compact object-style API.
+    It delegates all core math to the module-level generator/period functions.
+    """
+
+    def __init__(
+        self,
+        p: int,
+        k: int,
+        hensel_satisfied: bool = True,
+        seed: int = 42,
+        n_starts: int = 500,
+    ) -> None:
+        if p <= 1:
+            raise ValueError(f"p must be > 1, got {p}")
+        if k <= 0:
+            raise ValueError(f"k must be >= 1, got {k}")
+
+        self.p = int(p)
+        self.k = int(k)
+        self.m = self.p ** self.k
+        self.seed = int(seed)
+        self.hensel_satisfied = bool(hensel_satisfied)
+        self.config = "sat" if self.hensel_satisfied else "viol"
+        self.A_list, self.b_list = get_matrices(self.config)
+        self.period = compute_max_period(
+            self.m,
+            self.A_list,
+            self.b_list,
+            n_starts=n_starts,
+            seed=self.seed,
+        )
+
+    def generate(self, N: int, burn: int = 0, seed: Optional[int] = None) -> List[int]:
+        """
+        Generate a first-component output sequence from the configured map.
+        """
+        return generate_piecewise(
+            self.m,
+            self.A_list,
+            self.b_list,
+            N=N,
+            seed=self.seed if seed is None else int(seed),
+            burn=burn,
+        )
+
 # ─── self-test ────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":

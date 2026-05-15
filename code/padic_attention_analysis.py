@@ -3,7 +3,6 @@ P-ADIC ATTENTION ANALYSIS: Extracting Attention Heatmaps from Transformers
 ============================================================================
 
 Tests whether Transformer attention patterns correlate with p-adic valuations.
-This is the "PhD-level" feature that distinguishes this work.
 
 Author: Abhijay Gangarapu, UT Austin / ISEF 2026
 """
@@ -165,7 +164,7 @@ def test_padic_attention_hypothesis(p=5, m=125, L_in=32, N=10000, epochs=50):
         results: dict with correlation statistics and visualizations
     """
     print("="*70)
-    print("P-ADIC ATTENTION HYPOTHESIS TEST (PhD-Level)")
+    print("P-ADIC ATTENTION HYPOTHESIS TEST")
     print("="*70)
     print(f"Prime: p={p}, Modulus: m={m}, Window: L_in={L_in}")
     print()
