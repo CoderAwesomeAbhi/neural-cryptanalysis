@@ -66,15 +66,15 @@
 \thispagestyle{empty}
 
 \begin{abstract}
-Modern AI systems excel at sequence prediction, yet their fundamental limitations on algebraic structures remain poorly understood. We establish an information-theoretic limit: when sequence period $T$ exceeds training data $N$ by a factor greater than 2, neural networks cannot learn periodic sequences regardless of architecture or positional encoding modifications.
+Modern neural networks excel at learning patterns in natural language and images, yet their limitations on mathematical structures remain poorly understood. This paper identifies a sharp boundary: when a periodic sequence has period $T$ exceeding training data size $N$ by more than a factor of 2, gradient-based learning fails catastrophically regardless of architecture.
 
-We study piecewise affine recurrences $x_{n+1} = A_{\varphi(x_n)}\,x_n + b_{\varphi(x_n)} \pmod{m}$ over residue rings $\Z/p^k\Z$, where the transition matrix is selected by a nonlinear switching function $\varphi$. When the Hensel index $\delta_i = \vp(\det(A_i - \Id)) = 0$ for all regime matrices, the maximum period grows super-linearly with extension level $k$. We prove $T(p^{k+1}) > p \cdot T(p^k)$ for all $k \geq 1$ via orbit counting and regime boundary analysis, and establish an explicit lower bound $T(p^k) \geq p^{k-1}(p-1)r$.
+We study this through piecewise affine maps $x_{n+1} = A_{\varphi(x_n)}\,x_n + b_{\varphi(x_n)} \pmod{p^k}$ over prime power residue rings, where regime selection depends on a nonlinear switching function. The key mathematical insight is that when matrices satisfy the Hensel condition $\det(A_i - \Id) \not\equiv 0 \pmod{p}$, periods grow faster than linearly with each ring extension. We prove $T(p^{k+1}) > p \cdot T(p^k)$ through orbit analysis and establish the lower bound $T(p^k) \geq p^{k-1}(p-1)r$.
 
-Empirically, we characterize a \emph{Neural Resistance Threshold} at $T/L_{\mathrm{in}} \approx 21$: when sequence period $T$ exceeds observation window $L_{\mathrm{in}}$ by this factor, all three architectures (MLP, LSTM, Transformer) collapse from $100\%$ accuracy to $\leq 16.3\%$. We validate period growth across 168 primes with mean growth ratio $26.94\times$ (max $79.42\times$). Cross-prime validation confirms Hensel-satisfied configurations outperform violated ones by factors of $7.1\times$ to $135.6\times$ at $k=2$.
+Experimentally, we find a sharp phase transition at $T/L_{\mathrm{in}} \approx 21$: below this ratio, MLPs, LSTMs, and Transformers all achieve perfect accuracy; above it, all collapse to near-random performance ($\leq 16\%$). Validation across 168 primes shows Hensel-satisfied configurations achieve mean period growth of $27\times$ per extension (maximum $79\times$), outperforming violated configurations by factors up to $136\times$.
 
-We test whether architectural modifications can overcome this limit by implementing p-adic positional encodings designed to capture hierarchical structure. Results show no improvement over standard encodings (1.0\% vs 1.0\%), establishing that the failure is information-theoretic rather than architectural. This quantifies a fundamental boundary for gradient-based learning on periodic algebraic structures with implications for AI safety and mathematical reasoning in large language models.
+To test whether this failure is architectural or fundamental, we implement $p$-adic positional encodings designed to capture the hierarchical structure of Hensel lifting. These show no improvement (1.0\% vs 1.0\% baseline), confirming the barrier is information-theoretic: when most sequence transitions appear at most once in training, no amount of architectural engineering enables generalization.
 
-All code is open-source and fully reproducible (24/24 verification checks pass). No cryptographic security claims are made.
+This quantifies a fundamental limit for gradient-based learning on long-period algebraic sequences, with implications for AI safety and the mathematical reasoning capabilities of large language models. All code is open-source with full reproducibility (24/24 verification checks pass). No cryptographic security claims are made.
 \end{abstract}
 
 \vspace{4pt}
@@ -222,42 +222,6 @@ For the piecewise affine map~\eqref{eq:map} with Hensel-satisfied matrices $A_0,
 \end{equation}
 for all $k \geq 1$ and all primes $p \geq 5$.
 \end{theorem}
-
-\begin{proof}
-We prove this by analyzing the orbit structure under Hensel lifting.
-
-\textbf{Step 1: Fixed point multiplication.} By Hensel's Lemma (Theorem~\ref{thm:hensel}), each fixed point $x^*$ modulo $p^k$ with $\varphi(x^*) = i$ and $\delta(A_i) = 0$ lifts to exactly $p$ distinct fixed points modulo $p^{k+1}$. Let $F_k$ denote the number of fixed points at level $k$. Then $F_{k+1} = p \cdot F_k$.
-
-\textbf{Step 2: Periodic orbit lengthening.} Consider a periodic orbit $\mathcal{O}$ of period $T_0$ at level $k$. Under lifting to level $k+1$, each state $x \in \mathcal{O}$ lifts to $p$ states: $x, x + p^k \mathbf{e}_1, x + 2p^k \mathbf{e}_1, \ldots, x + (p-1)p^k \mathbf{e}_1$ (where $\mathbf{e}_1 = (1,0)^T$). 
-
-For the orbit to close at level $k+1$, we need $f^{T_0}(x + jp^k \mathbf{e}_1) = x + jp^k \mathbf{e}_1$ for some $j$. By the chain rule modulo $p^{k+1}$, this requires traversing all $p$ lifts, giving period $p \cdot T_0$.
-
-\textbf{Step 3: Regime boundary orbit splitting.} This is the key mechanism for super-linear growth. Consider states with $x_0 \equiv 0 \pmod{2}$ (regime boundary). At level $k$, such a state is in regime 0. At level $k+1$, its $p$ lifts have first components $x_0, x_0 + p^k, x_0 + 2p^k, \ldots, x_0 + (p-1)p^k$.
-
-For odd $p$, exactly $(p-1)/2$ of these lifts have $x_0 + jp^k \equiv 1 \pmod{2}$, placing them in regime 1. These create \emph{new orbit branches} that did not exist at level $k$.
-
-\textbf{Step 4: Counting new orbits.} Let $B_k$ be the number of boundary states at level $k$ (states with $x_0 \equiv 0 \pmod{2}$). We have $B_k = (p^k / 2) \cdot p^k = p^{2k}/2$.
-
-Each boundary state in a periodic orbit of period $T_0$ at level $k$ generates $(p-1)/2$ new orbit branches at level $k+1$. The number of new orbit branches is at least $B_k \cdot (p-1)/(2T_0) = p^{2k}(p-1)/(4T_0)$.
-
-Each new branch has period at least $T_0$ (inherited from the parent orbit). The total contribution to the period at level $k+1$ from new branches is at least:
-\begin{equation}
-\Delta T = \frac{p^{2k}(p-1)}{4T_0} \cdot T_0 = \frac{p^{2k}(p-1)}{4}
-\end{equation}
-
-\textbf{Step 5: Combining effects.} The period at level $k+1$ satisfies:
-\begin{align}
-T_{\mathrm{sat}}(p^{k+1}) &\geq p \cdot T_{\mathrm{sat}}(p^k) + \Delta T \\
-&\geq p \cdot T_{\mathrm{sat}}(p^k) + \frac{p^{2k}(p-1)}{4}
-\end{align}
-
-Since $T_{\mathrm{sat}}(p^k) \geq p^{k-1}(p-1) \cdot 2$ (by Theorem~\ref{thm:lowerbound}), we have:
-\begin{equation}
-\frac{p^{2k}(p-1)}{4} \geq \frac{p^{2k}(p-1)}{4} > 0
-\end{equation}
-
-Therefore $T_{\mathrm{sat}}(p^{k+1}) > p \cdot T_{\mathrm{sat}}(p^k)$, proving super-linear growth.
-\end{proof}
 
 \begin{proof}
 The period growth arises from three independent mechanisms:
