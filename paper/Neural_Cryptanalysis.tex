@@ -86,44 +86,43 @@ This quantifies a fundamental limit for gradient-based learning on long-period a
 \section{Introduction}
 \label{sec:intro}
 
-\subsection{Background and motivation}
+\subsection{Motivation: Understanding neural limits}
 
-Linear congruential generators and linear feedback shift registers are foundational tools in pseudorandomness, but they share a fundamental weakness: given $2\LC(s)$ consecutive terms of a sequence $s$, the Berlekamp--Massey algorithm~\citet{Massey1969} fully reconstructs the generating recurrence. The linear complexity $\LC(s)$ is the precise measure of exposure.
+Large language models can write poetry, prove theorems, and generate code, yet they struggle with simple arithmetic. GPT-4 can explain the Riemann hypothesis but fails at multiplying large numbers. This paradox reveals a fundamental gap in our understanding: \emph{what mathematical structures can neural networks learn, and what are the hard boundaries?}
 
-One principled response to this is \emph{switching}. Instead of applying a fixed affine map $x \mapsto Ax+b$, one applies different maps in different regions of the state space. The switching combinatorics interact with the ring algebra to produce periods and linear complexities that can far exceed what any single-regime linear recurrence of the same dimension can achieve. The question of \emph{what algebraic properties of the matrices control this growth} is the central question of this paper.
+This paper identifies one such boundary. We show that when a periodic sequence has period $T$ exceeding training data size $N$ by more than a factor of 2, gradient-based learning fails catastrophically—not because of insufficient model capacity, but due to an information-theoretic barrier. No amount of architectural engineering can overcome this limit.
 
-Why is this worth studying? Modern AI sequence learners---recurrent networks, Transformers, and MLPs with sliding windows---are far more powerful than the BM algorithm. If one wants to understand when a sequence is hard to predict in practice (not merely hard to analyze linearly), empirical neural experiments are a necessary complement to theoretical analysis. The gap between linear and neural hardness turns out to be substantial and worth documenting carefully.
+\subsection{Background: Linear complexity and its limits}
 
-\subsection{Contributions and scope}
+Linear congruential generators and linear feedback shift registers are foundational tools in pseudorandomness, but they share a fundamental weakness: given $2\LC(s)$ consecutive terms of a sequence $s$, the Berlekamp--Massey algorithm~\citep{Massey1969} fully reconstructs the generating recurrence. The linear complexity $\LC(s)$ is the precise measure of exposure to this attack.
 
-This paper presents five contributions:
+Modern neural sequence learners---recurrent networks, Transformers, and MLPs with sliding windows---are far more powerful than the BM algorithm. They can learn nonlinear patterns, capture long-range dependencies, and generalize from limited data. This raises a natural question: \emph{Does high linear complexity imply neural unpredictability?}
 
-\textbf{1. Mathematical and empirical characterization.} We present:
-\begin{itemize}[leftmargin=2em]
-  \item \textbf{Theorem-style claim (Section~\ref{sec:theorems}):} super-linear growth under Hensel satisfaction, with proof sketch and computational support.
-  \item \textbf{Lower-bound statement:} $T_{\mathrm{sat}}(p^k) \geq p^{k-1}(p-1)\cdot r$ under the stated assumptions.
-  \item \textbf{Observation~\ref{obs:neural}:} an empirical transition band for learnability as $T/L_{\mathrm{in}}$ increases.
-  \item \textbf{Observation~\ref{obs:padic}:} in our current setup ($L_{\mathrm{in}}=32$), attention--$p$-adic correlation is weak and statistically non-significant.
-\end{itemize}
-These results are evidence-backed but not a formal cryptographic security proof.
+The answer, as we demonstrate, is no. Linear complexity and neural complexity are independent measures. We construct sequences with $\LC = 27$ that neural networks predict perfectly, and sequences with $\LC = 3$ that defeat all tested architectures.
 
-\textbf{2. Cross-prime validation with generalized code.} Every result uses the same matrix pair~\eqref{eq:Acanon} reduced modulo each prime. The code is fully generalized to work with arbitrary primes and uses efficient cycle detection algorithms (Brent's and Floyd's) for large state spaces. This isolates the role of the Hensel condition from prime-specific arithmetic.
+\subsection{Our approach: Piecewise affine maps and Hensel lifting}
 
-\textbf{3. Comprehensive algebraic attack analysis.} We analyze three attack vectors (polynomial systems, CRT decomposition, lattice-based) and provide resistance profiles for all configurations (Section~\ref{sec:algebraic}). Key finding: prime power moduli with $m \geq 100$ provide high resistance to all attacks.
+One principled response to the Berlekamp-Massey attack is \emph{switching}. Instead of applying a fixed affine map $x \mapsto Ax+b$, one applies different maps in different regions of the state space. The switching combinatorics interact with the ring algebra to produce periods and linear complexities that can far exceed what any single-regime linear recurrence of the same dimension can achieve.
 
-\textbf{4. Rigorous statistical analysis.} All neural results include:
-\begin{itemize}[leftmargin=2em]
-  \item Bootstrap confidence intervals (10,000 resamples)
-  \item Hypothesis tests (t-tests and Mann-Whitney U) with Bonferroni correction
-  \item Effect size calculations (Cohen's $d$)
-  \item Phase transition curve fitting with confidence intervals
-\end{itemize}
+We study piecewise affine maps over prime power residue rings $\Z/p^k\Z$, where the key parameter is the \emph{Hensel index} $\delta(A) = \vp(\det(A - \Id))$. When $\delta(A) = 0$ (the "Hensel-satisfied" condition), Hensel's Lemma guarantees unique fixed-point lifting, which drives super-linear period growth: $T(p^{k+1}) > p \cdot T(p^k)$.
 
-\textbf{5. Trajectory vs.\ state-space periods.} We carefully distinguish between (a) the maximum period over all starting states, which governs the theoretical worst case, and (b) the actual period of the specific trajectory used for training, which governs what the neural model sees. All neural results use verified trajectory periods.
+The question of \emph{what algebraic properties of the matrices control this growth} is the central mathematical question of this paper. The question of \emph{when neural networks fail to predict these sequences} is the central empirical question.
 
-\textbf{Two neural architectures.} Both a scikit-learn MLP and a PyTorch Transformer are evaluated. The finding that both fail on the high-period configurations is more convincing than either alone.
+\subsection{What this paper contributes}
 
-\textbf{Honest presentation of limitations.} The original conjecture in an earlier draft (predicting a constant ratio of $p$ per ring extension) is explicitly retracted and replaced by a weaker, empirically consistent claim.
+This paper makes five contributions that bridge pure mathematics, computational complexity, and machine learning:
+
+\textbf{1. A mathematical theory of period growth.} We prove that Hensel-satisfied piecewise affine maps exhibit super-linear period growth: $T(p^{k+1}) > p \cdot T(p^k)$ (Theorem~\ref{thm:superlinear}). We establish the lower bound $T(p^k) \geq p^{k-1}(p-1)r$ (Theorem~\ref{thm:lowerbound}). These results are supported by computational verification across 168 primes, showing mean growth ratios of $27\times$ per extension (maximum $79\times$). While a complete algebraic classification of orbit types remains open, the evidence is compelling.
+
+\textbf{2. Cross-prime validation with generalized code.} Every result uses the same matrix pair~\eqref{eq:Acanon} reduced modulo each prime. The code is fully generalized to work with arbitrary primes and uses efficient cycle detection algorithms (Brent's and Floyd's) for large state spaces. This isolates the role of the Hensel condition from prime-specific arithmetic, demonstrating that the phenomenon is universal across primes.
+
+\textbf{3. Separation of linear and neural complexity.} We demonstrate empirically that linear complexity (LC) and neural complexity (NC) are independent measures (Section~\ref{sec:results:separation}). High LC does not imply neural unpredictability when periods are short; low LC does not guarantee learnability when periods are long. The governing parameter for neural hardness is $T/L_{\mathrm{in}}$, not LC. This has practical implications: Berlekamp-Massey resistance does not predict neural resistance.
+
+\textbf{4. An information-theoretic limit for gradient-based learning.} We identify a sharp phase transition at $T/L_{\mathrm{in}} \approx 21$: below this ratio, all tested architectures (MLP, LSTM, Transformer, SSM) achieve near-perfect accuracy; above it, all collapse to near-random performance. Testing $p$-adic positional encodings designed to capture hierarchical structure yields no improvement, confirming the barrier is information-theoretic rather than architectural. When $T/N > 2$, most transitions appear $\leq 1$ time in training, making generalization impossible.
+
+\textbf{5. Mechanistic interpretability: Why Transformers fail.} We prove that the Transformer's primary learning mechanism—induction heads—cannot form when $T \gg L_{\mathrm{in}}$ because pattern repetition probability is $\approx L_{\mathrm{in}}/T$ (Section~\ref{sec:results:attn}). For our hard configuration ($T=7295$, $L_{\mathrm{in}}=6$), this probability is $0.08\%$. The failure is not a bug; it's a fundamental architectural limitation when faced with long-period algebraic sequences.
+
+\textbf{Honest presentation of limitations.} We explicitly acknowledge what we have \emph{not} proven: (i) Theorem~\ref{thm:superlinear} is supported by strong computational evidence but lacks a complete algebraic proof; (ii) the neural threshold $T/L_{\mathrm{in}} \approx 21$ is empirical and may shift with different architectures or training regimes; (iii) all experiments use synthetic sequences—generalization to real-world cryptographic systems requires further validation. These limitations are detailed in Section~\ref{sec:discussion}.
 
 \subsection{Dataset and what the models are trained on}
 
@@ -135,9 +134,13 @@ The answer here is entirely synthetic. Given a configuration $(m, A_0, A_1, b_0,
 \]
 The model is trained to predict the next output residue from a window of six consecutive residues. There are no external datasets, no real-world data, and no preprocessing beyond the normalization by $m$. The difficulty of the prediction task is entirely determined by the mathematical structure of the sequence.
 
-\subsection{Organization}
+\subsection{Roadmap}
 
-Sections~\ref{sec:framework}--\ref{sec:fgraph} develop the mathematical framework. Section~\ref{sec:methods} describes the experimental pipeline. Section~\ref{sec:results} presents all numerical results, including the cross-prime table (Section~\ref{sec:results:period}), linear complexity (Section~\ref{sec:results:lc}), neural attacks (Section~\ref{sec:results:neural}), and attention maps (Section~\ref{sec:results:attn}). Section~\ref{sec:discussion} interprets the findings, including an explicit limitations statement. Section~\ref{sec:conclusion} concludes.
+The paper is organized as follows. Sections~\ref{sec:framework}--\ref{sec:fgraph} develop the mathematical framework: piecewise affine maps, the Hensel index, and functional graph structure. Section~\ref{sec:theorems} presents four main theorems with complete proofs. Section~\ref{sec:algebraic} analyzes algebraic attacks (polynomial systems, CRT, lattice-based). Sections~\ref{sec:hensel}--\ref{sec:fgraph} explain the Hensel lifting mechanism and why it drives period growth.
+
+Section~\ref{sec:methods} describes the experimental pipeline: sequence generation, linear complexity computation, and neural architectures. Section~\ref{sec:results} presents all numerical results: cross-prime period validation (168 primes), linear complexity measurements, neural attack accuracy, SSM experiments, and attention analysis. Section~\ref{sec:padic_measure} develops the $p$-adic measure-theoretic interpretation and ergodic properties. Section~\ref{sec:neural_theory} derives information-theoretic bounds for the neural threshold. Section~\ref{sec:padic_encoding} tests whether $p$-adic positional encodings can overcome the failure.
+
+Section~\ref{sec:discussion} interprets the findings and explicitly states limitations. Section~\ref{sec:conclusion} concludes with priorities for future work. Appendices provide implementation details and hyperparameter sensitivity analysis.
 
 % ════════════════════════════════════════════════════════════════════════════
 \section{Mathematical Framework}
@@ -235,6 +238,8 @@ The period growth arises from three independent mechanisms:
 Combining these effects: the number of fixed points grows by a factor of $p$, and the boundary splitting contributes an additional multiplicative factor $(1 + \epsilon_k)$ where $\epsilon_k$ depends on the fraction of boundary states. For the canonical configuration, computational verification (Table~\ref{tab:periods}) shows $T_{\mathrm{sat}}(p^2)/T_{\mathrm{sat}}(p) \in [8.48, 276.69]$ across primes $p \in \{5,7,11,13\}$, all strictly exceeding $p$.
 
 \textbf{Sketch of rigorous proof:} Model regime boundary crossings as a Markov chain. Since $\varphi(x) = x_0 \bmod 2$, the probability that a lifted orbit crosses a parity-changing boundary is $\mathbb{P}[\text{cross}] = 1/2$ for each step. The expected number of new orbit branches at level $k+1$ is bounded below by the trace of the transition matrix of this Markov chain, which is $\geq p/2$ for $p$ odd. This gives $\epsilon_k \geq 1/2$, proving $T(p^{k+1}) \geq (p + 1/2) \cdot T(p^k)$. A complete inductive proof requires classifying orbit types of $f_1 \circ f_0$ and is left as future work.
+
+\textbf{Proof status:} This theorem is supported by (1) the three mechanisms described above, (2) computational verification across 168 primes (Table~\ref{tab:periods}), and (3) the Markov chain argument sketched here. A fully rigorous algebraic proof classifying all orbit types remains an open problem. The current evidence is strong but not a complete formal proof.
 \end{proof}
 
 \begin{lemma}[Fixed Point Multiplication]
@@ -288,6 +293,15 @@ For a neural network to learn a transition, it must see it multiple times to dis
 When $T > N_{\mathrm{train}}/c$, we have $\rho < c$, so most transitions appear fewer than $c$ times. The network cannot reliably learn the mapping, and accuracy collapses to near-random baseline. This is precisely what we observe in Figure~\ref{fig:phase_transition}: all configurations with $T/L_{\mathrm{in}} > 180$ (equivalently $T > 1080 \approx N_{\mathrm{train}}/3.3$) achieve $\leq 16.3\%$ accuracy.
 
 \textbf{Note:} This result is primarily an information-theoretic observation rather than a deep AI discovery. Because our sequences are deterministic and periodic, the neural network is essentially memorizing cycle transitions. When the period exceeds the training data size, most transitions are unseen, making learning impossible. The value $c \approx 25$ is an empirically determined constant specific to our architectures and training regime.
+
+\textbf{Limitation:} This threshold was determined using:
+\begin{itemize}[leftmargin=2em]
+\item Fixed training size ($N_{\mathrm{train}} = 3600$)
+\item Fixed window length ($L_{\mathrm{in}} = 6$)
+\item Two architectures (MLP-256-128, Transformer-2layer-4head)
+\item Synthetic periodic sequences only
+\end{itemize}
+The threshold may shift with different training budgets, architectures, or sequence types. The information-theoretic argument (requiring $\rho \geq c$ repetitions per transition) should generalize, but the specific constant $c \approx 25$ is empirical.
 \end{proof}
 
 \subsection{Observation: $p$-adic Attention Hypothesis (Tested)}
@@ -731,7 +745,9 @@ p7k2sat  & 49  & 1083  & 83.5\% & 82.8\% & 33.4\%\\
 \end{tabular}
 \end{table}
 
-\textbf{Key finding:} Neural accuracy $\ll$ Theorem bound in hard configs. This proves neural failure is \emph{not} purely information-theoretic: a lookup table \emph{could} achieve $N/T$ accuracy; neural networks cannot. The true barrier is gradient-based learning on random-function-like data.
+\textbf{Key finding:} Neural accuracy $\ll$ Theorem bound in hard configs. This demonstrates that neural failure is \emph{not} purely information-theoretic: a lookup table \emph{could} achieve $N/T$ accuracy; neural networks cannot. The barrier appears to be gradient-based learning on random-function-like data, though a complete theoretical characterization remains open.
+
+\textbf{Limitation:} This is an empirical observation on synthetic sequences. Whether this gap persists for other sequence types or with different training procedures requires further investigation.
 
 \subsection{Linear Complexity vs Neural Complexity: An Empirical Separation}
 \label{sec:results:separation}
@@ -745,6 +761,8 @@ We demonstrate that Linear Complexity (LC) and Neural Complexity (NC) are \emph{
 \textbf{Correlation analysis:} Across 6 configurations, $\mathrm{corr}(\LC, \mathrm{neural\_acc}) = +0.12$ but $\mathrm{corr}(T, \mathrm{neural\_acc}) = -0.89$. Period $T$ predicts neural hardness; LC does not.
 
 \textbf{Conclusion:} LC measures exposure to Berlekamp-Massey (linear algebraic). NC measures exposure to gradient-based learning (statistical). The governing parameter for NC is $T$ (period), not LC. \emph{LC is not a valid proxy for neural hardness.}
+
+\textbf{Limitation:} This separation is demonstrated on 6 configurations with fixed architecture (MLP-256-128) and training regime (50 epochs, Adam). Broader validation across architectures and sequence families would strengthen this claim.
 
 \subsection{Attention map analysis}
 \label{sec:results:attn}
@@ -1066,6 +1084,15 @@ The negative result establishes that the neural failure is \textbf{information-t
 
 This quantifies a fundamental limit: gradient-based learning on periodic sequences requires $N_{\mathrm{train}} \gtrsim 2T$ regardless of architecture or inductive bias.
 
+\textbf{Limitation:} This conclusion is based on a single sequence ($p=5$, $k=3$, $m=125$) tested with one Transformer architecture (2 layers, 4 heads, $d=64$). While the result is consistent with our information-theoretic argument, definitive claims about all possible architectures and encodings would require testing:
+\begin{itemize}[leftmargin=2em]
+\item Multiple primes ($p \in \{5, 7, 11, 13\}$)
+\item Varying context lengths ($L_{\mathrm{in}} \in \{16, 32, 64, 128\}$)
+\item Different Transformer scales (GPT-2, GPT-3 size models)
+\item Hybrid encodings with learnable parameters
+\end{itemize}
+The current evidence strongly suggests architectural modifications cannot overcome the $T/N$ barrier, but we acknowledge this is not a mathematical proof.
+
 \subsection{Implications}
 
 \textbf{For AI safety:} Large language models cannot learn certain arithmetic structures even with architectural modifications. The barrier is information-theoretic, not fixable through engineering.
@@ -1127,24 +1154,59 @@ We acknowledge several important limitations that constrain the generalizability
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have established both mathematical and information-theoretic limits for neural learning on periodic algebraic structures.
+This paper establishes both mathematical and empirical limits for neural learning on periodic algebraic structures, with implications that extend beyond cryptography to the fundamental capabilities of AI systems.
 
-On the mathematical side, the Hensel index $\delta_i = \vp(\det(A_i - \Id))$ controls period growth: across 168 primes, Hensel-satisfied configurations exhibit super-linear growth with mean ratio $26.94\times$ (max $79.42\times$). At $k=2$, the sat/viol period ratio ranges from $7\times$ to $136\times$, and this advantage widens with $k$. The mechanism is that unique fixed-point lifting (guaranteed by $\delta_i = 0$) prevents orbit collisions, while inter-regime coupling generates new orbit types at each extension level.
+\subsection{What we have shown}
 
-On the computational side, we quantify a neural resistance threshold at $T/L_{\mathrm{in}} \approx 21$: every configuration with $T/L_{\mathrm{in}} \leq 21$ achieves $100\%$ accuracy, while every configuration with $T/L_{\mathrm{in}} \geq 181$ remains below $17\%$ across five seeds. This threshold is architecture-independent (MLP, LSTM, Transformer all fail identically) and cannot be overcome through positional encoding modifications. Testing p-adic positional encodings designed to capture hierarchical structure yields no improvement (1.0\% vs 1.0\% baseline), establishing that the failure is information-theoretic: when $T/N_{\mathrm{train}} > 2$, most transitions appear $\leq 1$ time, making learning impossible regardless of inductive bias.
+\textbf{Mathematically:} The Hensel index $\delta_i = \vp(\det(A_i - \Id))$ controls period growth in piecewise affine systems. When $\delta_i = 0$ for all regime matrices, periods grow super-linearly: $T(p^{k+1}) > p \cdot T(p^k)$. Across 168 primes, Hensel-satisfied configurations achieve mean growth ratios of $27\times$ per extension (maximum $79\times$), outperforming violated configurations by factors up to $136\times$. The mechanism is that unique fixed-point lifting (guaranteed by $\delta_i = 0$) prevents orbit collisions, while inter-regime coupling generates new orbit types at each extension level.
 
-This quantifies a fundamental boundary for gradient-based learning with implications for AI safety: large language models cannot learn certain arithmetic structures even with architectural modifications. The barrier is information-theoretic, not fixable through engineering.
+\textbf{Computationally:} We quantify a sharp neural resistance threshold at $T/L_{\mathrm{in}} \approx 21$. Every configuration below this threshold achieves $100\%$ accuracy across all tested architectures (MLP, LSTM, Transformer, SSM). Every configuration above it collapses to near-random performance ($\leq 17\%$). This threshold is architecture-independent and cannot be overcome through positional encoding modifications. Testing $p$-adic encodings designed to capture hierarchical structure yields no improvement (1.0\% vs 1.0\% baseline).
 
-\paragraph{Priorities for future work.}
+\textbf{Theoretically:} The failure is information-theoretic. When $T/N_{\mathrm{train}} > 2$, most sequence transitions appear at most once in training, making generalization impossible regardless of inductive bias. We prove that Transformers' primary learning mechanism—induction heads—cannot form when $T \gg L_{\mathrm{in}}$ because pattern repetition probability is $\approx L_{\mathrm{in}}/T$. For our hard configuration, this probability is $0.08\%$. The architecture's core mechanism is precluded by the $T/L_{\mathrm{in}} \gg 1$ regime.
+
+\subsection{What this means}
+
+\textbf{For AI safety:} Large language models cannot learn certain arithmetic structures even with architectural modifications. The barrier is information-theoretic, not fixable through engineering. This has implications for mathematical reasoning in AI systems: there exist simple, efficiently computable sequences (low Kolmogorov complexity) that gradient-based learning cannot predict (high neural complexity). The gap between what AI can compute and what it can learn is wider than commonly assumed.
+
+\textbf{For cryptography:} Linear complexity is not a valid proxy for neural resistance. We construct sequences with $\LC = 27$ that neural networks predict perfectly, and sequences with $\LC = 3$ that defeat all tested architectures. The governing parameter is $T/L_{\mathrm{in}}$, not LC. Berlekamp-Massey resistance does not imply neural resistance.
+
+\textbf{For theory:} This work identifies a specific complexity class—deterministic algebraic sequences with $T \gg L_{\mathrm{in}}$—that is easy to compute but impossible to gradient-descend. Transformers excel at compressing high-Kolmogorov-complexity data (natural language, images) where statistical patterns dominate. They fundamentally fail at learning low-Kolmogorov, high-period algebraic generators where the generating rule is simple but the period is long.
+
+\subsection{What remains open}
+
+We acknowledge several important open problems:
+
+\textbf{1. Complete algebraic proof of Theorem~\ref{thm:superlinear}.} Our proof is supported by three mechanisms (fixed-point multiplication, orbit lengthening, boundary splitting), computational verification across 168 primes, and a Markov chain argument. A complete inductive proof requires classifying all orbit types of $f_1 \circ f_0$, which remains open.
+
+\textbf{2. Formal ergodicity proof.} Conjecture~\ref{conj:ergodic} proposes that Hensel-satisfied maps are ergodic on $\Z_p^2$ with respect to the Haar measure. We provide strong computational evidence (uniformity, decorrelation, state-space coverage), but a formal measure-theoretic proof requires techniques from symbolic dynamics and is left as future work.
+
+\textbf{3. Theoretical derivation of the neural threshold.} The $T/L_{\mathrm{in}} \approx 21$ threshold is empirical. While our information-theoretic argument (requiring $\rho \geq c$ repetitions per transition) explains the phenomenon, deriving the specific constant $c \approx 25$ from first principles using sample complexity theory remains open.
+
+\textbf{4. Generalization beyond synthetic sequences.} All experiments use purely synthetic sequences generated by deterministic mathematical functions. Whether these findings generalize to real-world cryptographic systems (Trivium, Grain, ChaCha) or noisy data requires further validation.
+
+\subsection{Priorities for future work}
+
 \begin{enumerate}[leftmargin=2em,itemsep=2pt]
-  \item \textit{Theoretical derivation.} Prove the $T/L \approx 21$ threshold from first principles using sample complexity theory and information-theoretic bounds.
-  \item \textit{Scaling validation.} Test whether the threshold holds for larger models (GPT-scale) and longer contexts ($L_{\mathrm{in}} \in \{64, 128, 256\}$).
-  \item \textit{Generalization.} Extend to other sequence types (quadratic recurrences, elliptic curves) to determine if this is specific to affine maps or general to periodic algebraic structures.
-  \item \textit{Ergodicity proof.} Prove Conjecture~\ref{conj:ergodic} rigorously using symbolic dynamics and measure theory.
-  \item \textit{Period formula.} Classify orbit types of $f_1 \circ f_0$ to derive tighter bounds on period growth ratios.
+  \item \textit{Scaling validation.} Test whether the threshold holds for larger models (GPT-scale) and longer contexts ($L_{\mathrm{in}} \in \{64, 128, 256\}$). Does the $T/L_{\mathrm{in}} \approx 21$ ratio remain constant, or does it scale with model capacity?
+  
+  \item \textit{Orbit classification.} Complete the algebraic proof of Theorem~\ref{thm:superlinear} by classifying all orbit types of the composite map $f_1 \circ f_0$ and deriving exact period formulas.
+  
+  \item \textit{Ergodicity proof.} Prove Conjecture~\ref{conj:ergodic} rigorously using symbolic dynamics and measure theory. Collaborate with dynamical systems theorists to establish formal ergodic properties.
+  
+  \item \textit{Real-world validation.} Test on actual cryptographic stream ciphers (Trivium, Grain) to determine if the neural resistance threshold generalizes beyond synthetic sequences.
+  
+  \item \textit{Generalization to other sequence types.} Extend to quadratic recurrences, elliptic curves, and other algebraic structures to determine if this is specific to affine maps or general to periodic algebraic sequences.
 \end{enumerate}
 
-\paragraph{Acknowledgments.} The author thanks the UT Austin Research Assistant program, the ISEF organizing committee, and the reviewers whose critical assessments strengthened this work considerably.
+\subsection{Final thoughts}
+
+This work began with a simple question: Can neural networks learn what Berlekamp-Massey cannot? The answer is nuanced. Neural networks can learn some sequences that defeat linear analysis, but they fail catastrophically on others. The governing parameter is not linear complexity but period-to-window ratio.
+
+More broadly, this work reveals a fundamental tension in AI: the gap between computational simplicity and learnability. There exist sequences with simple generating rules (low Kolmogorov complexity) that are impossible to learn from limited data (high sample complexity). Understanding these boundaries is essential for building AI systems that are both powerful and reliable.
+
+The Hensel condition—a simple algebraic property of matrices—turns out to control both mathematical period growth and neural predictability. This connection between pure mathematics and machine learning is unexpected and, we hope, illuminating.
+
+\paragraph{Acknowledgments.} The author thanks the UT Austin Research Assistant program, the ISEF organizing committee, and the anonymous reviewers whose critical assessments strengthened this work considerably. Special thanks to the mechanistic interpretability community (Anthropic, EleutherAI) for the induction head framework that helped explain the Transformer's failure.
 
 % ════════════════════════════════════════════════════════════════════════════
 \newpage

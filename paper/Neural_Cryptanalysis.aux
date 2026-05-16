@@ -5,166 +5,172 @@
 \citation{Massey1969}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{4}{section.1}\protected@file@percent }
 \newlabel{sec:intro}{{1}{4}{Introduction}{section.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Background and motivation}{4}{subsection.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Contributions and scope}{4}{subsection.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Dataset and what the models are trained on}{5}{subsection.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Organization}{5}{subsection.1.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2}Mathematical Framework}{5}{section.2}\protected@file@percent }
-\newlabel{sec:framework}{{2}{5}{Mathematical Framework}{section.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Piecewise affine maps over residue rings}{5}{subsection.2.1}\protected@file@percent }
-\newlabel{eq:map}{{1}{5}{Piecewise affine maps over residue rings}{equation.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Motivation: Understanding neural limits}{4}{subsection.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Background: Linear complexity and its limits}{4}{subsection.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Our approach: Piecewise affine maps and Hensel lifting}{4}{subsection.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}What this paper contributes}{4}{subsection.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.5}Dataset and what the models are trained on}{5}{subsection.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.6}Roadmap}{6}{subsection.1.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Mathematical Framework}{6}{section.2}\protected@file@percent }
+\newlabel{sec:framework}{{2}{6}{Mathematical Framework}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Piecewise affine maps over residue rings}{6}{subsection.2.1}\protected@file@percent }
+\newlabel{eq:map}{{1}{6}{Piecewise affine maps over residue rings}{equation.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}The Hensel index}{6}{subsection.2.2}\protected@file@percent }
 \newlabel{def:hensel}{{2.2}{6}{Hensel index}{theorem.2.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Canonical matrix families}{6}{subsection.2.3}\protected@file@percent }
 \newlabel{eq:Acanon}{{2}{6}{Canonical matrix families}{equation.2}{}}
-\newlabel{eq:Aviol}{{3}{6}{Canonical matrix families}{equation.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Hensel index verification for canonical matrices at primes $p \in \{5,7,11,13\}$.}}{6}{table.caption.1}\protected@file@percent }
+\newlabel{eq:Aviol}{{3}{7}{Canonical matrix families}{equation.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Hensel index verification for canonical matrices at primes $p \in \{5,7,11,13\}$.}}{7}{table.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab:hensel_check}{{1}{6}{Hensel index verification for canonical matrices at primes $p \in \{5,7,11,13\}$}{table.caption.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Main Theoretical Results}{6}{section.3}\protected@file@percent }
-\newlabel{sec:theorems}{{3}{6}{Main Theoretical Results}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Theorem 1: Super-linear Period Growth}{6}{subsection.3.1}\protected@file@percent }
-\newlabel{thm:superlinear}{{3.1}{6}{Super-linear Growth Under Hensel Satisfaction}{theorem.3.1}{}}
-\newlabel{lem:fpmult}{{3.2}{7}{Fixed Point Multiplication}{theorem.3.2}{}}
-\newlabel{lem:boundary}{{3.3}{7}{Regime Boundary Orbit Splitting}{theorem.3.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Theorem 2: Explicit Period Lower Bound}{7}{subsection.3.2}\protected@file@percent }
-\newlabel{thm:lowerbound}{{3.4}{7}{Period Lower Bound}{theorem.3.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Observation: Neural Hardness Threshold}{7}{subsection.3.3}\protected@file@percent }
-\newlabel{obs:neural}{{3.5}{7}{Empirical Neural Hardness Threshold}{theorem.3.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Observation: $p$-adic Attention Hypothesis (Tested)}{8}{subsection.3.4}\protected@file@percent }
-\newlabel{obs:padic}{{3.6}{8}{Architectural Invariance to $p$-adic Structure}{theorem.3.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Algebraic Attack Analysis}{8}{section.4}\protected@file@percent }
-\newlabel{sec:algebraic}{{4}{8}{Algebraic Attack Analysis}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Polynomial System Attack}{9}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}CRT Decomposition Attack}{9}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Lattice-Based Attack}{9}{subsection.4.3}\protected@file@percent }
+\newlabel{tab:hensel_check}{{1}{7}{Hensel index verification for canonical matrices at primes $p \in \{5,7,11,13\}$}{table.caption.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Main Theoretical Results}{7}{section.3}\protected@file@percent }
+\newlabel{sec:theorems}{{3}{7}{Main Theoretical Results}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Theorem 1: Super-linear Period Growth}{7}{subsection.3.1}\protected@file@percent }
+\newlabel{thm:superlinear}{{3.1}{7}{Super-linear Growth Under Hensel Satisfaction}{theorem.3.1}{}}
+\newlabel{lem:fpmult}{{3.2}{8}{Fixed Point Multiplication}{theorem.3.2}{}}
+\newlabel{lem:boundary}{{3.3}{8}{Regime Boundary Orbit Splitting}{theorem.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Theorem 2: Explicit Period Lower Bound}{8}{subsection.3.2}\protected@file@percent }
+\newlabel{thm:lowerbound}{{3.4}{8}{Period Lower Bound}{theorem.3.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Observation: Neural Hardness Threshold}{8}{subsection.3.3}\protected@file@percent }
+\newlabel{obs:neural}{{3.5}{8}{Empirical Neural Hardness Threshold}{theorem.3.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Observation: $p$-adic Attention Hypothesis (Tested)}{9}{subsection.3.4}\protected@file@percent }
+\newlabel{obs:padic}{{3.6}{9}{Architectural Invariance to $p$-adic Structure}{theorem.3.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Algebraic Attack Analysis}{9}{section.4}\protected@file@percent }
+\newlabel{sec:algebraic}{{4}{9}{Algebraic Attack Analysis}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Polynomial System Attack}{10}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}CRT Decomposition Attack}{10}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Lattice-Based Attack}{10}{subsection.4.3}\protected@file@percent }
 \citation{Gouvea1997}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Quantitative LLL lattice attack results. Success rate = fraction of sequence terms correctly predicted from shortest lattice vector.}}{10}{table.caption.2}\protected@file@percent }
-\newlabel{tab:lattice}{{2}{10}{Quantitative LLL lattice attack results. Success rate = fraction of sequence terms correctly predicted from shortest lattice vector}{table.caption.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Summary}{10}{subsection.4.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Algebraic attack resistance for representative configurations. Resistance: LOW (feasible), MEDIUM (borderline), HIGH (infeasible).}}{10}{table.caption.3}\protected@file@percent }
-\newlabel{tab:algebraic}{{3}{10}{Algebraic attack resistance for representative configurations. Resistance: LOW (feasible), MEDIUM (borderline), HIGH (infeasible)}{table.caption.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Hensel Lifting and Period Growth}{10}{section.5}\protected@file@percent }
-\newlabel{sec:hensel}{{5}{10}{Hensel Lifting and Period Growth}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}The fixed-point lifting theorem}{10}{subsection.5.1}\protected@file@percent }
-\newlabel{thm:hensel}{{5.1}{10}{Hensel lifting; see~\citealt {Gouvea1997}}{theorem.5.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Comparison of piecewise affine generator (Hensel-satisfied, $p=5$, $k=3$, $m=125$) with AES-128 in CTR mode. Both generators produce sequences with high entropy and pass basic randomness tests, but the piecewise generator has provable period bounds via Hensel lifting theory.}}{11}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:aes_comparison}{{1}{11}{Comparison of piecewise affine generator (Hensel-satisfied, $p=5$, $k=3$, $m=125$) with AES-128 in CTR mode. Both generators produce sequences with high entropy and pass basic randomness tests, but the piecewise generator has provable period bounds via Hensel lifting theory}{figure.caption.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Regime boundaries and the piecewise complication}{11}{subsection.5.2}\protected@file@percent }
-\newlabel{prop:pw-hensel}{{5.2}{11}{}{theorem.5.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Quantitative LLL lattice attack results. Success rate = fraction of sequence terms correctly predicted from shortest lattice vector.}}{11}{table.caption.2}\protected@file@percent }
+\newlabel{tab:lattice}{{2}{11}{Quantitative LLL lattice attack results. Success rate = fraction of sequence terms correctly predicted from shortest lattice vector}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Summary}{11}{subsection.4.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Algebraic attack resistance for representative configurations. Resistance: LOW (feasible), MEDIUM (borderline), HIGH (infeasible).}}{11}{table.caption.3}\protected@file@percent }
+\newlabel{tab:algebraic}{{3}{11}{Algebraic attack resistance for representative configurations. Resistance: LOW (feasible), MEDIUM (borderline), HIGH (infeasible)}{table.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Hensel Lifting and Period Growth}{11}{section.5}\protected@file@percent }
+\newlabel{sec:hensel}{{5}{11}{Hensel Lifting and Period Growth}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}The fixed-point lifting theorem}{11}{subsection.5.1}\protected@file@percent }
+\newlabel{thm:hensel}{{5.1}{11}{Hensel lifting; see~\citealt {Gouvea1997}}{theorem.5.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Comparison of piecewise affine generator (Hensel-satisfied, $p=5$, $k=3$, $m=125$) with AES-128 in CTR mode. Both generators produce sequences with high entropy and pass basic randomness tests, but the piecewise generator has provable period bounds via Hensel lifting theory.}}{12}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:aes_comparison}{{1}{12}{Comparison of piecewise affine generator (Hensel-satisfied, $p=5$, $k=3$, $m=125$) with AES-128 in CTR mode. Both generators produce sequences with high entropy and pass basic randomness tests, but the piecewise generator has provable period bounds via Hensel lifting theory}{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Regime boundaries and the piecewise complication}{12}{subsection.5.2}\protected@file@percent }
+\newlabel{prop:pw-hensel}{{5.2}{12}{}{theorem.5.2}{}}
 \citation{numpy}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}From fixed points to periods}{12}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Why a closed-form formula fails}{12}{subsection.5.4}\protected@file@percent }
-\newlabel{conj:superlinear}{{5.4}{12}{Super-linear growth under Hensel satisfaction}{theorem.5.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Functional Graph Structure}{12}{section.6}\protected@file@percent }
-\newlabel{sec:fgraph}{{6}{12}{Functional Graph Structure}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}From fixed points to periods}{13}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Why a closed-form formula fails}{13}{subsection.5.4}\protected@file@percent }
+\newlabel{conj:superlinear}{{5.4}{13}{Super-linear growth under Hensel satisfaction}{theorem.5.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Functional Graph Structure}{13}{section.6}\protected@file@percent }
+\newlabel{sec:fgraph}{{6}{13}{Functional Graph Structure}{section.6}{}}
 \citation{Massey1969}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces $p$-adic lifting tree visualization for $p=5$ across extension levels $k \in \{1,2,3\}$. \textbf  {Left panel:} Hensel-satisfied configuration shows unique lifting with period multipliers $8.5\times $ and $34.4\times $. \textbf  {Right panel:} Hensel-violated configuration exhibits collapsed lifting with slower growth ($10\times $ and $15.6\times $). The hierarchical structure demonstrates how solutions lift from $\mathbb  {Z}/5\mathbb  {Z}\to \mathbb  {Z}/25\mathbb  {Z}\to \mathbb  {Z}/125\mathbb  {Z}$ under the Hensel condition.}}{13}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:lifting_tree}{{2}{13}{$p$-adic lifting tree visualization for $p=5$ across extension levels $k \in \{1,2,3\}$. \textbf {Left panel:} Hensel-satisfied configuration shows unique lifting with period multipliers $8.5\times $ and $34.4\times $. \textbf {Right panel:} Hensel-violated configuration exhibits collapsed lifting with slower growth ($10\times $ and $15.6\times $). The hierarchical structure demonstrates how solutions lift from $\Z /5\Z \to \Z /25\Z \to \Z /125\Z $ under the Hensel condition}{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Experimental Methods}{13}{section.7}\protected@file@percent }
-\newlabel{sec:methods}{{7}{13}{Experimental Methods}{section.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Sequence generation}{13}{subsection.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Trajectory period.}{13}{subsection.7.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces $p$-adic lifting tree visualization for $p=5$ across extension levels $k \in \{1,2,3\}$. \textbf  {Left panel:} Hensel-satisfied configuration shows unique lifting with period multipliers $8.5\times $ and $34.4\times $. \textbf  {Right panel:} Hensel-violated configuration exhibits collapsed lifting with slower growth ($10\times $ and $15.6\times $). The hierarchical structure demonstrates how solutions lift from $\mathbb  {Z}/5\mathbb  {Z}\to \mathbb  {Z}/25\mathbb  {Z}\to \mathbb  {Z}/125\mathbb  {Z}$ under the Hensel condition.}}{14}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:lifting_tree}{{2}{14}{$p$-adic lifting tree visualization for $p=5$ across extension levels $k \in \{1,2,3\}$. \textbf {Left panel:} Hensel-satisfied configuration shows unique lifting with period multipliers $8.5\times $ and $34.4\times $. \textbf {Right panel:} Hensel-violated configuration exhibits collapsed lifting with slower growth ($10\times $ and $15.6\times $). The hierarchical structure demonstrates how solutions lift from $\Z /5\Z \to \Z /25\Z \to \Z /125\Z $ under the Hensel condition}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Experimental Methods}{14}{section.7}\protected@file@percent }
+\newlabel{sec:methods}{{7}{14}{Experimental Methods}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Sequence generation}{14}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Trajectory period.}{14}{subsection.7.1}\protected@file@percent }
 \citation{sklearn}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Linear complexity}{14}{subsection.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}MLP neural attack}{14}{subsection.7.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}PyTorch Transformer}{14}{subsection.7.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Configurations}{14}{subsection.7.5}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Experimental configurations. $T$ is the trajectory period (verified from seed=42). All use $L_{\mathrm  {in}}=6$.}}{14}{table.caption.6}\protected@file@percent }
-\newlabel{tab:configs}{{4}{14}{Experimental configurations. $T$ is the trajectory period (verified from seed=42). All use $L_{\mathrm {in}}=6$}{table.caption.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Results}{15}{section.8}\protected@file@percent }
-\newlabel{sec:results}{{8}{15}{Results}{section.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Cross-prime period table}{15}{subsection.8.1}\protected@file@percent }
-\newlabel{sec:results:period}{{8.1}{15}{Cross-prime period table}{subsection.8.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Period growth across 168 primes ($p \in [2, 997]$) for Hensel-satisfied (blue) and Hensel-violated (orange) configurations at $k=2$. Mean growth ratio: $26.94\times $ (max $79.42\times $). The super-linear scaling is evident in the accelerating gap between satisfied and violated configurations.}}{15}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:prime_sweep}{{3}{15}{Period growth across 168 primes ($p \in [2, 997]$) for Hensel-satisfied (blue) and Hensel-violated (orange) configurations at $k=2$. Mean growth ratio: $26.94\times $ (max $79.42\times $). The super-linear scaling is evident in the accelerating gap between satisfied and violated configurations}{figure.caption.7}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces State-space maximum periods $T(p^k)$ for Hensel-satisfied and Hensel-violated configurations, $p \in \{5,7,11,13\}$. Same structural matrices~\eqref  {eq:Acanon}--\eqref  {eq:Aviol} reduced modulo~$p$ throughout. For $m^2 \leq 2500$, all states enumerated; otherwise, 1000 random samples used (Brent's algorithm). Values for large $m$ are \emph  {lower bounds} on the true maximum period. Ratio $= T(p^k)/T(p^{k-1})$.}}{16}{table.caption.8}\protected@file@percent }
-\newlabel{tab:periods}{{5}{16}{State-space maximum periods $T(p^k)$ for Hensel-satisfied and Hensel-violated configurations, $p \in \{5,7,11,13\}$. Same structural matrices~\eqref {eq:Acanon}--\eqref {eq:Aviol} reduced modulo~$p$ throughout. For $m^2 \leq 2500$, all states enumerated; otherwise, 1000 random samples used (Brent's algorithm). Values for large $m$ are \emph {lower bounds} on the true maximum period. Ratio $= T(p^k)/T(p^{k-1})$}{table.caption.8}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Berlekamp--Massey linear complexity over $\mathbb  {F}_5$, 300 post-burn terms. $H$ = first-component empirical entropy; $H_{\max } = \log _2 m$.}}{16}{table.caption.9}\protected@file@percent }
-\newlabel{tab:lc}{{6}{16}{Berlekamp--Massey linear complexity over $\F _5$, 300 post-burn terms. $H$ = first-component empirical entropy; $H_{\max } = \log _2 m$}{table.caption.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Linear complexity}{16}{subsection.8.2}\protected@file@percent }
-\newlabel{sec:results:lc}{{8.2}{16}{Linear complexity}{subsection.8.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Neural attack accuracy}{16}{subsection.8.3}\protected@file@percent }
-\newlabel{sec:results:neural}{{8.3}{16}{Neural attack accuracy}{subsection.8.3}{}}
-\@writefile{toc}{\contentsline {paragraph}{The Hensel-violated anomaly.}{16}{table.caption.10}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces MLP-(256,128) top-1 validation accuracy at 50 epochs, mean $\pm $ std over 5 seeds. The threshold between learnable and unlearnable lies in $T/L_{\mathrm  {in}} \in (21, 181)$.}}{17}{table.caption.10}\protected@file@percent }
-\newlabel{tab:neural}{{7}{17}{MLP-(256,128) top-1 validation accuracy at 50 epochs, mean $\pm $ std over 5 seeds. The threshold between learnable and unlearnable lies in $T/L_{\mathrm {in}} \in (21, 181)$}{table.caption.10}{}}
-\@writefile{toc}{\contentsline {paragraph}{Accuracy decay with increasing $T/L_{\mathrm  {in}}$.}{17}{table.caption.10}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Phase transition in neural predictability. MLP accuracy collapses from $100\%$ to $<17\%$ as $T/L_{\mathrm  {in}}$ crosses the critical threshold $\approx 21$. The sharp transition demonstrates an information-theoretic barrier: when period exceeds training data by factor $>25$, most transitions appear $\leq 1$ times, making generalization impossible.}}{17}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:phase_transition}{{4}{17}{Phase transition in neural predictability. MLP accuracy collapses from $100\%$ to $<17\%$ as $T/L_{\mathrm {in}}$ crosses the critical threshold $\approx 21$. The sharp transition demonstrates an information-theoretic barrier: when period exceeds training data by factor $>25$, most transitions appear $\leq 1$ times, making generalization impossible}{figure.caption.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}LSTM and Transformer results}{17}{subsection.8.4}\protected@file@percent }
-\newlabel{sec:results:lstm}{{8.4}{17}{LSTM and Transformer results}{subsection.8.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Noise robustness analysis across 6 noise levels ($\sigma \in [0, 0.5]$). Hensel-satisfied configurations maintain high periods even under additive Gaussian noise, while violated configurations degrade rapidly. This demonstrates that the period growth mechanism is robust to perturbations, a key property for cryptographic applications.}}{18}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:noise_robustness}{{5}{18}{Noise robustness analysis across 6 noise levels ($\sigma \in [0, 0.5]$). Hensel-satisfied configurations maintain high periods even under additive Gaussian noise, while violated configurations degrade rapidly. This demonstrates that the period growth mechanism is robust to perturbations, a key property for cryptographic applications}{figure.caption.12}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.5}State Space Model (SSM) experiments}{18}{subsection.8.5}\protected@file@percent }
-\newlabel{sec:results:ssm}{{8.5}{18}{State Space Model (SSM) experiments}{subsection.8.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.6}Information-Theoretic Prediction Bound}{19}{subsection.8.6}\protected@file@percent }
-\newlabel{sec:results:optimal}{{8.6}{19}{Information-Theoretic Prediction Bound}{subsection.8.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Optimal prediction bound verification ($N_{\mathrm  {train}}=3600$, $L_{\mathrm  {in}}=6$).}}{19}{table.caption.13}\protected@file@percent }
-\newlabel{tab:optimal_bound}{{8}{19}{Optimal prediction bound verification ($N_{\mathrm {train}}=3600$, $L_{\mathrm {in}}=6$)}{table.caption.13}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.7}Linear Complexity vs Neural Complexity: An Empirical Separation}{19}{subsection.8.7}\protected@file@percent }
-\newlabel{sec:results:separation}{{8.7}{19}{Linear Complexity vs Neural Complexity: An Empirical Separation}{subsection.8.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Linear complexity}{15}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}MLP neural attack}{15}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}PyTorch Transformer}{15}{subsection.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Configurations}{15}{subsection.7.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Experimental configurations. $T$ is the trajectory period (verified from seed=42). All use $L_{\mathrm  {in}}=6$.}}{15}{table.caption.6}\protected@file@percent }
+\newlabel{tab:configs}{{4}{15}{Experimental configurations. $T$ is the trajectory period (verified from seed=42). All use $L_{\mathrm {in}}=6$}{table.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Results}{16}{section.8}\protected@file@percent }
+\newlabel{sec:results}{{8}{16}{Results}{section.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Cross-prime period table}{16}{subsection.8.1}\protected@file@percent }
+\newlabel{sec:results:period}{{8.1}{16}{Cross-prime period table}{subsection.8.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Period growth across 168 primes ($p \in [2, 997]$) for Hensel-satisfied (blue) and Hensel-violated (orange) configurations at $k=2$. Mean growth ratio: $26.94\times $ (max $79.42\times $). The super-linear scaling is evident in the accelerating gap between satisfied and violated configurations.}}{16}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:prime_sweep}{{3}{16}{Period growth across 168 primes ($p \in [2, 997]$) for Hensel-satisfied (blue) and Hensel-violated (orange) configurations at $k=2$. Mean growth ratio: $26.94\times $ (max $79.42\times $). The super-linear scaling is evident in the accelerating gap between satisfied and violated configurations}{figure.caption.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces State-space maximum periods $T(p^k)$ for Hensel-satisfied and Hensel-violated configurations, $p \in \{5,7,11,13\}$. Same structural matrices~\eqref  {eq:Acanon}--\eqref  {eq:Aviol} reduced modulo~$p$ throughout. For $m^2 \leq 2500$, all states enumerated; otherwise, 1000 random samples used (Brent's algorithm). Values for large $m$ are \emph  {lower bounds} on the true maximum period. Ratio $= T(p^k)/T(p^{k-1})$.}}{17}{table.caption.8}\protected@file@percent }
+\newlabel{tab:periods}{{5}{17}{State-space maximum periods $T(p^k)$ for Hensel-satisfied and Hensel-violated configurations, $p \in \{5,7,11,13\}$. Same structural matrices~\eqref {eq:Acanon}--\eqref {eq:Aviol} reduced modulo~$p$ throughout. For $m^2 \leq 2500$, all states enumerated; otherwise, 1000 random samples used (Brent's algorithm). Values for large $m$ are \emph {lower bounds} on the true maximum period. Ratio $= T(p^k)/T(p^{k-1})$}{table.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Berlekamp--Massey linear complexity over $\mathbb  {F}_5$, 300 post-burn terms. $H$ = first-component empirical entropy; $H_{\max } = \log _2 m$.}}{17}{table.caption.9}\protected@file@percent }
+\newlabel{tab:lc}{{6}{17}{Berlekamp--Massey linear complexity over $\F _5$, 300 post-burn terms. $H$ = first-component empirical entropy; $H_{\max } = \log _2 m$}{table.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Linear complexity}{17}{subsection.8.2}\protected@file@percent }
+\newlabel{sec:results:lc}{{8.2}{17}{Linear complexity}{subsection.8.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Neural attack accuracy}{17}{subsection.8.3}\protected@file@percent }
+\newlabel{sec:results:neural}{{8.3}{17}{Neural attack accuracy}{subsection.8.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{The Hensel-violated anomaly.}{17}{table.caption.10}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces MLP-(256,128) top-1 validation accuracy at 50 epochs, mean $\pm $ std over 5 seeds. The threshold between learnable and unlearnable lies in $T/L_{\mathrm  {in}} \in (21, 181)$.}}{18}{table.caption.10}\protected@file@percent }
+\newlabel{tab:neural}{{7}{18}{MLP-(256,128) top-1 validation accuracy at 50 epochs, mean $\pm $ std over 5 seeds. The threshold between learnable and unlearnable lies in $T/L_{\mathrm {in}} \in (21, 181)$}{table.caption.10}{}}
+\@writefile{toc}{\contentsline {paragraph}{Accuracy decay with increasing $T/L_{\mathrm  {in}}$.}{18}{table.caption.10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Phase transition in neural predictability. MLP accuracy collapses from $100\%$ to $<17\%$ as $T/L_{\mathrm  {in}}$ crosses the critical threshold $\approx 21$. The sharp transition demonstrates an information-theoretic barrier: when period exceeds training data by factor $>25$, most transitions appear $\leq 1$ times, making generalization impossible.}}{18}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:phase_transition}{{4}{18}{Phase transition in neural predictability. MLP accuracy collapses from $100\%$ to $<17\%$ as $T/L_{\mathrm {in}}$ crosses the critical threshold $\approx 21$. The sharp transition demonstrates an information-theoretic barrier: when period exceeds training data by factor $>25$, most transitions appear $\leq 1$ times, making generalization impossible}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}LSTM and Transformer results}{18}{subsection.8.4}\protected@file@percent }
+\newlabel{sec:results:lstm}{{8.4}{18}{LSTM and Transformer results}{subsection.8.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Noise robustness analysis across 6 noise levels ($\sigma \in [0, 0.5]$). Hensel-satisfied configurations maintain high periods even under additive Gaussian noise, while violated configurations degrade rapidly. This demonstrates that the period growth mechanism is robust to perturbations, a key property for cryptographic applications.}}{19}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:noise_robustness}{{5}{19}{Noise robustness analysis across 6 noise levels ($\sigma \in [0, 0.5]$). Hensel-satisfied configurations maintain high periods even under additive Gaussian noise, while violated configurations degrade rapidly. This demonstrates that the period growth mechanism is robust to perturbations, a key property for cryptographic applications}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.5}State Space Model (SSM) experiments}{19}{subsection.8.5}\protected@file@percent }
+\newlabel{sec:results:ssm}{{8.5}{19}{State Space Model (SSM) experiments}{subsection.8.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.6}Information-Theoretic Prediction Bound}{20}{subsection.8.6}\protected@file@percent }
+\newlabel{sec:results:optimal}{{8.6}{20}{Information-Theoretic Prediction Bound}{subsection.8.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Optimal prediction bound verification ($N_{\mathrm  {train}}=3600$, $L_{\mathrm  {in}}=6$).}}{20}{table.caption.13}\protected@file@percent }
+\newlabel{tab:optimal_bound}{{8}{20}{Optimal prediction bound verification ($N_{\mathrm {train}}=3600$, $L_{\mathrm {in}}=6$)}{table.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.7}Linear Complexity vs Neural Complexity: An Empirical Separation}{20}{subsection.8.7}\protected@file@percent }
+\newlabel{sec:results:separation}{{8.7}{20}{Linear Complexity vs Neural Complexity: An Empirical Separation}{subsection.8.7}{}}
 \citation{Olah2020,Elhage2021}
 \citation{Olsson2022}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.8}Attention map analysis}{20}{subsection.8.8}\protected@file@percent }
-\newlabel{sec:results:attn}{{8.8}{20}{Attention map analysis}{subsection.8.8}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.8.1}Induction Head Impossibility}{20}{subsubsection.8.8.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Transformer attention analysis for $p=5$, $m=125$, $L_{\mathrm  {in}}=32$. Left: Attention heatmap showing diffuse, unstructured pattern. Right: Spearman correlation between attention weights and $p$-adic distance ($\rho = -0.255$, $p = 0.159$, not significant). The attention mechanism fails to correlate with $p$-adic structure, demonstrating architectural blindness to hierarchical mathematical patterns.}}{21}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:padic_attention}{{6}{21}{Transformer attention analysis for $p=5$, $m=125$, $L_{\mathrm {in}}=32$. Left: Attention heatmap showing diffuse, unstructured pattern. Right: Spearman correlation between attention weights and $p$-adic distance ($\rho = -0.255$, $p = 0.159$, not significant). The attention mechanism fails to correlate with $p$-adic structure, demonstrating architectural blindness to hierarchical mathematical patterns}{figure.caption.14}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}$p$-adic Measure Theory and Ergodic Interpretation}{21}{section.9}\protected@file@percent }
-\newlabel{sec:padic_measure}{{9}{21}{$p$-adic Measure Theory and Ergodic Interpretation}{section.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}The $p$-adic metric space}{21}{subsection.9.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Measure-preserving dynamics}{21}{subsection.9.2}\protected@file@percent }
-\newlabel{thm:measure_preserving}{{9.2}{21}{Measure Preservation Under Hensel Condition}{theorem.9.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Ergodic properties and mixing}{22}{subsection.9.3}\protected@file@percent }
-\newlabel{conj:ergodic}{{9.3}{22}{Ergodicity of $\tilde {f}$}{theorem.9.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Empirical Metrics of Topological Mixing}{22}{subsection.9.4}\protected@file@percent }
-\newlabel{sec:ergodicity_verification}{{9.4}{22}{Empirical Metrics of Topological Mixing}{subsection.9.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Ergodicity measures for Hensel-satisfied vs violated configurations.}}{22}{table.caption.15}\protected@file@percent }
-\newlabel{tab:ergodicity}{{9}{22}{Ergodicity measures for Hensel-satisfied vs violated configurations}{table.caption.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.8}Attention map analysis}{21}{subsection.8.8}\protected@file@percent }
+\newlabel{sec:results:attn}{{8.8}{21}{Attention map analysis}{subsection.8.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.8.1}Induction Head Impossibility}{21}{subsubsection.8.8.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Transformer attention analysis for $p=5$, $m=125$, $L_{\mathrm  {in}}=32$. Left: Attention heatmap showing diffuse, unstructured pattern. Right: Spearman correlation between attention weights and $p$-adic distance ($\rho = -0.255$, $p = 0.159$, not significant). The attention mechanism fails to correlate with $p$-adic structure, demonstrating architectural blindness to hierarchical mathematical patterns.}}{22}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:padic_attention}{{6}{22}{Transformer attention analysis for $p=5$, $m=125$, $L_{\mathrm {in}}=32$. Left: Attention heatmap showing diffuse, unstructured pattern. Right: Spearman correlation between attention weights and $p$-adic distance ($\rho = -0.255$, $p = 0.159$, not significant). The attention mechanism fails to correlate with $p$-adic structure, demonstrating architectural blindness to hierarchical mathematical patterns}{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}$p$-adic Measure Theory and Ergodic Interpretation}{22}{section.9}\protected@file@percent }
+\newlabel{sec:padic_measure}{{9}{22}{$p$-adic Measure Theory and Ergodic Interpretation}{section.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}The $p$-adic metric space}{22}{subsection.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Measure-preserving dynamics}{22}{subsection.9.2}\protected@file@percent }
+\newlabel{thm:measure_preserving}{{9.2}{22}{Measure Preservation Under Hensel Condition}{theorem.9.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Ergodic properties and mixing}{23}{subsection.9.3}\protected@file@percent }
+\newlabel{conj:ergodic}{{9.3}{23}{Ergodicity of $\tilde {f}$}{theorem.9.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Empirical Metrics of Topological Mixing}{23}{subsection.9.4}\protected@file@percent }
+\newlabel{sec:ergodicity_verification}{{9.4}{23}{Empirical Metrics of Topological Mixing}{subsection.9.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Ergodicity measures for Hensel-satisfied vs violated configurations.}}{24}{table.caption.15}\protected@file@percent }
+\newlabel{tab:ergodicity}{{9}{24}{Ergodicity measures for Hensel-satisfied vs violated configurations}{table.caption.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.5}Implications for neural predictability}{24}{subsection.9.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}Information-Theoretic Bounds and Heuristic Scaling Laws}{24}{section.10}\protected@file@percent }
+\newlabel{sec:neural_theory}{{10}{24}{Information-Theoretic Bounds and Heuristic Scaling Laws}{section.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Information-theoretic lower bound}{24}{subsection.10.1}\protected@file@percent }
+\newlabel{thm:sample_complexity}{{10.1}{24}{Sample Complexity Lower Bound}{theorem.10.1}{}}
 \citation{Bartlett1998}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.5}Implications for neural predictability}{23}{subsection.9.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10}Information-Theoretic Bounds and Heuristic Scaling Laws}{23}{section.10}\protected@file@percent }
-\newlabel{sec:neural_theory}{{10}{23}{Information-Theoretic Bounds and Heuristic Scaling Laws}{section.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Information-theoretic lower bound}{23}{subsection.10.1}\protected@file@percent }
-\newlabel{thm:sample_complexity}{{10.1}{23}{Sample Complexity Lower Bound}{theorem.10.1}{}}
 \citation{Hahn2020}
 \citation{Neyshabur2017}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}VC dimension of neural architectures}{25}{subsection.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Deriving the critical threshold}{25}{subsection.10.3}\protected@file@percent }
 \citation{Jiang2020}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}VC dimension of neural architectures}{24}{subsection.10.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Deriving the critical threshold}{24}{subsection.10.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Refined bound via Rademacher complexity}{24}{subsection.10.4}\protected@file@percent }
-\newlabel{thm:rademacher}{{10.2}{25}{Rademacher-based Sample Complexity}{theorem.10.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.5}Empirical formula: The "21" law}{25}{subsection.10.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {11}Testing Architectural Modifications: p-adic Positional Encoding}{25}{section.11}\protected@file@percent }
-\newlabel{sec:padic_encoding}{{11}{25}{Testing Architectural Modifications: p-adic Positional Encoding}{section.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Hypothesis}{26}{subsection.11.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}$p$-adic positional encoding design}{26}{subsection.11.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Experimental validation}{26}{subsection.11.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.4}Results}{26}{subsection.11.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Validation accuracy for different positional encodings on hard sequence ($m=125$, $T=7295$, $T/L=228$). All encodings perform at random baseline, confirming the failure is information-theoretic.}}{26}{table.caption.16}\protected@file@percent }
-\newlabel{tab:padic_pe}{{10}{26}{Validation accuracy for different positional encodings on hard sequence ($m=125$, $T=7295$, $T/L=228$). All encodings perform at random baseline, confirming the failure is information-theoretic}{table.caption.16}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.5}Interpretation}{26}{subsection.11.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.6}Implications}{27}{subsection.11.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {12}Discussion}{27}{section.12}\protected@file@percent }
-\newlabel{sec:discussion}{{12}{27}{Discussion}{section.12}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}$T/L_{\mathrm  {in}}$ as an operational hardness parameter}{27}{subsection.12.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}Why the Transformer does not fix the problem}{27}{subsection.12.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.3}The $p$-adic attention hypothesis}{28}{subsection.12.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.4}Kolmogorov Complexity vs Neural Complexity}{28}{subsection.12.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.5}Limitations}{28}{subsection.12.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {13}Conclusion}{29}{section.13}\protected@file@percent }
-\newlabel{sec:conclusion}{{13}{29}{Conclusion}{section.13}{}}
-\@writefile{toc}{\contentsline {paragraph}{Priorities for future work.}{29}{section.13}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Acknowledgments.}{30}{Item.15}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A}Period Computation: Implementation}{31}{section.A}\protected@file@percent }
-\newlabel{app:period}{{A}{31}{Period Computation: Implementation}{section.A}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {B}Trajectory Period Verification}{31}{section.B}\protected@file@percent }
-\newlabel{app:traj}{{B}{31}{Trajectory Period Verification}{section.B}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {C}MLP Hyperparameter Sensitivity}{31}{section.C}\protected@file@percent }
-\newlabel{app:mlp}{{C}{31}{MLP Hyperparameter Sensitivity}{section.C}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {D}Transformer Architecture Details}{31}{section.D}\protected@file@percent }
-\newlabel{app:transformer}{{D}{31}{Transformer Architecture Details}{section.D}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Refined bound via Rademacher complexity}{26}{subsection.10.4}\protected@file@percent }
+\newlabel{thm:rademacher}{{10.2}{26}{Rademacher-based Sample Complexity}{theorem.10.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.5}Empirical formula: The "21" law}{26}{subsection.10.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Testing Architectural Modifications: p-adic Positional Encoding}{27}{section.11}\protected@file@percent }
+\newlabel{sec:padic_encoding}{{11}{27}{Testing Architectural Modifications: p-adic Positional Encoding}{section.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Hypothesis}{27}{subsection.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}$p$-adic positional encoding design}{27}{subsection.11.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Experimental validation}{27}{subsection.11.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.4}Results}{27}{subsection.11.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Validation accuracy for different positional encodings on hard sequence ($m=125$, $T=7295$, $T/L=228$). All encodings perform at random baseline, confirming the failure is information-theoretic.}}{27}{table.caption.16}\protected@file@percent }
+\newlabel{tab:padic_pe}{{10}{27}{Validation accuracy for different positional encodings on hard sequence ($m=125$, $T=7295$, $T/L=228$). All encodings perform at random baseline, confirming the failure is information-theoretic}{table.caption.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.5}Interpretation}{28}{subsection.11.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.6}Implications}{28}{subsection.11.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12}Discussion}{28}{section.12}\protected@file@percent }
+\newlabel{sec:discussion}{{12}{28}{Discussion}{section.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}$T/L_{\mathrm  {in}}$ as an operational hardness parameter}{28}{subsection.12.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}Why the Transformer does not fix the problem}{29}{subsection.12.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.3}The $p$-adic attention hypothesis}{29}{subsection.12.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.4}Kolmogorov Complexity vs Neural Complexity}{29}{subsection.12.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.5}Limitations}{30}{subsection.12.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13}Conclusion}{30}{section.13}\protected@file@percent }
+\newlabel{sec:conclusion}{{13}{30}{Conclusion}{section.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.1}What we have shown}{30}{subsection.13.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.2}What this means}{31}{subsection.13.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.3}What remains open}{31}{subsection.13.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.4}Priorities for future work}{32}{subsection.13.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.5}Final thoughts}{32}{subsection.13.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Acknowledgments.}{32}{subsection.13.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A}Period Computation: Implementation}{33}{section.A}\protected@file@percent }
+\newlabel{app:period}{{A}{33}{Period Computation: Implementation}{section.A}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Trajectory Period Verification}{33}{section.B}\protected@file@percent }
+\newlabel{app:traj}{{B}{33}{Trajectory Period Verification}{section.B}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C}MLP Hyperparameter Sensitivity}{33}{section.C}\protected@file@percent }
+\newlabel{app:mlp}{{C}{33}{MLP Hyperparameter Sensitivity}{section.C}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {D}Transformer Architecture Details}{33}{section.D}\protected@file@percent }
+\newlabel{app:transformer}{{D}{33}{Transformer Architecture Details}{section.D}{}}
 \bibstyle{plainnat}
 \bibcite{Berlekamp1968}{{1}{1968}{{Berlekamp}}{{}}}
 \bibcite{BM1984}{{2}{1984}{{Blum \& Micali}}{{}}}
@@ -185,4 +191,4 @@
 \bibcite{Olah2020}{{17}{2020}{{Olah et al.}}{{}}}
 \bibcite{Elhage2021}{{18}{2021}{{Elhage et al.}}{{}}}
 \bibcite{Olsson2022}{{19}{2022}{{Olsson et al.}}{{}}}
-\gdef \@abspage@last{33}
+\gdef \@abspage@last{35}
