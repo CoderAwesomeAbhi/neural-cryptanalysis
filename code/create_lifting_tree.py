@@ -2,7 +2,7 @@
 HENSEL LIFTING TREE VISUALIZATION
 ==================================
 
-Visual diagram showing how periods grow under ring extension p → p² → p³.
+Visual diagram showing how periods grow under ring extension p -> p² -> p³.
 This is the "Aha!" moment for understanding super-linear growth.
 
 Author: Abhijay Gangarapu
@@ -80,7 +80,7 @@ def create_lifting_tree():
         
         # Super-linear indicator
         if ratio1 > p and ratio2 > p:
-            ax.text(5, 0.5, '✓ SUPER-LINEAR GROWTH', ha='center', fontsize=12,
+            ax.text(5, 0.5, '[OK] SUPER-LINEAR GROWTH', ha='center', fontsize=12,
                    color='green', fontweight='bold',
                    bbox=dict(boxstyle='round', facecolor='lightgreen', alpha=0.5))
         
@@ -102,7 +102,7 @@ def create_lifting_tree():
     
     # Table data
     table_data = []
-    table_data.append(['Prime p', 'T(p)', 'T(p²)', 'T(p³)', 'Ratio 1→2', 'Ratio 2→3'])
+    table_data.append(['Prime p', 'T(p)', 'T(p²)', 'T(p³)', 'Ratio 1->2', 'Ratio 2->3'])
     for p in primes:
         T1, T2, T3 = periods[p][1], periods[p][2], periods[p][3]
         r1 = T2/T1

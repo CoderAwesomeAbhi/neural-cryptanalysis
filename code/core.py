@@ -6,9 +6,9 @@ All experiments import from here for reproducibility.
 import numpy as np
 from itertools import islice
 
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 # Canonical matrices (same for all primes, reduced mod p)
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 A0_BASE = np.array([[1, 1], [3, 1]], dtype=np.int64)
 A1_BASE = np.array([[3, 3], [1, 3]], dtype=np.int64)
 b0_BASE = np.array([1, 2], dtype=np.int64)

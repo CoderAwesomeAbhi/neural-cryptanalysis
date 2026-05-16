@@ -3,13 +3,13 @@ berlekamp_massey.py
 ===================
 Berlekamp–Massey algorithm over GF(p) (prime modulus).
 
-Given a finite sequence s = (s_0, s_1, …, s_{n−1}) over Z/pZ, computes the
+Given a finite sequence s = (s_0, s_1, ..., s_{n-1}) over Z/pZ, computes the
 shortest linear feedback shift register (LFSR) that generates s, i.e. the
 shortest linear recurrence
 
-    s_i = c_1 s_{i−1} + c_2 s_{i−2} + … + c_L s_{i−L}   (mod p)
+    s_i = c_1 s_{i-1} + c_2 s_{i-2} + ... + c_L s_{i-L}   (mod p)
 
-that holds for all i = L, L+1, …, n−1.
+that holds for all i = L, L+1, ..., n-1.
 
 The linear complexity LC(s) = L of the sequence is a foundational
 cryptographic parameter: exactly 2L observed terms suffice for the
@@ -34,7 +34,7 @@ Author: Research pipeline for
 from typing import List, Tuple, Dict
 
 
-# ─── core Berlekamp–Massey algorithm ─────────────────────────────────────────
+# --- core Berlekamp–Massey algorithm -----------------------------------------
 
 def berlekamp_massey(seq: List[int], p: int) -> int:
     """
@@ -44,7 +44,7 @@ def berlekamp_massey(seq: List[int], p: int) -> int:
 
     Parameters
     ----------
-    seq : sequence of integers in {0, …, p−1}
+    seq : sequence of integers in {0, ..., p-1}
     p   : prime modulus (field characteristic)
 
     Returns
@@ -61,7 +61,7 @@ def berlekamp_massey(seq: List[int], p: int) -> int:
     b  = 1               # leading coefficient of B at last length change
 
     for i in range(n):
-        # Discrepancy: d = Σ_{j=0}^{L} C[j] * s[i−j]  mod p
+        # Discrepancy: d = Σ_{j=0}^{L} C[j] * s[i-j]  mod p
         d = sum(C[j] * s[i - j] for j in range(min(L + 1, len(C)))) % p
 
         if d == 0:
@@ -101,16 +101,16 @@ def berlekamp_massey(seq: List[int], p: int) -> int:
 def lfsr_from_bm(seq: List[int], p: int) -> Tuple[int, List[int]]:
     """
     Run Berlekamp–Massey and return (L, feedback_taps) where taps c satisfy
-        s[i] = Σ_{j=1}^{L} c[j−1] * s[i−j]  (mod p).
+        s[i] = Σ_{j=1}^{L} c[j-1] * s[i-j]  (mod p).
 
     Parameters
     ----------
-    seq : sequence of integers in {0, …, p−1}
+    seq : sequence of integers in {0, ..., p-1}
     p   : prime modulus
 
     Returns
     -------
-    (L, taps) where L = LC(s) and taps = [c_1, …, c_L] in GF(p).
+    (L, taps) where L = LC(s) and taps = [c_1, ..., c_L] in GF(p).
     """
     s  = [int(x) % p for x in seq]
     n  = len(s)
@@ -140,7 +140,7 @@ def lfsr_from_bm(seq: List[int], p: int) -> Tuple[int, List[int]]:
                 else:            C.append((-c_over_b * B[j]) % p)
             m_ += 1
 
-    # Connection polynomial C satisfies: s[i] = −Σ_{j=1}^{L} C[j] s[i−j]
+    # Connection polynomial C satisfies: s[i] = -Σ_{j=1}^{L} C[j] s[i-j]
     taps = [(-C[j]) % p for j in range(1, L + 1)]
     return L, taps
 
@@ -167,7 +167,7 @@ def verify_lfsr(
     L, taps = lfsr_from_bm(seq, p)
     s       = [int(x) % p for x in seq]
 
-    # Seed the LFSR with s[0 … L−1], then predict s[L], s[L+1], …
+    # Seed the LFSR with s[0 ... L-1], then predict s[L], s[L+1], ...
     errors = 0
     buf    = list(s[:L])
     end    = min(L + verify_steps, len(s))
@@ -229,7 +229,7 @@ def compute_lc_table(
     return results
 
 
-# ─── self-test ────────────────────────────────────────────────────────────────
+# --- self-test ----------------------------------------------------------------
 
 if __name__ == "__main__":
     import sys
@@ -260,7 +260,7 @@ if __name__ == "__main__":
     for name, row in table.items():
         exp  = expected_LC[name]
         ok   = abs(row["LC"] - exp) <= 30
-        mark = "✓" if ok else f"✗ (expected ~{exp})"
+        mark = "[OK]" if ok else f"[X] (expected ~{exp})"
         print(f"  {name:<28}  {row['LC']:>6}  "
               f"{row['crack_cost']:>12}  {row['errors']:>10}  {mark}")
 

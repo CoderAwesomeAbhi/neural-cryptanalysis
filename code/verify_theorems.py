@@ -8,13 +8,13 @@ This is what judges actually want to see: not just "our results show X" but
 
 Verified claims:
   [T3.1]  Super-linear period growth: T(p^{k+1}) > p · T(p^k)
-  [T3.2]  Period lower bound: T_sat(p^k) ≥ p^{k-1}(p-1)r
-  [T5.1]  Hensel lifting: δ(A)=0 ⟹ fixed-point lifts uniquely
+  [T3.2]  Period lower bound: T_sat(p^k) >= p^{k-1}(p-1)r
+  [T5.1]  Hensel lifting: δ(A)=0 => fixed-point lifts uniquely
   [T9.2]  Measure preservation: |det(A_i)|_p = 1
-  [T11.1] Optimal prediction bound: oracle accuracy ≤ N/T + (1-N/T)/m
-  [O3.5]  Neural threshold: T/Lin ≤ 21 ↔ acc=100%; T/Lin ≥ 181 ↔ acc<17%
+  [T11.1] Optimal prediction bound: oracle accuracy <= N/T + (1-N/T)/m
+  [O3.5]  Neural threshold: T/Lin <= 21 ↔ acc=100%; T/Lin >= 181 ↔ acc<17%
   [O3.6]  p-adic attention: Spearman ρ not significant
-  [S9.5]  Spectral gap: γ_sat > 0 for all tested params
+  [S9.5]  Spectral gap: gamma_sat > 0 for all tested params
   [T12.1] LC–NC separation: corr(LC, neural_acc) ≠ corr(T, neural_acc)
 """
 
@@ -25,14 +25,14 @@ import numpy as np
 from core import (generate_sequence, find_trajectory_period,
                   make_matrices, CONFIGS)
 
-PASS = "✓ PASS"
-FAIL = "✗ FAIL"
+PASS = "[OK] PASS"
+FAIL = "[X] FAIL"
 
 results = {}
 
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 # [T3.1] Super-linear period growth
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 print("\n[T3.1] SUPER-LINEAR PERIOD GROWTH  T(p^{k+1}) > p·T(p^k)")
 data_T31 = {
     5:  {1: 25,   2: 212,  3: 7295},
@@ -51,16 +51,16 @@ for p, levels in data_T31.items():
         claim = T_k1 > p * T_k
         status = PASS if claim else FAIL
         if not claim: all_pass = False
-        print(f"  p={p}  k={k}→{k1}: T={T_k}→{T_k1}  "
+        print(f"  p={p}  k={k}->{k1}: T={T_k}->{T_k1}  "
               f"ratio={ratio:.2f}x  (need >{p}x)  {status}")
 
 results["T3.1"] = PASS if all_pass else FAIL
 print(f"  VERDICT: {results['T3.1']}")
 
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 # [T3.2] Period lower bound
-# ─────────────────────────────────────────────────────────────
-print("\n[T3.2] PERIOD LOWER BOUND  T_sat(p^k) ≥ p^{k-1}(p-1)·r")
+# -------------------------------------------------------------
+print("\n[T3.2] PERIOD LOWER BOUND  T_sat(p^k) >= p^{k-1}(p-1)·r")
 data_T32 = [
     # (p, k, r, T_observed)
     (5,  1, 2, 25),
@@ -82,10 +82,10 @@ for p, k, r, T_obs in data_T32:
 results["T3.2"] = PASS if all_pass else FAIL
 print(f"  VERDICT: {results['T3.2']}")
 
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 # [T5.1] Hensel lifting: δ(A)=0 means (A-I) invertible mod p
-# ─────────────────────────────────────────────────────────────
-print("\n[T5.1] HENSEL LIFTING  δ(A)=0 ⟹ (A-I) invertible mod p")
+# -------------------------------------------------------------
+print("\n[T5.1] HENSEL LIFTING  δ(A)=0 => (A-I) invertible mod p")
 A0_base = np.array([[1,1],[3,1]])
 A1_base = np.array([[3,3],[1,3]])
 A0v_base = np.array([[2,1],[1,2]])
@@ -111,9 +111,9 @@ for p in [5, 7, 11, 13]:
 results["T5.1"] = PASS if all_pass else FAIL
 print(f"  VERDICT: {results['T5.1']}")
 
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 # [T9.2] Measure preservation: |det(A_i)|_p = 1
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 print("\n[T9.2] MEASURE PRESERVATION  |det(A_i)|_p = 1")
 all_pass = True
 for p in [5, 7, 11, 13]:
@@ -128,10 +128,10 @@ for p in [5, 7, 11, 13]:
 results["T9.2"] = PASS if all_pass else FAIL
 print(f"  VERDICT: {results['T9.2']}")
 
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 # [T11.1] Optimal prediction bound
-# ─────────────────────────────────────────────────────────────
-print("\n[T11.1] OPTIMAL PREDICTION BOUND  acc ≤ N/T + (1-N/T)/m")
+# -------------------------------------------------------------
+print("\n[T11.1] OPTIMAL PREDICTION BOUND  acc <= N/T + (1-N/T)/m")
 
 observed_neural = {
     # (m, sat): observed MLP accuracy
@@ -152,7 +152,7 @@ periods = {
 }
 
 all_pass = True
-print(f"  {'Config':<20} {'Bound':>7} {'Neural':>7} {'Bound≥Neural':>14}")
+print(f"  {'Config':<20} {'Bound':>7} {'Neural':>7} {'Bound>=Neural':>14}")
 for (m, sat), acc in observed_neural.items():
     T     = periods[(m, sat)]
     bound = N_train / T + (1 - N_train / T) / m if N_train < T else 1.0
@@ -166,10 +166,10 @@ for (m, sat), acc in observed_neural.items():
 results["T11.1"] = PASS if all_pass else FAIL
 print(f"  VERDICT: {results['T11.1']}")
 
-# ─────────────────────────────────────────────────────────────
-# [O3.5] Neural threshold: T/Lin ≤ 21 → 100%, T/Lin ≥ 181 → <17%
-# ─────────────────────────────────────────────────────────────
-print("\n[O3.5] NEURAL HARDNESS THRESHOLD  T/Lin ≤ 21 → 100%; ≥ 181 → <17%")
+# -------------------------------------------------------------
+# [O3.5] Neural threshold: T/Lin <= 21 -> 100%, T/Lin >= 181 -> <17%
+# -------------------------------------------------------------
+print("\n[O3.5] NEURAL HARDNESS THRESHOLD  T/Lin <= 21 -> 100%; >= 181 -> <17%")
 Lin = 6
 easy_configs = [(10, 1.0), (25, 1.0), (40, 1.0), (30, 1.0), (46, 1.0), (74, 1.0), (125, 1.0)]
 hard_configs = [(1083, 0.163), (4912, 0.073), (7295, 0.026), (20475, 0.022)]
@@ -186,13 +186,13 @@ for T, acc in hard_configs:
 
 status = PASS if all_pass else FAIL
 results["O3.5"] = status
-print(f"  All easy configs (T/Lin≤21): acc=100% ... {PASS}")
-print(f"  All hard configs (T/Lin≥181): acc<17% ... {PASS}")
+print(f"  All easy configs (T/Lin<=21): acc=100% ... {PASS}")
+print(f"  All hard configs (T/Lin>=181): acc<17% ... {PASS}")
 print(f"  VERDICT: {results['O3.5']}")
 
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 # SUMMARY
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 print("\n" + "=" * 55)
 print("VERIFICATION SUMMARY")
 print("=" * 55)

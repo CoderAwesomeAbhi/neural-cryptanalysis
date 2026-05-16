@@ -7,17 +7,17 @@ Linear Complexity LC(s) and Neural Complexity NC(s) are GENUINELY DIFFERENT
 measures of sequence hardness. We construct explicit families showing:
 
   (A) HIGH LC + LOW  NC:  Sequence with LC ≫ 1 that neural nets predict perfectly.
-      → The H-viol m=25 config (LC=27, neural=100%) is the canonical example.
-      → We systematically construct more examples via controlled period manipulation.
+      -> The H-viol m=25 config (LC=27, neural=100%) is the canonical example.
+      -> We systematically construct more examples via controlled period manipulation.
 
-  (B) LOW  LC + HIGH NC:  Sequence with LC ≈ 1 but period ≫ N_train.
-      → This shows that short linear recurrences can generate hard neural targets.
+  (B) LOW  LC + HIGH NC:  Sequence with LC ~= 1 but period ≫ N_train.
+      -> This shows that short linear recurrences can generate hard neural targets.
 
   (C) Quantitative separation: we show for any pair (LC_0, NC_0), we can construct
-      s with LC(s) ≈ LC_0 and NC(s) ≈ NC_0 independently.
+      s with LC(s) ~= LC_0 and NC(s) ~= NC_0 independently.
 
 THEOREM 12.1 (LC–NC Independence):
-  ∃ sequences {s_n} with:
+  exists sequences {s_n} with:
     (i)  LC(s) = Ω(m) but NC(s) = O(1)   [high LC, easy for neural]
     (ii) LC(s) = O(1) but NC(s) = Ω(T)   [low LC, hard for neural]
   These families are explicitly constructible.
@@ -30,9 +30,9 @@ import numpy as np
 from core import generate_sequence, find_trajectory_period, make_matrices
 from sklearn.neural_network import MLPClassifier
 
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 # Berlekamp-Massey over Z/pZ (projected)
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 def berlekamp_massey_Fp(seq, p):
     """BM algorithm over GF(p). Returns linear complexity."""
     s = [int(x) % p for x in seq]
@@ -73,15 +73,15 @@ def neural_accuracy_quick(seq, m, N_train=3600, L_in=6, seed=0):
     return mlp.score(X[N_train:N_train+500], y[N_train:N_train+500])
 
 
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 # Case A: High LC, Low NC  (long LC, short period)
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 def construct_high_LC_low_NC():
     """
     Use H-viol m=25 (p=5, k=2) with verified LC=27, T=30.
     Then vary k to get higher LC while keeping period short.
     """
-    print("\n── CASE A: High LC, Low NC ──────────────────────────────────")
+    print("\n-- CASE A: High LC, Low NC ----------------------------------")
     print("Construction: H-viol configs with increasing modulus.")
     print(f"{'m':>6} {'T':>6} {'LC':>6} {'Neural%':>9} {'T/Lin':>7}")
     print("-" * 45)
@@ -102,14 +102,14 @@ def construct_high_LC_low_NC():
     # Find high-LC low-NC cases
     easy = [(m,T,lc,acc) for m,T,lc,acc,r,sat in results if acc > 90]
     hard_lc = [(m,T,lc,acc) for m,T,lc,acc,r,sat in results if lc > 20 and acc > 90]
-    print(f"\n  → {len(easy)} configs with >90% neural accuracy.")
-    print(f"  → {len(hard_lc)} with LC>20 AND neural>90%  (HIGH-LC, LOW-NC cases).")
+    print(f"\n  -> {len(easy)} configs with >90% neural accuracy.")
+    print(f"  -> {len(hard_lc)} with LC>20 AND neural>90%  (HIGH-LC, LOW-NC cases).")
     return results
 
 
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 # Case B: Low LC, High NC  (LCR shift register with long period)
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 def construct_low_LC_high_NC():
     """
     A degree-d LFSR over GF(p) has LC = d but period up to p^d - 1.
@@ -120,7 +120,7 @@ def construct_low_LC_high_NC():
     Simpler construction: generate a sequence with very low LC (near-linear)
     but with period >> N_train by using a large prime p with k=1, sat.
     """
-    print("\n── CASE B: Low LC, High NC ──────────────────────────────────")
+    print("\n-- CASE B: Low LC, High NC ----------------------------------")
     print("Construction: LFSR-based sequences with controlled LC and period.")
 
     # LFSR with primitive polynomial over GF(p)
@@ -150,21 +150,21 @@ def construct_low_LC_high_NC():
         results.append((p, d, lc, T, acc*100))
         print(f"{p:>4} {d:>4} {lc:>6} {T:>6} {acc*100:>9.1f} {ratio:>7.1f}")
 
-    print("\n  → LFSR: LC = degree d (small), but T can be large.")
-    print("  → When T > N_train: neural fails despite low LC.")
-    print("  → This demonstrates LC and NC are INDEPENDENT measures.")
+    print("\n  -> LFSR: LC = degree d (small), but T can be large.")
+    print("  -> When T > N_train: neural fails despite low LC.")
+    print("  -> This demonstrates LC and NC are INDEPENDENT measures.")
     return results
 
 
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 # Formal separation measurement
-# ─────────────────────────────────────────────────────────────
+# -------------------------------------------------------------
 def measure_separation():
     """
     Compute the LC–NC correlation across all configs.
     Theorem 12.1 is supported if corr(LC, NC) is low or negative.
     """
-    print("\n── CORRELATION ANALYSIS: LC vs NC ──────────────────────────")
+    print("\n-- CORRELATION ANALYSIS: LC vs NC --------------------------")
 
     data = []
     for cfg_name in ["p5k2sat", "p5k2viol", "p7k2sat", "p7k2viol",
@@ -196,8 +196,8 @@ def measure_separation():
         corr_T_nc   = np.corrcoef(Ts,   accs)[0, 1]
         print(f"\n  Pearson corr(LC, neural accuracy) = {corr_lc_nc:+.3f}")
         print(f"  Pearson corr(T,  neural accuracy) = {corr_T_nc:+.3f}")
-        print(f"\n  → T predicts neural accuracy far better than LC does.")
-        print(f"  → This quantitatively supports Theorem 12.1: NC ∝ T, not LC.")
+        print(f"\n  -> T predicts neural accuracy far better than LC does.")
+        print(f"  -> This quantitatively supports Theorem 12.1: NC proportional to T, not LC.")
 
 
 def main():

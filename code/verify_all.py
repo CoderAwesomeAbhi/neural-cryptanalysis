@@ -40,7 +40,7 @@ p = 5
 SEP  = "=" * 65
 SEP2 = "-" * 65
 
-# ─── helper ─────────────────────────────────────────────────────────────────
+# --- helper -----------------------------------------------------------------
 def check(label, got, expected, tol=0):
     ok = abs(got - expected) <= tol if tol else got == expected
     status = "[OK]" if ok else "[FAIL]"

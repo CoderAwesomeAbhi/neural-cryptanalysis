@@ -105,7 +105,7 @@ def benchmark_neural_attack():
     
     # Verdict
     if result_padic['test_acc'] < result_aes['test_acc']:
-        print("✓ HEADLINE: p-adic generator RESISTS neural attacks better than AES-CTR!")
+        print("[OK] HEADLINE: p-adic generator RESISTS neural attacks better than AES-CTR!")
         print(f"  Resistance ratio: {result_aes['test_acc']/result_padic['test_acc']:.2f}×")
     else:
         print("  p-adic generator and AES-CTR show similar resistance.")

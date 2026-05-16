@@ -28,7 +28,7 @@ def prove_superlinear_growth_lemma1(p: int, A: np.ndarray) -> Dict:
     """
     Lemma 1 (Fixed Point Lifting Multiplicity):
     
-    Let A ∈ GL_2(Z/pZ) with δ(A) = 0 (Hensel-satisfied).
+    Let A in GL_2(Z/pZ) with δ(A) = 0 (Hensel-satisfied).
     Let x* be a fixed point of x ↦ Ax + b (mod p).
     
     Then:
@@ -102,7 +102,7 @@ def prove_superlinear_growth_lemma2(p: int, r: int = 2) -> Dict:
     For r = 2 (parity switching), this occurs when k = 1 and p is odd.
     
     Proof: The regime classification depends on x[0] mod r. Under lifting,
-    x[0] → x[0] + jp^k for j = 0, ..., p-1. The regime of the lift is
+    x[0] -> x[0] + jp^k for j = 0, ..., p-1. The regime of the lift is
     (x[0] + jp^k) mod r. When p is odd and r = 2, these alternate between
     even and odd, causing regime switches.
     
@@ -112,7 +112,7 @@ def prove_superlinear_growth_lemma2(p: int, r: int = 2) -> Dict:
     # For r = 2, boundary states are those with x[0] ≡ 0 (mod 2)
     # At level k, there are p^k / r states on each boundary
     
-    k = 1  # Consider k=1 → k=2 transition
+    k = 1  # Consider k=1 -> k=2 transition
     m_k = p ** k
     m_k1 = p ** (k + 1)
     
@@ -148,7 +148,7 @@ def prove_superlinear_growth_theorem(p: int, A0: np.ndarray, A1: np.ndarray) -> 
     For the piecewise affine map with Hensel-satisfied matrices A0, A1,
     the maximum period satisfies:
     
-        T_sat(p^{k+1}) > T_sat(p^k) * p    for all k ≥ 1
+        T_sat(p^{k+1}) > T_sat(p^k) * p    for all k >= 1
     
     PROOF:
     
@@ -167,11 +167,11 @@ def prove_superlinear_growth_theorem(p: int, A0: np.ndarray, A1: np.ndarray) -> 
         period pT at level k+1 due to the lifting structure.
     
     Combining these effects:
-        T_sat(p^{k+1}) ≥ p * T_sat(p^k) * (1 + ε)
+        T_sat(p^{k+1}) >= p * T_sat(p^k) * (1 + ε)
     
     where ε > 0 depends on the regime boundary structure.
     
-    For the canonical matrices with r = 2 and p ∈ {5, 7, 11, 13}, we have ε > 0,
+    For the canonical matrices with r = 2 and p in {5, 7, 11, 13}, we have ε > 0,
     proving super-linear growth.
     
     Q.E.D.
@@ -222,7 +222,7 @@ def prove_period_lower_bound(p: int, k: int, r: int = 2) -> Dict:
     For the Hensel-satisfied piecewise affine map with r regimes,
     the maximum period satisfies:
     
-        T_sat(p^k) ≥ p^{k-1} * (p - 1) * r
+        T_sat(p^k) >= p^{k-1} * (p - 1) * r
     
     PROOF:
     
@@ -239,7 +239,7 @@ def prove_period_lower_bound(p: int, k: int, r: int = 2) -> Dict:
     (5) The regime switching ensures that cycles must traverse all r regimes,
         multiplying the minimum cycle length by r.
     
-    (6) Combining: T_sat(p^k) ≥ (p^k - 1) * r ≥ p^{k-1} * (p - 1) * r.
+    (6) Combining: T_sat(p^k) >= (p^k - 1) * r >= p^{k-1} * (p - 1) * r.
     
     Q.E.D.
     """
@@ -291,18 +291,18 @@ def prove_neural_hardness_threshold(T: int, N_train: int, L_in: int, m: int) -> 
     (a) If ρ >> 1 (many repetitions), the sequence is learnable with high probability.
     (b) If ρ << 1 (few repetitions), the sequence is information-theoretically hard.
     
-    Formally, the expected number of times each transition (s_i, ..., s_{i+L_in}) → s_{i+L_in+1}
+    Formally, the expected number of times each transition (s_i, ..., s_{i+L_in}) -> s_{i+L_in+1}
     appears in the training set is:
     
         E[repetitions] = N_train / T
     
-    For successful learning, we need E[repetitions] ≥ c for some constant c > 1.
+    For successful learning, we need E[repetitions] >= c for some constant c > 1.
     
     This gives the critical threshold:
     
-        T_critical ≈ N_train / c
+        T_critical ~= N_train / c
     
-    Empirically, we observe c ≈ 20-30 for the MLP and Transformer architectures tested.
+    Empirically, we observe c ~= 20-30 for the MLP and Transformer architectures tested.
     
     PROOF:
     
@@ -311,15 +311,15 @@ def prove_neural_hardness_threshold(T: int, N_train: int, L_in: int, m: int) -> 
     (2) The training set contains N_train - L_in windows.
     
     (3) By the pigeonhole principle, the average number of times each transition
-        appears is (N_train - L_in) / T ≈ N_train / T.
+        appears is (N_train - L_in) / T ~= N_train / T.
     
     (4) For a neural network to learn a transition, it needs to see it multiple times
         to distinguish signal from noise and generalize.
     
-    (5) Empirical observation: MLPs and Transformers require ≈ 20-30 examples per
+    (5) Empirical observation: MLPs and Transformers require ~= 20-30 examples per
         transition to achieve > 90% accuracy.
     
-    (6) Therefore, the critical threshold is T_critical ≈ N_train / 25.
+    (6) Therefore, the critical threshold is T_critical ~= N_train / 25.
     
     (7) When T >> T_critical, most transitions appear 0 or 1 times, making learning
         information-theoretically impossible.
@@ -330,7 +330,7 @@ def prove_neural_hardness_threshold(T: int, N_train: int, L_in: int, m: int) -> 
     expected_repetitions = rho
     
     # Empirical constant from experiments (Section 6.1 of paper)
-    c_empirical = 25  # Observed from phase transition at T/L_in ≈ 20-180
+    c_empirical = 25  # Observed from phase transition at T/L_in ~= 20-180
     
     T_critical = N_train / c_empirical
     
@@ -378,7 +378,7 @@ def prove_padic_attention_hypothesis(p: int, k: int, L_in: int) -> Dict:
     
     Formally, we conjecture:
     
-        E[α_{n,j}] ∝ p^{-ν_p(n-j)}
+        E[α_{n,j}] proportional to p^{-ν_p(n-j)}
     
     where ν_p(n-j) is the p-adic valuation of n-j.
     

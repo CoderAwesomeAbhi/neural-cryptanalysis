@@ -52,7 +52,7 @@ def create_phase_portrait():
     ax.scatter(x_viol[:2000], y_viol[:2000], s=1, alpha=0.3, c='#ff7f0e')
     ax.set_xlabel('$x_n$', fontsize=14)
     ax.set_ylabel('$x_{n+1}$', fontsize=14)
-    ax.set_title('Hensel-Violated (δ≥1)\nLow Entropy', fontsize=16, fontweight='bold')
+    ax.set_title('Hensel-Violated (δ>=1)\nLow Entropy', fontsize=16, fontweight='bold')
     ax.set_xlim(0, m)
     ax.set_ylim(0, m)
     ax.grid(True, alpha=0.2)

@@ -4,7 +4,7 @@ CRITICAL EXPERIMENTS FOR GRAND AWARD
 Runs the 3 experiments needed to move from "good" to "bulletproof":
 1. Multi-prime Spearman correlation (p=5,7,11)
 2. p-adic Positional Encoding benchmark
-3. Scaling law validation (L_in ∈ {16,32,64,128})
+3. Scaling law validation (L_in in {16,32,64,128})
 
 Author: Abhijay Gangarapu
 """
@@ -32,10 +32,10 @@ print("      ACTION NEEDED: Run controlled benchmark showing accuracy jump")
 
 # Task 3: Scaling law validation
 print("\n[3/3] Scaling law validation (L_in sweep)...")
-print("NOTE: Tests if T/L ≈ 21 holds across context lengths")
+print("NOTE: Tests if T/L ~= 21 holds across context lengths")
 print("      Estimated time: 60-90 minutes")
 print("      Status: Requires modifying neural_attack.py")
-print("      ACTION NEEDED: Sweep L_in ∈ {16,32,64,128}")
+print("      ACTION NEEDED: Sweep L_in in {16,32,64,128}")
 
 print("\n" + "="*70)
 print("REALITY CHECK")

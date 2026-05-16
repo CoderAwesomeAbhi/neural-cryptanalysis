@@ -9,19 +9,19 @@ Implements the state-transition map:
 
 where phi(x) = x[0] mod r  (first-component parity switching function).
 
-Cross-prime design: all canonical matrix entries are small integers (≤ 4),
-so the same matrices are used at every prime p ∈ {5, 7, 11, 13} and reduced
+Cross-prime design: all canonical matrix entries are small integers (<= 4),
+so the same matrices are used at every prime p in {5, 7, 11, 13} and reduced
 to Z/p^kZ at runtime.  This isolates the role of the Hensel condition from
 prime-specific arithmetic effects.
 
 Canonical matrices (Section 2.3 of the paper):
 ----------------------------------------------
 Hensel-satisfied (δ(Aᵢ) = 0 for all regimes):
-  A0 = [[1,1],[3,1]], b0 = [1,2]     det(A0−I) mod p = −3 mod p
-  A1 = [[3,3],[1,3]], b1 = [2,1]     det(A1−I) mod p = 1
+  A0 = [[1,1],[3,1]], b0 = [1,2]     det(A0-I) mod p = -3 mod p
+  A1 = [[3,3],[1,3]], b1 = [2,1]     det(A1-I) mod p = 1
 
-Hensel-violated (δ(A0_viol) ≥ 1):
-  A0_viol = [[2,1],[1,2]], b0_viol = [3,4]    det(A0_viol−I) = 0 always
+Hensel-violated (δ(A0_viol) >= 1):
+  A0_viol = [[2,1],[1,2]], b0_viol = [3,4]    det(A0_viol-I) = 0 always
 
 Author: Research pipeline for
   "Period Growth and Neural Predictability in Piecewise Affine Systems
@@ -34,23 +34,23 @@ from typing import List, Tuple, Dict, Optional
 import itertools
 
 
-# ─── canonical matrix definitions ───────────────────────────────────────────
+# --- canonical matrix definitions -------------------------------------------
 
 # Hensel-satisfied two-regime configuration
-# det(A0_CANON − I) = det([[0,1],[3,0]]) = −3     ≠ 0 mod p for p ∈ {5,7,11,13}
-# det(A1_CANON − I) = det([[2,3],[1,2]]) =  1     ≠ 0 mod p for all p
+# det(A0_CANON - I) = det([[0,1],[3,0]]) = -3     ≠ 0 mod p for p in {5,7,11,13}
+# det(A1_CANON - I) = det([[2,3],[1,2]]) =  1     ≠ 0 mod p for all p
 A0_CANON = np.array([[1, 1], [3, 1]], dtype=np.int64)
 b0_CANON = np.array([1, 2],           dtype=np.int64)
 A1_CANON = np.array([[3, 3], [1, 3]], dtype=np.int64)
 b1_CANON = np.array([2, 1],           dtype=np.int64)
 
 # Hensel-violated variant for comparison
-# det(A0_VIOL − I) = det([[1,1],[1,1]]) = 0       ≡ 0 mod any prime
+# det(A0_VIOL - I) = det([[1,1],[1,1]]) = 0       ≡ 0 mod any prime
 A0_VIOL  = np.array([[2, 1], [1, 2]], dtype=np.int64)
 b0_VIOL  = np.array([3, 4],           dtype=np.int64)
 
 # Three-regime extension (used for PW-3R composite m=35 experiment)
-# det(A2_3R) = det([[3,4],[2,3]]) = 9−8 = 1       ≠ 0 mod any prime
+# det(A2_3R) = det([[3,4],[2,3]]) = 9-8 = 1       ≠ 0 mod any prime
 A2_3R    = np.array([[3, 4], [2, 3]], dtype=np.int64)
 b2_3R    = np.array([1, 1],           dtype=np.int64)
 
@@ -61,7 +61,7 @@ PRIMES: List[int] = [5, 7, 11, 13]
 STATE_DIM: int = 2
 
 
-# ─── arithmetic helpers ──────────────────────────────────────────────────────
+# --- arithmetic helpers ------------------------------------------------------
 
 def prime_factorization(n: int) -> List[Tuple[int, int]]:
     """
@@ -105,24 +105,24 @@ def det2x2_mod(A: np.ndarray, m: int) -> int:
 
 
 def is_invertible_mod(A: np.ndarray, m: int) -> bool:
-    """True iff det(A) is coprime to m, i.e. A ∈ GL_d(Z/mZ)."""
+    """True iff det(A) is coprime to m, i.e. A in GL_d(Z/mZ)."""
     return gcd(det2x2_mod(A, m), m) == 1
 
 
 def hensel_index(A: np.ndarray, p: int) -> int:
     """
-    Compute δ(A) = ν_p(det(A − I)), the p-adic valuation of det(A − I).
+    Compute δ(A) = ν_p(det(A - I)), the p-adic valuation of det(A - I).
 
-    Returns 0  if det(A−I) ≢ 0 (mod p)   [Hensel-satisfied]
-    Returns k≥1 if p^k | det(A−I) but p^{k+1} ∤ det(A−I)
-    Returns ∞  (represented as 999) if det(A−I) = 0 (practically impossible
+    Returns 0  if det(A-I) ≢ 0 (mod p)   [Hensel-satisfied]
+    Returns k>=1 if p^k | det(A-I) but p^{k+1} ∤ det(A-I)
+    Returns infinity  (represented as 999) if det(A-I) = 0 (practically impossible
               for our matrices away from trivial cases)
     """
     I2 = np.eye(2, dtype=np.int64)
     val = int(det2x2_mod((A - I2).astype(np.int64), p))
     if val != 0:
         return 0
-    # Compute actual p-adic valuation of the integer det(A−I)
+    # Compute actual p-adic valuation of the integer det(A-I)
     raw = int((A[0, 0] - 1) * (A[1, 1] - 1) - A[0, 1] * A[1, 0])
     if raw == 0:
         return 999  # Exactly zero (not a prime-adic question)
@@ -146,7 +146,7 @@ def hensel_condition(A: np.ndarray, p: int) -> bool:
     return hensel_satisfied(A, p)
 
 
-# ─── cross-prime matrix accessor ─────────────────────────────────────────────
+# --- cross-prime matrix accessor ---------------------------------------------
 
 def get_matrices(config: str = "sat") -> Tuple[List[np.ndarray], List[np.ndarray]]:
     """
@@ -186,7 +186,7 @@ def verify_hensel_table() -> Dict:
     return result
 
 
-# ─── sequence generation ─────────────────────────────────────────────────────
+# --- sequence generation -----------------------------------------------------
 
 def generate_piecewise(
     m: int,
@@ -216,7 +216,7 @@ def generate_piecewise(
 
     Returns
     -------
-    List[int] of length N − burn, each in {0, …, m−1}.
+    List[int] of length N - burn, each in {0, ..., m-1}.
     """
     if m <= 1:
         raise ValueError(f"m must be >= 2, got {m}")
@@ -275,7 +275,7 @@ def generate_linear(
     return generate_piecewise(m, [A], [b], N=N, d=d, seed=seed, burn=burn)
 
 
-# ─── period computation ───────────────────────────────────────────────────────
+# --- period computation -------------------------------------------------------
 
 def _apply_map(
     x: Tuple[int, ...],
@@ -307,7 +307,7 @@ def compute_period_single(
       'brent'  : Brent's algorithm (O(1) space, faster than Floyd)
       'auto'   : Choose based on m^d (hash for small, Brent for large)
 
-    Returns the cycle length, or −1 if not found within reasonable limit.
+    Returns the cycle length, or -1 if not found within reasonable limit.
     """
     A_mods = [(A % m).astype(np.int64) for A in A_list]
     b_mods = [(b % m).astype(np.int64) for b in b_list]
@@ -393,7 +393,7 @@ def compute_max_period(
     Compute the maximum cycle length (state-space maximum period) over all
     starting states (exhaustive for small m^d, random sampling otherwise).
 
-    For m^d ≤ exhaustive_threshold: enumerates all m^d starting states.
+    For m^d <= exhaustive_threshold: enumerates all m^d starting states.
     Otherwise: samples n_starts random starting states.
 
     Parameters
@@ -454,8 +454,8 @@ def verify_trajectory_period(
 
     Methodology (Appendix B of the paper):
       1. Generate N_verify terms with burn=0 from the given seed.
-      2. Find the smallest T ≥ 1 such that
-             s[burn + i] = s[burn + i + T]   for all i in {0, …, check_len−1}.
+      2. Find the smallest T >= 1 such that
+             s[burn + i] = s[burn + i + T]   for all i in {0, ..., check_len-1}.
          This is the period of the orbit that the neural model actually sees.
 
     Note: The trajectory period can be smaller than the state-space maximum
@@ -464,7 +464,7 @@ def verify_trajectory_period(
 
     Returns
     -------
-    Trajectory period T, or −1 if not found within N_verify/2 steps.
+    Trajectory period T, or -1 if not found within N_verify/2 steps.
     """
     full_seq = generate_piecewise(m, A_list, b_list, N=N_verify, seed=seed, burn=0)
     s = full_seq  # length N_verify
@@ -573,7 +573,7 @@ class PiecewiseAffineGenerator:
             burn=burn,
         )
 
-# ─── self-test ────────────────────────────────────────────────────────────────
+# --- self-test ----------------------------------------------------------------
 
 if __name__ == "__main__":
     print("=" * 65)
@@ -583,7 +583,7 @@ if __name__ == "__main__":
     I2 = np.eye(2, dtype=np.int64)
     p  = 5
 
-    # ── Hensel condition verification ─────────────────────────────────────────
+    # -- Hensel condition verification -----------------------------------------
     print("\n[ Hensel Index Table (all four primes) ]")
     table = verify_hensel_table()
     header = f"  {'p':>3}  {'det(A0-I)':>10}  δ(A0)  {'det(A1-I)':>10}  δ(A1)  {'det(Av-I)':>10}  δ(Av)"
@@ -592,7 +592,7 @@ if __name__ == "__main__":
     for prime, row in table.items():
         print(f"  {prime:>3}  {row['det_A0']:>10}    {row['delta_A0']}  "
               f"{row['det_A1']:>10}    {row['delta_A1']}  "
-              f"{row['det_Av']:>10}  {'≥'+str(row['delta_Av']) if row['delta_Av']>0 else '0':>5}")
+              f"{row['det_Av']:>10}  {'>='+str(row['delta_Av']) if row['delta_Av']>0 else '0':>5}")
 
     # Expected values (from Table 1 of the paper):
     expected = {5: (2, 0, 1, 0, 0), 7: (4, 0, 1, 0, 0),
@@ -604,9 +604,9 @@ if __name__ == "__main__":
         assert row["det_A1"]  == exp[2]
         assert row["delta_A1"] == exp[3]
         assert row["det_Av"]  == exp[4]
-    print("  ✓ All Hensel index values match Table 1 of the paper.")
+    print("  [OK] All Hensel index values match Table 1 of the paper.")
 
-    # ── Period growth under ring extension (p=5) ──────────────────────────────
+    # -- Period growth under ring extension (p=5) ------------------------------
     print("\n[ Period Growth: p=5, Hensel-sat vs Hensel-viol ]")
     A_sat,  b_sat  = get_matrices("sat")
     A_viol, b_viol = get_matrices("viol")
@@ -624,7 +624,7 @@ if __name__ == "__main__":
         assert T_v == expected_viol[k], f"T_viol(p^{k}) mismatch: got {T_v}"
         print(f"  {k:>3}  {m:>5}  {T_s:>8}  {T_v:>8}  {T_s/T_v:>9.2f}×")
 
-    # ── Trajectory period for seed=42 ─────────────────────────────────────────
+    # -- Trajectory period for seed=42 -----------------------------------------
     print("\n[ Trajectory Period Verification: seed=42, burn=300 ]")
     traj_tests = [
         ("sat m=5",   5,   A_sat,  b_sat,  25),
@@ -634,10 +634,10 @@ if __name__ == "__main__":
     ]
     for label, m, As, bs, exp_T in traj_tests:
         T = verify_trajectory_period(m, As, bs)
-        mark = "✓" if T == exp_T else f"✗ (got {T})"
+        mark = "[OK]" if T == exp_T else f"[X] (got {T})"
         print(f"  {label:<14} traj T = {T:>6}  (expected {exp_T:>6})  {mark}")
 
-    # ── Sample sequence ────────────────────────────────────────────────────────
+    # -- Sample sequence --------------------------------------------------------
     seq = generate_piecewise(p, A_sat, b_sat, N=320, burn=0)
     print(f"\n[ First 20 terms from sat config, m=5 ]")
     print(f"  {seq[:20]}")

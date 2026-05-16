@@ -9,8 +9,8 @@ Classical Markov-chain spectral gap = 0 by construction.
 
 The correct ergodicity measures for deterministic systems are:
   (E1) EQUIDISTRIBUTION: does the orbit visit each residue class with
-       frequency ≈ 1/m? (chi-squared test vs uniform)
-  (E2) AUTOCORRELATION DECAY: how quickly does corr(s_n, s_{n+τ}) → 0?
+       frequency ~= 1/m? (chi-squared test vs uniform)
+  (E2) AUTOCORRELATION DECAY: how quickly does corr(s_n, s_{n+τ}) -> 0?
   (E3) N-GRAM COVERAGE: what fraction of possible (s_n, s_{n+1}) pairs appear?
        Full coverage ⟺ maximal orbit size ⟺ supports Conjecture 9.3.
   (E4) ENTROPY CONCENTRATION: empirical H(first component) vs log2(m).
@@ -54,7 +54,7 @@ def autocorrelation(seq: np.ndarray, max_lag: int = 50) -> np.ndarray:
 
 def autocorr_decay_rate(acf: np.ndarray) -> float:
     """
-    Fit |acf[τ]| ≈ C·exp(-γ·τ). Return γ (higher = faster decay = better mixing).
+    Fit |acf[τ]| ~= C·exp(-gamma·τ). Return gamma (higher = faster decay = better mixing).
     """
     lags  = np.arange(1, len(acf) + 1, dtype=float)
     abs_acf = np.abs(acf) + 1e-12  # avoid log(0)
@@ -125,22 +125,22 @@ def main():
             'cov2': cov2, 'H_frac': H_frac,
         })
 
-        label = "SAT ✓" if sat else "VIOL ✗"
+        label = "SAT [OK]" if sat else "VIOL [X]"
         print(f"\n[{cfg_name}]  {label}  m={m}  T={T_str}")
-        print(f"  E1 Equidistribution   : χ²={chi2:.1f}  p={p_val:.4f}  "
-              f"({'uniform ✓' if p_val > 0.05 else 'non-uniform ✗'})")
+        print(f"  E1 Equidistribution   : chi^2={chi2:.1f}  p={p_val:.4f}  "
+              f"({'uniform [OK]' if p_val > 0.05 else 'non-uniform [X]'})")
         print(f"  E2 Mean |ACF|         : {mean_acf:.4f}  "
-              f"({'fast decay ✓' if mean_acf < 0.15 else 'slow decay ✗'})")
+              f"({'fast decay [OK]' if mean_acf < 0.15 else 'slow decay [X]'})")
         print(f"  E3 2-gram coverage    : {cov2*100:.1f}%  "
-              f"({'high ✓' if cov2 > 0.5 else 'low ✗'})")
+              f"({'high [OK]' if cov2 > 0.5 else 'low [X]'})")
         print(f"  E4 Entropy H/Hmax     : {H_frac*100:.1f}%  "
-              f"({'near-max ✓' if H_frac > 0.95 else 'below-max ✗'})")
+              f"({'near-max [OK]' if H_frac > 0.95 else 'below-max [X]'})")
 
     # Summary table
     print("\n" + "=" * 78)
     print("SUMMARY TABLE")
     print(f"{'Config':<14} {'m':>4} {'Sat':>4} {'T':>7} "
-          f"{'p(χ²)':>8} {'Mean|ACF|':>10} {'Cov2':>6} {'H/Hmax':>8}")
+          f"{'p(chi^2)':>8} {'Mean|ACF|':>10} {'Cov2':>6} {'H/Hmax':>8}")
     print("-" * 78)
     for r in results:
         s = "Y" if r['sat'] else "N"
@@ -162,14 +162,14 @@ def main():
               f"(sat is {(sat_H-viol_H)*100:.1f}pp more entropic)")
         print(f"  Mean cov2   : sat={sat_c:.3f}  viol={viol_c:.3f}  "
               f"(sat covers {(sat_c-viol_c)*100:.1f}pp more 2-grams)")
-        print(f"\n  → Sat configs show significantly higher entropy and transition coverage.")
-        print(f"  → This provides COMPUTATIONAL SUPPORT for Conjecture 9.3:")
+        print(f"\n  -> Sat configs show significantly higher entropy and transition coverage.")
+        print(f"  -> This provides COMPUTATIONAL SUPPORT for Conjecture 9.3:")
         print(f"    the Hensel-satisfied map behaves ergodically in all measurable senses.")
-        print(f"  → A formal proof remains open (listed as Future Work).")
+        print(f"  -> A formal proof remains open (listed as Future Work).")
 
     print("\nNOTE ON SPECTRAL GAP:")
     print("  For deterministic periodic maps, the transition matrix is a permutation.")
-    print("  All eigenvalues lie on the unit circle → classical spectral gap = 0.")
+    print("  All eigenvalues lie on the unit circle -> classical spectral gap = 0.")
     print("  The CORRECT ergodicity measures for deterministic systems are E1–E4 above.")
     print("  These establish ergodic behavior computationally without claiming a proof.")
     print("=" * 78)

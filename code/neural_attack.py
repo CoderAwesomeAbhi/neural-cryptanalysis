@@ -15,8 +15,8 @@ Experimental setup (Section 4 of the paper):
 
 Key finding (Section 6.1 of the paper):
   The ratio T/L_in is the operationally relevant hardness parameter:
-    T/L_in ≤ 21  →  both models achieve 100% accuracy
-    T/L_in ≥ 181 →  both models collapse to ≤ 17% accuracy (near-random)
+    T/L_in <= 21  ->  both models achieve 100% accuracy
+    T/L_in >= 181 ->  both models collapse to <= 17% accuracy (near-random)
 
 Author: Research pipeline for
   "Period Growth and Neural Predictability in Piecewise Affine Systems
@@ -28,12 +28,12 @@ import warnings
 import numpy as np
 from typing import List, Tuple, Dict, Optional
 
-# ── scikit-learn MLP ──────────────────────────────────────────────────────────
+# -- scikit-learn MLP ----------------------------------------------------------
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score
 
-# ── PyTorch Transformer ───────────────────────────────────────────────────────
+# -- PyTorch Transformer -------------------------------------------------------
 try:
     import torch
     import torch.nn as nn
@@ -60,19 +60,19 @@ def make_windowed_dataset(
     """
     Convert a 1-D integer sequence into windowed (X, y) pairs.
 
-        X[i] = (seq[i]/m, seq[i+1]/m, …, seq[i+L_in−1]/m) ∈ [0,1]^{L_in}
-        y[i] = seq[i + L_in]  ∈ {0, …, m−1}
+        X[i] = (seq[i]/m, seq[i+1]/m, ..., seq[i+L_in-1]/m) in [0,1]^{L_in}
+        y[i] = seq[i + L_in]  in {0, ..., m-1}
 
     Parameters
     ----------
-    seq  : list of integers in {0, …, m−1}
+    seq  : list of integers in {0, ..., m-1}
     m    : modulus (used for normalization to [0,1])
     L_in : input window length
 
     Returns
     -------
-    X : float32 array of shape (N−L_in, L_in)
-    y : int32   array of shape (N−L_in,)
+    X : float32 array of shape (N-L_in, L_in)
+    y : int32   array of shape (N-L_in,)
     """
     if m <= 1:
         raise ValueError(f"m must be >= 2, got {m}")
@@ -268,7 +268,7 @@ if TORCH_AVAILABLE:
                     attn_mask=src_mask,
                     key_padding_mask=src_key_padding_mask,
                     need_weights=True,
-                    average_attn_weights=True,  # PyTorch ≥ 1.13
+                    average_attn_weights=True,  # PyTorch >= 1.13
                 )
             except TypeError:
                 # Fallback for PyTorch < 1.13
@@ -293,10 +293,10 @@ if TORCH_AVAILABLE:
         Two-layer Transformer encoder for next-term prediction over Z/mZ.
 
         Architecture (Appendix D of the paper):
-          embed:   Linear(1 → d_model)
+          embed:   Linear(1 -> d_model)
           pos_enc: Embedding(L_in, d_model)  [learned positional encoding]
           encoder: 2 × AttentionCapturingLayer(d_model, nhead, ff_dim, dropout=0)
-          head:    Linear(d_model × L_in → m)
+          head:    Linear(d_model × L_in -> m)
 
         Input:  (B, L_in) float tensor of normalised residues in [0,1]
         Output: (B, m) logits over Z/mZ
@@ -460,7 +460,7 @@ if TORCH_AVAILABLE:
 
         Returns
         -------
-        (trained model, metrics dict with val_acc, test_acc, …)
+        (trained model, metrics dict with val_acc, test_acc, ...)
         """
         torch.manual_seed(seed)
         Xtr, ytr, Xva, yva, Xte, yte = train_val_test_split(X, y)
@@ -553,7 +553,7 @@ if TORCH_AVAILABLE:
         # Maximum attention position
         qi, ki = np.unravel_index(mean.argmax(), mean.shape)
 
-        # Row-wise entropy: H(row) = −Σ_j w_j log w_j
+        # Row-wise entropy: H(row) = -Σ_j w_j log w_j
         eps     = 1e-9
         row_ent = -(attn0 * np.log(attn0 + eps)).sum(axis=-1)  # (B, L)
         avg_ent = float(row_ent.mean())
@@ -609,7 +609,7 @@ def build_all_configs(N: int = 4500, seed: int = 42) -> List[Dict]:
         ("p=5 H-sat (m=25)",          25,  125,
          lambda: generate_piecewise(25,  [A0_CANON, A1_CANON],
                                          [b0_CANON, b1_CANON],           N=N, seed=seed)),
-        # Hard configurations: T/L_in ≥ 181
+        # Hard configurations: T/L_in >= 181
         ("p=7 H-sat (m=49)",          49,  1083,
          lambda: generate_piecewise(49,  [A0_CANON, A1_CANON],
                                          [b0_CANON, b1_CANON],           N=N, seed=seed)),
@@ -655,7 +655,7 @@ if __name__ == "__main__":
     print("=" * 80)
     print(f"\nSetup: N={N}, burn=300, L_in={L_IN}, MLP epochs={EPOCHS}, seeds={N_SEEDS}\n")
 
-    # ── MLP: all 11 configurations ────────────────────────────────────────────
+    # -- MLP: all 11 configurations --------------------------------------------
     print("[ MLP-(256,128): All 11 Configurations ]")
     print()
     header = (f"  {'Configuration':<30}  {'m':>5}  {'T':>6}  {'T/L':>5}  "
@@ -670,7 +670,7 @@ if __name__ == "__main__":
         result = evaluate_mlp_over_seeds(cfg["X"], cfg["y"], cfg["m"],
                                          n_seeds=N_SEEDS, epochs=EPOCHS)
         if cfg["T_over_L"] > 21 and not separator_printed:
-            print("  " + "─" * (len(header) - 2) + "  ← phase transition")
+            print("  " + "-" * (len(header) - 2) + "  ← phase transition")
             separator_printed = True
 
         print(f"  {cfg['name']:<30}  {cfg['m']:>5}  {cfg['T_traj']:>6}  "
@@ -678,7 +678,7 @@ if __name__ == "__main__":
               f"{result['mean']:>8.1%}  ±{result['std']:>4.1%}  "
               f"{cfg['random_baseline']:>8.1%}")
 
-    # ── Transformer: easy vs hard ─────────────────────────────────────────────
+    # -- Transformer: easy vs hard ---------------------------------------------
     if TORCH_AVAILABLE:
         print()
         print("[ PyTorch Transformer: Easy (m=25) vs Hard (m=125) ]")
@@ -712,7 +712,7 @@ if __name__ == "__main__":
 
             print(f"  {cfg_name} [{label}]:")
             print(f"    Avg attention entropy: {ent:.3f} bits (higher = more diffuse)")
-            print(f"    Max attention: query pos {qi} → key pos {ki}")
+            print(f"    Max attention: query pos {qi} -> key pos {ki}")
             if mean_a is not None:
                 # Describe the pattern
                 row_max = mean_a.max(axis=1)

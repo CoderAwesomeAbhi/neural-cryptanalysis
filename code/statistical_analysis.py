@@ -121,7 +121,7 @@ def analyze_phase_transition(T_over_L_values: List[float], accuracies: List[List
         'fit_success': fit_success,
         'transition_point': transition_T_over_L,
         'transition_ci_95': transition_ci,
-        'interpretation': f'Phase transition at T/L_in ≈ {transition_T_over_L:.1f} [{transition_ci[0]:.1f}, {transition_ci[1]:.1f}]' if fit_success else 'Fit failed'
+        'interpretation': f'Phase transition at T/L_in ~= {transition_T_over_L:.1f} [{transition_ci[0]:.1f}, {transition_ci[1]:.1f}]' if fit_success else 'Fit failed'
     }
 
 
