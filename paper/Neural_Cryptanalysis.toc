@@ -1,0 +1,74 @@
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Background and motivation}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Contributions and scope}{4}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Dataset and what the models are trained on}{5}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Organization}{5}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Mathematical Framework}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Piecewise affine maps over residue rings}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}The Hensel index}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Canonical matrix families}{6}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Main Theoretical Results}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Theorem 1: Super-linear Period Growth}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Theorem 2: Explicit Period Lower Bound}{8}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Observation: Neural Hardness Threshold}{8}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Observation: $p$-adic Attention Hypothesis (Tested)}{9}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Algebraic Attack Analysis}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Polynomial System Attack}{9}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}CRT Decomposition Attack}{10}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Lattice-Based Attack}{10}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Summary}{11}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Hensel Lifting and Period Growth}{11}{section.5}%
+\contentsline {subsection}{\numberline {5.1}The fixed-point lifting theorem}{11}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Regime boundaries and the piecewise complication}{12}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}From fixed points to periods}{12}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Why a closed-form formula fails}{13}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Functional Graph Structure}{13}{section.6}%
+\contentsline {section}{\numberline {7}Experimental Methods}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Sequence generation}{13}{subsection.7.1}%
+\contentsline {paragraph}{Trajectory period.}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Linear complexity}{14}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}MLP neural attack}{14}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}PyTorch Transformer}{14}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Configurations}{15}{subsection.7.5}%
+\contentsline {section}{\numberline {8}Results}{15}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Cross-prime period table}{15}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Linear complexity}{16}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Neural attack accuracy}{16}{subsection.8.3}%
+\contentsline {paragraph}{The Hensel-violated anomaly.}{16}{table.caption.10}%
+\contentsline {paragraph}{Accuracy decay with increasing $T/L_{\mathrm {in}}$.}{17}{table.caption.10}%
+\contentsline {subsection}{\numberline {8.4}LSTM and Transformer results}{17}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}State Space Model (SSM) experiments}{18}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.6}Optimal Prediction Bound (Theorem 11.1)}{19}{subsection.8.6}%
+\contentsline {subsection}{\numberline {8.7}LC-NC Separation (Theorem 12.1)}{20}{subsection.8.7}%
+\contentsline {subsection}{\numberline {8.8}Attention map analysis}{20}{subsection.8.8}%
+\contentsline {section}{\numberline {9}$p$-adic Measure Theory and Ergodic Interpretation}{21}{section.9}%
+\contentsline {subsection}{\numberline {9.1}The $p$-adic metric space}{21}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Measure-preserving dynamics}{21}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Ergodic properties and mixing}{22}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Computational ergodicity verification}{22}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}Implications for neural predictability}{23}{subsection.9.5}%
+\contentsline {section}{\numberline {10}Information-Theoretic Bounds and Heuristic Scaling Laws}{23}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Information-theoretic lower bound}{23}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}VC dimension of neural architectures}{23}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Deriving the critical threshold}{24}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Refined bound via Rademacher complexity}{24}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}Empirical formula: The "21" law}{25}{subsection.10.5}%
+\contentsline {section}{\numberline {11}Testing Architectural Modifications: p-adic Positional Encoding}{25}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Hypothesis}{25}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}$p$-adic positional encoding design}{26}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Experimental validation}{26}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}Results}{26}{subsection.11.4}%
+\contentsline {subsection}{\numberline {11.5}Interpretation}{26}{subsection.11.5}%
+\contentsline {subsection}{\numberline {11.6}Implications}{27}{subsection.11.6}%
+\contentsline {section}{\numberline {12}Discussion}{27}{section.12}%
+\contentsline {subsection}{\numberline {12.1}$T/L_{\mathrm {in}}$ as an operational hardness parameter}{27}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Why the Transformer does not fix the problem}{27}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}The $p$-adic attention hypothesis}{27}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Limitations}{28}{subsection.12.4}%
+\contentsline {section}{\numberline {13}Conclusion}{28}{section.13}%
+\contentsline {paragraph}{Priorities for future work.}{29}{section.13}%
+\contentsline {paragraph}{Acknowledgments.}{29}{Item.12}%
+\contentsline {section}{\numberline {A}Period Computation: Implementation}{30}{section.A}%
+\contentsline {section}{\numberline {B}Trajectory Period Verification}{30}{section.B}%
+\contentsline {section}{\numberline {C}MLP Hyperparameter Sensitivity}{30}{section.C}%
+\contentsline {section}{\numberline {D}Transformer Architecture Details}{30}{section.D}%
