@@ -15,7 +15,8 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 import sys
 sys.path.append('.')
-from generator import generate_sequence, compute_max_period
+from core import generate_sequence
+from generator import compute_max_period
 
 class SequenceDataset(Dataset):
     def __init__(self, sequence, L_in, N):
@@ -120,12 +121,8 @@ def main():
     sequences = {}
     for p, k, T, name in configs:
         m = p ** k
-        A0_mod = A0 % p
-        A1_mod = A1 % p
-        b0_mod = b0 % p
-        b1_mod = b1 % p
-        seq = generate_sequence(m, [A0_mod, A1_mod], [b0_mod, b1_mod], 
-                               length=15000, burn_in=300, seed=42)
+        # Use sat=True for Hensel-satisfied sequences
+        seq = generate_sequence(m, sat=True, N=15000, burn=300, seed=42)
         sequences[name] = (seq, m, T)
         print(f"  {name}: m={m}, T={T}")
     
