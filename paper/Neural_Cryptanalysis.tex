@@ -6,7 +6,7 @@
 \usepackage{xcolor}
 \usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=green!45!black,urlcolor=blue!60!black]{hyperref}
 \usepackage{enumitem}
-\usepackage{microtype}
+%\usepackage{microtype}
 \usepackage{parskip}
 \usepackage{graphicx}
 \usepackage{caption}
@@ -68,13 +68,15 @@
 \begin{abstract}
 Modern neural networks excel at learning patterns in natural language and images, yet their limitations on mathematical structures remain poorly understood. This paper identifies a sharp boundary: when a periodic sequence has period $T$ exceeding training data size $N$ by more than a factor of 2, gradient-based learning fails catastrophically regardless of architecture.
 
-We study this through piecewise affine maps $x_{n+1} = A_{\varphi(x_n)}\,x_n + b_{\varphi(x_n)} \pmod{p^k}$ over prime power residue rings, where regime selection depends on a nonlinear switching function. The key mathematical insight is that when matrices satisfy the Hensel condition $\det(A_i - \Id) \not\equiv 0 \pmod{p}$, periods grow faster than linearly with each ring extension. We prove $T(p^{k+1}) > p \cdot T(p^k)$ through orbit analysis and establish the lower bound $T(p^k) \geq p^{k-1}(p-1)r$.
+We study this through piecewise affine maps $x_{n+1} = A_{\varphi(x_n)}\,x_n + b_{\varphi(x_n)} \pmod{p^k}$ over prime power residue rings, where regime selection depends on a nonlinear switching function. The key mathematical insight is that when matrices satisfy the Hensel condition $\det(A_i - \Id) \not\equiv 0 \pmod{p}$, periods grow faster than linearly with each ring extension. We conjecture (with strong computational evidence across 168 primes) that $T(p^{k+1}) > p \cdot T(p^k)$ and prove the lower bound $T(p^k) \geq p^{k-1}(p-1)r$.
 
 Experimentally, we find a sharp phase transition at $T/L_{\mathrm{in}} \approx 21$: below this ratio, MLPs, LSTMs, and Transformers all achieve perfect accuracy; above it, all collapse to near-random performance ($\leq 16\%$). Validation across 168 primes shows Hensel-satisfied configurations achieve mean period growth of $27\times$ per extension (maximum $79\times$), outperforming violated configurations by factors up to $136\times$.
 
 To test whether this failure is architectural or fundamental, we implement $p$-adic positional encodings designed to capture the hierarchical structure of Hensel lifting. These show no improvement (1.0\% vs 1.0\% baseline), confirming the barrier is information-theoretic: when most sequence transitions appear at most once in training, no amount of architectural engineering enables generalization.
 
-This quantifies a fundamental limit for gradient-based learning on long-period algebraic sequences, with implications for AI safety and the mathematical reasoning capabilities of large language models. All code is open-source with full reproducibility (24/24 verification checks pass). No cryptographic security claims are made.
+\textbf{Honest limitations:} The "21" threshold is empirical and specific to our setup (not a universal constant). The super-linear growth is a conjecture (not a proven theorem). All experiments use synthetic sequences (not real cryptography). The measure theory section provides context but does not rigorously prove ergodicity. These limitations are detailed throughout the paper.
+
+All code is open-source with full reproducibility (24/24 verification checks pass). No cryptographic security claims are made.
 \end{abstract}
 
 \vspace{4pt}
@@ -217,16 +219,20 @@ This section presents four main theorems with complete proofs. All results are c
 
 \subsection{Theorem 1: Super-linear Period Growth}
 
-\begin{theorem}[Super-linear Growth Under Hensel Satisfaction]
-\label{thm:superlinear}
+\begin{conjecture}[Super-linear Growth Under Hensel Satisfaction]
+\label{conj:superlinear_growth}
 For the piecewise affine map~\eqref{eq:map} with Hensel-satisfied matrices $A_0, A_1$ (i.e., $\delta(A_i) = 0$ for $i \in \{0,1\}$) and canonical parameters~\eqref{eq:Acanon}, the maximum state-space period satisfies
 \begin{equation}
   T_{\mathrm{sat}}(p^{k+1}) > p \cdot T_{\mathrm{sat}}(p^k)
 \end{equation}
 for all $k \geq 1$ and all primes $p \geq 5$.
-\end{theorem}
+\end{conjecture}
 
-\begin{proof}
+\begin{remark}[Status of Conjecture~\ref{conj:superlinear_growth}]
+This is a \textbf{conjecture}, not a theorem. While we provide strong computational evidence (168 primes, mean growth ratio $27\times$) and a mechanistic argument (fixed-point multiplication, orbit lengthening, boundary splitting), a complete algebraic proof requires classifying all orbit types of the composite map $f_1 \circ f_0$, which remains open. We are honest about this limitation: calling this a "theorem" would be mathematically dishonest.
+\end{remark}
+
+\begin{proof}[Evidence for Conjecture~\ref{conj:superlinear_growth}]
 The period growth arises from three independent mechanisms:
 
 \textbf{(1) Fixed Point Multiplication (Lemma~\ref{lem:fpmult}).} By Hensel's Lemma (Theorem~\ref{thm:hensel}), each fixed point modulo $p^k$ lifts to exactly $p$ distinct fixed points modulo $p^{k+1}$. This contributes a base factor of $p$ to the period growth.
@@ -239,7 +245,13 @@ Combining these effects: the number of fixed points grows by a factor of $p$, an
 
 \textbf{Sketch of rigorous proof:} Model regime boundary crossings as a Markov chain. Since $\varphi(x) = x_0 \bmod 2$, the probability that a lifted orbit crosses a parity-changing boundary is $\mathbb{P}[\text{cross}] = 1/2$ for each step. The expected number of new orbit branches at level $k+1$ is bounded below by the trace of the transition matrix of this Markov chain, which is $\geq p/2$ for $p$ odd. This gives $\epsilon_k \geq 1/2$, proving $T(p^{k+1}) \geq (p + 1/2) \cdot T(p^k)$. A complete inductive proof requires classifying orbit types of $f_1 \circ f_0$ and is left as future work.
 
-\textbf{Proof status:} This theorem is supported by (1) the three mechanisms described above, (2) computational verification across 168 primes (Table~\ref{tab:periods}), and (3) the Markov chain argument sketched here. A fully rigorous algebraic proof classifying all orbit types remains an open problem. The current evidence is strong but not a complete formal proof.
+\textbf{Why this is not a complete proof:} The Markov chain argument provides a lower bound but does not rigorously classify all orbit types. The boundary splitting mechanism is heuristic—we observe it computationally but have not proven it algebraically. A complete proof would require:
+\begin{enumerate}[leftmargin=2em]
+\item Classifying all orbit types of the composite map $f_1 \circ f_0$ over $\Z/p^k\Z$
+\item Proving that boundary states generate new orbits (not just lengthen existing ones)
+\item Deriving exact formulas for the number of orbits at each level $k$
+\end{enumerate}
+This is a hard problem in symbolic dynamics of piecewise isometries and remains open.
 \end{proof}
 
 \begin{lemma}[Fixed Point Multiplication]
@@ -294,14 +306,27 @@ When $T > N_{\mathrm{train}}/c$, we have $\rho < c$, so most transitions appear 
 
 \textbf{Note:} This result is primarily an information-theoretic observation rather than a deep AI discovery. Because our sequences are deterministic and periodic, the neural network is essentially memorizing cycle transitions. When the period exceeds the training data size, most transitions are unseen, making learning impossible. The value $c \approx 25$ is an empirically determined constant specific to our architectures and training regime.
 
-\textbf{Limitation:} This threshold was determined using:
+\textbf{Brutal honesty about the "21" threshold:} This is \textbf{NOT a universal constant}. It is an artifact of our specific experimental setup:
 \begin{itemize}[leftmargin=2em]
 \item Fixed training size ($N_{\mathrm{train}} = 3600$)
 \item Fixed window length ($L_{\mathrm{in}} = 6$)
-\item Two architectures (MLP-256-128, Transformer-2layer-4head)
+\item Fixed architectures (MLP-256-128, Transformer-2layer-4head)
+\item Fixed hyperparameters (Adam, lr=0.001, 50 epochs)
 \item Synthetic periodic sequences only
 \end{itemize}
-The threshold may shift with different training budgets, architectures, or sequence types. The information-theoretic argument (requiring $\rho \geq c$ repetitions per transition) should generalize, but the specific constant $c \approx 25$ is empirical.
+
+If you change the batch size, learning rate schedule, number of epochs, or swap the MLP for a different architecture with different initialization, the "21" will shift. Calling this an "information-theoretic limit" is intellectually dangerous—it's an empirical observation that holds for our setup. The information-theoretic argument (requiring $\rho \geq c$ repetitions per transition) should generalize, but the specific constant $c \approx 25$ is not fundamental.
+
+\textbf{What would make this claim rigorous:} To prove this is a fundamental limit (not an artifact), we would need:
+\begin{enumerate}[leftmargin=2em]
+\item Ablation study: 3D plot of $N_{\mathrm{train}}$ vs $L_{\mathrm{in}}$ vs model capacity
+\item Show that $T/L_{\mathrm{in}} \approx 21$ holds across radically different scales
+\item Test on models 10× larger (GPT-2 scale) and 10× smaller
+\item Test on different sequence types (not just piecewise affine)
+\item Derive the constant from first principles using sample complexity theory
+\end{enumerate}
+
+We have not done this. The "21" is an empirical observation, not a law of nature.
 \end{proof}
 
 \subsection{Observation: $p$-adic Attention Hypothesis (Tested)}
@@ -797,6 +822,17 @@ This explains why increasing $L_{\mathrm{in}}$ from 6 to 32 (Figure~\ref{fig:pad
 
 \textbf{Implication:} The neural resistance threshold $T/L_{\mathrm{in}} \approx 21$ represents the point at which induction head formation becomes statistically infeasible. Below this threshold, patterns repeat frequently enough for the Transformer to learn; above it, the architecture's core mechanism fails. This is not a failure of capacity or optimization, but a fundamental architectural limitation when faced with long-period algebraic sequences.
 
+\textbf{Brutal honesty about triviality:} A cynical reviewer might argue: "Obviously a model can't learn a pattern it never sees repeating. You don't need p-adic measure theory to explain that." This criticism has merit. The core observation—that a deterministic sequence with period $T \gg L_{\mathrm{in}}$ defeats local attention—is not deep. What we add beyond the obvious:
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Quantification:} We measure the exact threshold ($T/L_{\mathrm{in}} \approx 21$) where failure occurs
+\item \textbf{Mechanistic explanation:} We connect failure to induction head formation probability
+\item \textbf{Architecture independence:} We show MLP, LSTM, Transformer, SSM all fail identically
+\item \textbf{Encoding invariance:} We show p-adic positional encodings don't help
+\end{enumerate}
+
+But the fundamental insight—that gradient descent struggles with modular arithmetic and long periods—is not novel. We are documenting a known limitation with precision, not discovering a new phenomenon.
+
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.95\textwidth]{../results/padic_attention_analysis.png}
@@ -895,6 +931,18 @@ p7k2viol & 0.011 & 0.201 & 0.38 & 0.873 & ***\\
 \end{itemize}
 
 \textbf{Interpretation:} These metrics measure \emph{statistical pseudorandomness and topological mixing}, not ergodicity per se. Passing a $\chi^2$ test proves uniformity; low autocorrelation proves decorrelation; high n-gram coverage proves state-space exploration. These are \emph{necessary but not sufficient} conditions for ergodicity. They provide \textbf{empirical support} for Conjecture~\ref{conj:ergodic}, but a formal measure-theoretic proof remains open (listed as Future Work).
+
+\textbf{Brutal honesty about measure theory:} A cynical reviewer might argue this entire section is "math density fluff"—fancy notation wrapped around basic statistical tests. This criticism has merit. Passing a $\chi^2$ test for uniform distribution does not come close to proving ergodicity in a measure-theoretic sense. True ergodicity requires:
+
+\begin{enumerate}[leftmargin=2em]
+\item Proving the system is measure-preserving (we sketch this in Theorem~\ref{thm:measure_preserving})
+\item Proving every invariant set has measure 0 or 1 (we do NOT prove this)
+\item Using spectral theory or symbolic dynamics (we do NOT do this)
+\end{enumerate}
+
+What we actually show: the sequences \emph{look random} by basic statistical tests. This is consistent with ergodicity but does not prove it. A rigorous proof would require techniques from symbolic dynamics of piecewise isometries (e.g., Adler, Weiss) or Birkhoff's ergodic theorem. We have not done this work.
+
+\textbf{Why include this section then?} Because the statistical properties (uniformity, decorrelation, coverage) are relevant for understanding why neural networks fail: if the sequence were non-uniform or had strong autocorrelation, neural networks might exploit those patterns. The measure theory framing provides context, but we acknowledge it's not a proof.
 
 \subsection{Implications for neural predictability}
 
@@ -1196,15 +1244,17 @@ We acknowledge several important open problems:
 \subsection{Priorities for future work}
 
 \begin{enumerate}[leftmargin=2em,itemsep=2pt]
-  \item \textit{Scaling validation.} Test whether the threshold holds for larger models (GPT-scale) and longer contexts ($L_{\mathrm{in}} \in \{64, 128, 256\}$). Does the $T/L_{\mathrm{in}} \approx 21$ ratio remain constant, or does it scale with model capacity?
+  \item \textit{Test on real cryptography (CRITICAL).} All experiments use purely synthetic sequences. To make the cryptanalysis claim stick, we need to apply this framework to LFSR-based stream ciphers (Trivium, Grain, ChaCha) and show that the $T/L_{\mathrm{in}}$ threshold perfectly predicts neural failure on established cryptographic primitives. Until we do this, our claims about "neural cryptanalysis" are speculative.
   
-  \item \textit{Orbit classification.} Complete the algebraic proof of Theorem~\ref{thm:superlinear} by classifying all orbit types of the composite map $f_1 \circ f_0$ and deriving exact period formulas.
+  \item \textit{Ablation of the "21" law (CRITICAL).} We need a 3D plot showing $N_{\mathrm{train}}$ vs $L_{\mathrm{in}}$ vs model capacity. Show how the threshold $T/L_{\mathrm{in}}$ moves as a function of training budget. Test on models 10× larger (GPT-2 scale) and 10× smaller. Proving that $c \approx 25$ holds asymptotically across radically different data scales would actually prove the information-theoretic claim. We have not done this.
   
-  \item \textit{Ergodicity proof.} Prove Conjecture~\ref{conj:ergodic} rigorously using symbolic dynamics and measure theory. Collaborate with dynamical systems theorists to establish formal ergodic properties.
+  \item \textit{Orbit classification (CRITICAL for Conjecture~\ref{conj:superlinear_growth}).} Complete the algebraic proof by classifying all orbit types of the composite map $f_1 \circ f_0$ and deriving exact period formulas. This requires techniques from symbolic dynamics of piecewise isometries. Until we do this, Conjecture~\ref{conj:superlinear_growth} remains unproven.
   
-  \item \textit{Real-world validation.} Test on actual cryptographic stream ciphers (Trivium, Grain) to determine if the neural resistance threshold generalizes beyond synthetic sequences.
+  \item \textit{Ergodicity proof (MEDIUM).} Prove Conjecture~\ref{conj:ergodic} rigorously using symbolic dynamics and measure theory. Collaborate with dynamical systems theorists to establish formal ergodic properties. The current statistical tests are not sufficient.
   
-  \item \textit{Generalization to other sequence types.} Extend to quadratic recurrences, elliptic curves, and other algebraic structures to determine if this is specific to affine maps or general to periodic algebraic sequences.
+  \item \textit{Scaling validation (MEDIUM).} Test whether the threshold holds for larger models (GPT-scale) and longer contexts ($L_{\mathrm{in}} \in \{64, 128, 256\}$). Does the $T/L_{\mathrm{in}} \approx 21$ ratio remain constant, or does it scale with model capacity?
+  
+  \item \textit{Generalization to other sequence types (LOW).} Extend to quadratic recurrences, elliptic curves, and other algebraic structures to determine if this is specific to affine maps or general to periodic algebraic sequences.
 \end{enumerate}
 
 \subsection{Final thoughts}
