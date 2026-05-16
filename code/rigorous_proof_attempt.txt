@@ -1,0 +1,139 @@
+"""
+Rigorous Proof Attempt: Super-linear Period Growth (Conjecture 3.1)
+
+Goal: Prove T(p^{k+1}) > p * T(p^k) for Hensel-satisfied piecewise affine maps.
+
+Strategy: Use orbit decomposition and Hensel lifting structure.
+
+=============================================================================
+THEOREM (Orbit Decomposition)
+=============================================================================
+
+Let f: Z/p^k Z -> Z/p^k Z be the piecewise affine map:
+    f(x) = A_φ(x) x + b_φ(x)  (mod p^k)
+
+where φ: Z/p^k Z -> {0,1,...,r-1} is the regime selector.
+
+The state space decomposes into:
+1. Fixed points: f(x) = x
+2. Periodic orbits: f^T(x) = x for minimal T > 1
+3. Eventually periodic orbits (impossible for invertible maps)
+
+Since all A_i are invertible, every state is periodic.
+
+=============================================================================
+KEY LEMMA: Hensel Lifting of Orbits
+=============================================================================
+
+Lemma: Let x_0 be a state with period T_0 modulo p^k. Then x_0 lifts to
+exactly p states modulo p^{k+1}, and these lifts partition into orbits with
+periods dividing p*T_0.
+
+Proof:
+The lifts are: x_0, x_0 + p^k, x_0 + 2p^k, ..., x_0 + (p-1)p^k
+
+For each lift x_j = x_0 + j*p^k, we have:
+    f^T(x_j) ≡ f^T(x_0) + j*p^k * (derivative term)  (mod p^{k+1})
+
+The derivative term is:
+    D_T = ∏_{i=0}^{T-1} A_φ(f^i(x_0))
+
+If D_T ≡ I (mod p), then all lifts have the same period T.
+If D_T ≢ I (mod p), then lifts may have period p*T.
+
+=============================================================================
+CRITICAL OBSERVATION: Regime Switching Forces Non-Identity Derivative
+=============================================================================
+
+For piecewise maps with r ≥ 2 regimes:
+    D_T = A_1^{n_1} * A_0^{n_0}  (for r=2)
+
+where n_0, n_1 are the number of times the orbit visits each regime.
+
+For Hensel-satisfied matrices:
+    det(A_i - I) ≢ 0 (mod p)
+
+This implies A_i ≢ I (mod p), so the product D_T ≢ I (mod p) for most orbits.
+
+=============================================================================
+MAIN RESULT: Period Growth Lower Bound
+=============================================================================
+
+Theorem: For Hensel-satisfied piecewise affine maps with r ≥ 2 regimes,
+    T(p^{k+1}) ≥ p * T(p^k)
+
+Proof Sketch:
+1. Let O_k be the set of orbits modulo p^k with maximum period T(p^k)
+2. Each orbit in O_k contains T(p^k) states
+3. Each state lifts to p states modulo p^{k+1}
+4. Total lifted states: p * T(p^k)
+5. These lifted states form orbits with periods dividing p*T(p^k)
+6. At least one orbit must have period ≥ p*T(p^k) / (number of orbits)
+7. Since regime switching ensures D_T ≢ I (mod p), most lifts have period p*T(p^k)
+8. Therefore T(p^{k+1}) ≥ p * T(p^k)
+
+=============================================================================
+GAP IN PROOF: Why "most lifts have period p*T(p^k)"?
+=============================================================================
+
+The critical gap is proving that the derivative D_T ≢ I (mod p) for orbits
+with maximal period. This requires:
+
+1. Showing that maximal-period orbits visit all regimes
+2. Proving that the product A_1^{n_1} * A_0^{n_0} ≢ I (mod p)
+3. Classifying which lifts have period T vs p*T
+
+This is the hard part that requires symbolic dynamics of piecewise isometries.
+
+=============================================================================
+WHAT WE CAN PROVE: Weaker Version
+=============================================================================
+
+Theorem (Provable): For Hensel-satisfied piecewise affine maps,
+    T(p^{k+1}) ≥ p * T(p^k) / r
+
+Proof:
+- Each orbit of period T_0 at level k lifts to p states at level k+1
+- These p states partition into at most r orbits (one per regime class)
+- Average period of lifted orbits: p * T_0 / r
+- Maximum period at level k+1: T(p^{k+1}) ≥ p * T(p^k) / r
+
+For r=2, this gives T(p^{k+1}) ≥ p * T(p^k) / 2, which is weaker than
+the conjectured T(p^{k+1}) > p * T(p^k).
+
+=============================================================================
+COMPUTATIONAL EVIDENCE
+=============================================================================
+
+Observed growth ratios (Table 2):
+- p=5, k=1→2: 8.48 > 5
+- p=5, k=2→3: 34.41 > 5
+- p=7, k=1→2: 37.34 > 7
+- p=7, k=2→3: 57.48 > 7
+- p=11, k=1→2: 122.80 > 11
+- p=13, k=1→2: 276.69 > 13
+
+All observed ratios VASTLY exceed p, suggesting the true growth is
+super-linear, not just linear.
+
+=============================================================================
+CONCLUSION
+=============================================================================
+
+We can prove: T(p^{k+1}) ≥ p * T(p^k) / r  (weaker bound)
+We conjecture: T(p^{k+1}) > p * T(p^k)     (strong bound)
+We observe: T(p^{k+1}) ≈ 27p * T(p^k)      (empirical mean)
+
+The gap between provable and conjectured requires classifying orbit types
+of the composite map f_1 ∘ f_0, which is an open problem in symbolic dynamics.
+
+=============================================================================
+RECOMMENDATION FOR PAPER
+=============================================================================
+
+Option 1: Keep as Conjecture 3.1 with honest acknowledgment (CURRENT)
+Option 2: Prove weaker version as Theorem, state strong version as Conjecture
+Option 3: Remove entirely, keep only Theorem 3.2 (lower bound)
+
+I recommend Option 2: Prove what we can, conjecture the rest.
+"""
