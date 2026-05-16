@@ -1381,15 +1381,19 @@ We acknowledge several important open problems:
 \subsection{Priorities for future work}
 
 \begin{enumerate}[leftmargin=2em,itemsep=2pt]
-  \item \textit{Test on real cryptography (CRITICAL).} All experiments use purely synthetic sequences. To make the cryptanalysis claim stick, we need to apply this framework to LFSR-based stream ciphers (Trivium, Grain, ChaCha) and show that the $T/L_{\mathrm{in}}$ threshold perfectly predicts neural failure on established cryptographic primitives. Until we do this, our claims about "neural cryptanalysis" are speculative.
+  \item \textit{Real-world cryptography validation (HIGHEST PRIORITY).} Apply the $T/L_{\mathrm{in}}$ threshold law to production stream ciphers (Trivium, Grain-128, ChaCha20). If the threshold perfectly predicts neural attack success/failure on real cryptographic systems, this elevates from "mathematical curiosity" to "empirical law of neural cryptanalysis" with immediate security implications.
   
-  \item \textit{Ablation of the threshold law (CRITICAL).} We need a 3D plot showing $N_{\mathrm{train}}$ vs $L_{\mathrm{in}}$ vs model capacity. Show how the threshold $T/L_{\mathrm{in}} \approx 200$-300 moves as a function of training budget. Test on models 10× larger (GPT-2 scale) and 10× smaller. Proving that the threshold holds asymptotically across radically different data scales would actually prove the information-theoretic claim. We have not done this.
+  \item \textit{Grokking at scale (CRITICAL).} Train GPT-2 scale models (124M parameters) for 100,000+ epochs on hard sequences. Test whether massive over-parameterization enables grokking of algebraic structure. This definitively separates optimization barriers from information-theoretic limits.
+  
+  \item \textit{Chain-of-Thought with autoregressive scratchpads.} Implement full CoT where the model generates intermediate states autoregressively: $(s_0) \to \text{predict } x_1 \to \text{predict } s_1 \to \ldots$. Test whether this bypasses both computational depth and sample complexity barriers.
   
   \item \textit{Orbit classification (CRITICAL for Conjecture~\ref{conj:superlinear_growth}).} Complete the algebraic proof by classifying all orbit types of the composite map $f_1 \circ f_0$ and deriving exact period formulas. This requires techniques from symbolic dynamics of piecewise isometries. Until we do this, Conjecture~\ref{conj:superlinear_growth} remains unproven.
   
   \item \textit{Ergodicity proof (MEDIUM).} Prove Conjecture~\ref{conj:ergodic} rigorously using symbolic dynamics and measure theory. Collaborate with dynamical systems theorists to establish formal ergodic properties. The current statistical tests are not sufficient.
   
-  \item \textit{Scaling validation (MEDIUM).} Test whether the threshold holds for larger models (GPT-scale) and longer contexts ($L_{\mathrm{in}} \in \{64, 128, 256\}$). Does the $T/L_{\mathrm{in}} \approx 21$ ratio remain constant, or does it scale with model capacity?
+  \item \textit{Adversarial training against neural attacks.} Train networks specifically to break the $T/L_{\mathrm{in}}$ threshold. Use meta-learning, curriculum learning, and adversarial examples. If networks still fail, the barrier is truly fundamental.
+  
+  \item \textit{Quantum neural networks.} Test whether quantum computing provides any advantage for learning long-period algebraic sequences. The Grover speedup suggests $O(\sqrt{T})$ sample complexity might be achievable.
   
   \item \textit{Generalization to other sequence types (LOW).} Extend to quadratic recurrences, elliptic curves, and other algebraic structures to determine if this is specific to affine maps or general to periodic algebraic sequences.
 \end{enumerate}
@@ -1560,6 +1564,11 @@ In-context learning and induction heads.
 National Institute of Standards and Technology (2010).
 A Statistical Test Suite for Random and Pseudorandom Number Generators for Cryptographic Applications.
 \textit{NIST Special Publication 800-22 Revision 1a}.
+
+\bibitem[Wolpert \& Macready(1997)]{Wolpert1997}
+Wolpert, D.\,H.\ \& Macready, W.\,G. (1997).
+No free lunch theorems for optimization.
+\textit{IEEE Transactions on Evolutionary Computation}, 1(1), 67--82.
 
 \bibitem[Wolpert \& Macready(1997)]{Wolpert1997}
 Wolpert, D.\,H.\ \& Macready, W.\,G. (1997).
