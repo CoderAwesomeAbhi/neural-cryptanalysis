@@ -1,0 +1,74 @@
+[
+  {
+    "p": 5,
+    "k": 1,
+    "m": 5,
+    "period": 25,
+    "n_terms": 200,
+    "lattice_dim": 201,
+    "shortest_norm": 1.4142135623730951,
+    "success_rate": 0.19796954314720816,
+    "errors": 158,
+    "resistance": "MEDIUM"
+  },
+  {
+    "p": 5,
+    "k": 2,
+    "m": 25,
+    "period": 212,
+    "n_terms": 200,
+    "lattice_dim": 201,
+    "shortest_norm": 2.0,
+    "success_rate": 0.055837563451776595,
+    "errors": 186,
+    "resistance": "HIGH"
+  },
+  {
+    "p": 5,
+    "k": 3,
+    "m": 125,
+    "period": 7295,
+    "n_terms": 200,
+    "lattice_dim": 201,
+    "shortest_norm": 2.6457513110645907,
+    "success_rate": 0.005076142131979711,
+    "errors": 196,
+    "resistance": "HIGH"
+  },
+  {
+    "p": 7,
+    "k": 2,
+    "m": 49,
+    "period": 1083,
+    "n_terms": 200,
+    "lattice_dim": 201,
+    "shortest_norm": 2.23606797749979,
+    "success_rate": 0.030456852791878153,
+    "errors": 191,
+    "resistance": "HIGH"
+  },
+  {
+    "p": 11,
+    "k": 2,
+    "m": 121,
+    "period": 4912,
+    "n_terms": 200,
+    "lattice_dim": 201,
+    "shortest_norm": 2.449489742783178,
+    "success_rate": 0.02030456852791873,
+    "errors": 193,
+    "resistance": "HIGH"
+  },
+  {
+    "p": 13,
+    "k": 2,
+    "m": 169,
+    "period": 20475,
+    "n_terms": 200,
+    "lattice_dim": 201,
+    "shortest_norm": 2.449489742783178,
+    "success_rate": 0.0,
+    "errors": 197,
+    "resistance": "HIGH"
+  }
+]

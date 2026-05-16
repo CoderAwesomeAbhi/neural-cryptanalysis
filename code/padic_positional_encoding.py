@@ -28,9 +28,14 @@ class PadicPositionalEncoding(nn.Module):
         k_max = int(np.log(max_len) / np.log(p)) + 1
         
         for pos in range(max_len):
+            # Extract p-adic digits
+            temp = pos
             for i in range(min(k_max, d_model)):
-                # Encode position modulo p^(i+1)
-                pe[pos, i] = np.sin((pos % (p ** (i + 1))) / (p ** (i + 1)) * 2 * np.pi)
+                digit = temp % p
+                # Encode digit with sine/cosine for smoothness
+                pe[pos, i*2] = np.sin(2 * np.pi * digit / p) if i*2 < d_model else 0
+                pe[pos, i*2+1] = np.cos(2 * np.pi * digit / p) if i*2+1 < d_model else 0
+                temp //= p
         
         self.register_buffer('pe', pe)
     
@@ -69,8 +74,14 @@ class HybridPositionalEncoding(nn.Module):
         pe_padic = torch.zeros(max_len, d_model)
         k_max = int(np.log(max_len) / np.log(p)) + 1
         for pos in range(max_len):
+            # Extract p-adic digits
+            temp = pos
             for i in range(min(k_max, d_model)):
-                pe_padic[pos, i] = np.sin((pos % (p ** (i + 1))) / (p ** (i + 1)) * 2 * np.pi)
+                digit = temp % p
+                # Encode digit with sine/cosine
+                pe_padic[pos, i*2] = np.sin(2 * np.pi * digit / p) if i*2 < d_model else 0
+                pe_padic[pos, i*2+1] = np.cos(2 * np.pi * digit / p) if i*2+1 < d_model else 0
+                temp //= p
         self.register_buffer('pe_padic', pe_padic)
         
         # Learnable mixing parameter α
@@ -171,8 +182,8 @@ def train_padic_transformer(p=5, k=3, encoding_type='padic', epochs=100, device=
     
     # Generate training data
     L_in = 32  # Longer context for p-adic structure
-    n_train = 10000
-    n_val = 1000
+    n_train = 3600   # Matches paper setup: T/N_train > 2 (hard regime)
+    n_val = 400      # 10% validation split
     
     print(f"Generating sequence with m={m}, T={gen.period}...")
     seq = gen.generate(n_train + n_val + L_in)
@@ -312,6 +323,8 @@ def compare_encodings(p=5, k=3, epochs=100):
     ax2.axhline(y=0.5, color='r', linestyle='--', alpha=0.5, label='50% threshold')
     
     plt.tight_layout()
+    import os
+    os.makedirs('../results', exist_ok=True)
     plt.savefig('../results/padic_encoding_comparison.png', dpi=300, bbox_inches='tight')
     print(f"\nSaved comparison plot to ../results/padic_encoding_comparison.png")
     
