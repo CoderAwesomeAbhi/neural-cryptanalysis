@@ -214,6 +214,12 @@ def plot_grokking_curves(all_results, save_path):
 def main():
     """Run grokking experiments on multiple configurations"""
     
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--max-epochs', type=int, default=100000, help='Maximum training epochs')
+    parser.add_argument('--log-every', type=int, default=1000, help='Log frequency')
+    args = parser.parse_args()
+    
     # Test configurations
     configs = [
         {
@@ -249,7 +255,7 @@ def main():
     # Run experiments
     all_results = []
     for config in configs:
-        results = train_with_grokking(config, max_epochs=100000, log_every=1000)
+        results = train_with_grokking(config, max_epochs=args.max_epochs, log_every=args.log_every)
         all_results.append(results)
         
         # Save individual results
