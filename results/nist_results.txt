@@ -1,0 +1,86 @@
+======================================================================
+NIST RANDOMNESS TESTING: Hensel-Satisfied Sequences
+======================================================================
+
+Testing whether our sequences pass cryptographic randomness tests.
+
+
+======================================================================
+Testing: p5k2sat (m=25, sat=True)
+======================================================================
+
+======================================================================
+NIST SP 800-22 Statistical Test Suite
+======================================================================
+Sequence length: 1000000 bits
+
+Frequency (Monobit)      : p=0.000000  [FAIL]
+Block Frequency          : p=0.000000  [FAIL]
+Runs                     : p=0.000000  [FAIL]
+Longest Run              : p=0.000000  [FAIL]
+Spectral (DFT)           : p=0.000000  [FAIL]
+Approximate Entropy      : p=0.000000  [FAIL]
+Cumulative Sums          : p=0.000000  [FAIL]
+
+======================================================================
+Results: 0/7 tests passed
+======================================================================
+
+[FAIL] p5k2sat passes only 0/7 tests.
+This sequence may not be cryptographically secure.
+
+======================================================================
+Testing: p5k3sat (m=125, sat=True)
+======================================================================
+
+======================================================================
+NIST SP 800-22 Statistical Test Suite
+======================================================================
+Sequence length: 1000000 bits
+
+Frequency (Monobit)      : p=0.000140  [FAIL]
+Block Frequency          : p=1.000000  [PASS]
+Runs                     : p=0.996013  [PASS]
+Longest Run              : p=0.000000  [FAIL]
+Spectral (DFT)           : p=0.000000  [FAIL]
+Approximate Entropy      : p=0.000000  [FAIL]
+Cumulative Sums          : p=0.000000  [FAIL]
+
+======================================================================
+Results: 2/7 tests passed
+======================================================================
+
+[FAIL] p5k3sat passes only 2/7 tests.
+This sequence may not be cryptographically secure.
+
+======================================================================
+Testing: p7k2sat (m=49, sat=True)
+======================================================================
+
+======================================================================
+NIST SP 800-22 Statistical Test Suite
+======================================================================
+Sequence length: 1000000 bits
+
+Frequency (Monobit)      : p=0.000004  [FAIL]
+Block Frequency          : p=0.000000  [FAIL]
+Runs                     : p=0.000000  [FAIL]
+Longest Run              : p=0.000000  [FAIL]
+Spectral (DFT)           : p=0.000000  [FAIL]
+Approximate Entropy      : p=0.000000  [FAIL]
+Cumulative Sums          : p=0.000000  [FAIL]
+
+======================================================================
+Results: 0/7 tests passed
+======================================================================
+
+[FAIL] p7k2sat passes only 0/7 tests.
+This sequence may not be cryptographically secure.
+
+======================================================================
+CONCLUSION
+======================================================================
+If sequences pass NIST tests, we can claim:
+  'Post-Quantum Lightweight PRNG that defeats AI, defeats
+   Lattice Attacks, and passes NIST SP 800-22.'
+======================================================================
