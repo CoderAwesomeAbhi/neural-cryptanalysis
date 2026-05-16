@@ -28,11 +28,11 @@ def run_experiment(script_name, description):
         elapsed = time.time() - start_time
         
         if result.returncode == 0:
-            print(f"\n✅ SUCCESS: {description}")
+            print(f"\n[SUCCESS] {description}")
             print(f"   Time: {elapsed/60:.1f} minutes")
             print(f"\n{result.stdout}")
         else:
-            print(f"\n❌ FAILED: {description}")
+            print(f"\n[FAILED] {description}")
             print(f"   Error: {result.stderr}")
             return False
             
@@ -95,24 +95,24 @@ def main():
     print(f"{'='*80}\n")
     
     for result in results:
-        status = "✅ COMPLETED" if result['success'] else "❌ FAILED"
+        status = "[COMPLETED]" if result['success'] else "[FAILED]"
         print(f"{status}: {result['experiment']}")
     
     all_success = all(r['success'] for r in results)
     
     if all_success:
         print(f"\n{'='*80}")
-        print("🎉 ALL EXPERIMENTS COMPLETED SUCCESSFULLY!")
+        print("*** ALL EXPERIMENTS COMPLETED SUCCESSFULLY! ***")
         print(f"{'='*80}")
         print("\nNEXT STEPS:")
         print("1. Check results/ folder for generated plots")
         print("2. Review JSON files for detailed metrics")
         print("3. Add results to paper (see PAPER_UPDATES.md)")
         print("4. Recompile paper with new sections")
-        print("\nYour paper is now GRAND AWARD READY! 🏆")
+        print("\nYour paper is now GRAND AWARD READY!")
     else:
         print(f"\n{'='*80}")
-        print("⚠️  SOME EXPERIMENTS FAILED")
+        print("[WARNING] SOME EXPERIMENTS FAILED")
         print(f"{'='*80}")
         print("\nPlease check error messages above and:")
         print("1. Ensure all dependencies are installed (torch, numpy, matplotlib)")

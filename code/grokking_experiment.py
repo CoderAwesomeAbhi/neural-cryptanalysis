@@ -145,7 +145,7 @@ def train_with_grokking(config, max_epochs=100000, log_every=1000):
                 # Detect grokking (sudden jump to >90% accuracy)
                 if val_acc > 0.9 and best_val_acc < 0.9 and grokking_epoch is None:
                     grokking_epoch = epoch
-                    print(f"\n🎉 GROKKING DETECTED at epoch {epoch}!")
+                    print(f"\n*** GROKKING DETECTED at epoch {epoch}! ***")
                     print(f"   Val accuracy jumped from {best_val_acc:.1%} to {val_acc:.1%}")
                 
                 best_val_acc = max(best_val_acc, val_acc)
@@ -160,7 +160,7 @@ def train_with_grokking(config, max_epochs=100000, log_every=1000):
     print(f"  Best validation accuracy: {best_val_acc:.1%}")
     print(f"  Final test accuracy: {test_accs[-1]:.1%}")
     if grokking_epoch:
-        print(f"  Grokking occurred at epoch: {grokking_epoch}")
+        print(f"  *** Grokking occurred at epoch: {grokking_epoch} ***")
     else:
         print(f"  No grokking detected (never reached >90% accuracy)")
     print(f"{'='*80}\n")
@@ -286,9 +286,9 @@ def main():
         print(f"  Best val acc: {results['best_val_acc']:.1%}")
         print(f"  Final test acc: {results['final_test_acc']:.1%}")
         if results['grokking_epoch']:
-            print(f"  ✅ GROKKED at epoch {results['grokking_epoch']}")
+            print(f"  [SUCCESS] GROKKED at epoch {results['grokking_epoch']}")
         else:
-            print(f"  ❌ NO GROKKING (information-theoretic limit confirmed)")
+            print(f"  [FAILED] NO GROKKING (information-theoretic limit confirmed)")
     print("="*80)
 
 if __name__ == '__main__':

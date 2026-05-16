@@ -328,11 +328,11 @@ def main():
         print(f"  Final test accuracy: {results['final_test_acc']:.1%}")
         
         if results['final_test_acc'] > 0.9:
-            print(f"  ✅ CoT BREAKTHROUGH: State supervision enables learning!")
+            print(f"  [SUCCESS] CoT BREAKTHROUGH: State supervision enables learning!")
         elif results['final_test_acc'] > 0.5:
-            print(f"  ⚠️  PARTIAL SUCCESS: CoT helps but doesn't fully solve it")
+            print(f"  [PARTIAL] CoT helps but doesn't fully solve it")
         else:
-            print(f"  ❌ CoT FAILED: Information-theoretic barrier persists")
+            print(f"  [FAILED] CoT FAILED: Information-theoretic barrier persists")
     print("="*80)
 
 if __name__ == '__main__':
