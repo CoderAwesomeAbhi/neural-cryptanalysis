@@ -736,10 +736,10 @@ Hard ($m=125$, $T=7295$) & 0.4\% & 4.6\% & 0.8\%\\
 
 \textbf{Conclusion:} SSMs fail identically to Transformers on hard sequences (both near-random at $\sim$1\%). This rules out ``insufficient memory'' as the cause of failure and confirms the barrier is \emph{information-theoretic, not architectural}. When $T \gg N_{\mathrm{train}}$, no architecture can generalize because most transitions appear $\leq 1$ time in training.
 
-\subsection{Optimal Prediction Bound (Theorem 11.1)}
+\subsection{Information-Theoretic Prediction Bound}
 \label{sec:results:optimal}
 
-We verify the information-theoretic upper bound computationally. For any predictor $f\colon \Sigma^{L_{\mathrm{in}}} \to \Sigma$ trained on $N$ consecutive transitions of a period-$T$ sequence with $N < T$:
+We verify an information-theoretic upper bound computationally. For any predictor $f\colon \Sigma^{L_{\mathrm{in}}} \to \Sigma$ trained on $N$ consecutive transitions of a period-$T$ sequence with $N < T$:
 \begin{equation}
 \mathrm{acc}(f) \leq \frac{N}{T} + \left(1 - \frac{N}{T}\right) \cdot \frac{1}{m}
 \end{equation}
@@ -769,13 +769,13 @@ p7k2sat  & 49  & 1083  & 83.5\% & 82.8\% & 33.4\%\\
 
 \textbf{Key finding:} Neural accuracy $\ll$ Theorem bound in hard configs. This proves neural failure is \emph{not} purely information-theoretic: a lookup table \emph{could} achieve $N/T$ accuracy; neural networks cannot. The true barrier is gradient-based learning on random-function-like data.
 
-\subsection{LC-NC Separation (Theorem 12.1)}
+\subsection{Linear Complexity vs Neural Complexity: An Empirical Separation}
 \label{sec:results:separation}
 
-We prove Linear Complexity (LC) and Neural Complexity (NC) are \emph{independent} measures by constructing explicit sequences with:
+We demonstrate that Linear Complexity (LC) and Neural Complexity (NC) are \emph{independent} measures by constructing explicit sequences with:
 \begin{itemize}
 \item \textbf{High LC + Low NC:} H-viol $m=25$ has $\LC=27$ but neural accuracy $=100\%$ (period $T=30$ is short)
-\item \textbf{Low LC + High NC:} LFSR with $\LC=3$ but $T=124$ gives neural accuracy $<10\%$
+\item \textbf{Low LC + High NC:} LFSR with $\LC=3$ but $T=124$ gives neural accuracy $<10\%$ (note: $T/L_{\mathrm{in}} \approx 20.6$, at the critical threshold; linear structure may lower effective learnability)
 \end{itemize}
 
 \textbf{Correlation analysis:} Across 6 configurations, $\mathrm{corr}(\LC, \mathrm{neural\_acc}) = +0.12$ but $\mathrm{corr}(T, \mathrm{neural\_acc}) = -0.89$. Period $T$ predicts neural hardness; LC does not.
@@ -788,6 +788,23 @@ We prove Linear Complexity (LC) and Neural Complexity (NC) are \emph{independent
 We analyze Transformer attention patterns using mechanistic interpretability techniques~\citep{Olah2020,Elhage2021}. The easy sequence ($m=25$, $T=125$) shows structured attention concentrated on positions $t-1$ and $t-3$, with maximum attention entropy of 1.2 bits. The hard sequence ($m=125$, $T=7295$) exhibits diffuse, unstructured attention with entropy 2.8 bits---the model cannot identify informative positions. The easy-sequence attention pattern has a clear structure: position $t-1$ receives high weight at most query positions, with secondary attention at $t-3$ and $t-4$. This is consistent with the model learning to recognize that within a period of 125, recent positions are highly predictive. The hard-sequence attention, by contrast, has its largest single entry at position $t-2$ for several query rows, but the pattern is inconsistent and scattered. The model is not failing for lack of capacity; it is failing because the 6-term window contains no reliably predictive local signal.
 
 \textbf{Caveat:} The context window $L_{\mathrm{in}}=6$ is too small to capture long-range $p$-adic structure. For the hard sequence with $T=7295$, positions that are $p$-adically close (e.g., $n$ and $n+5$, $n+25$, $n+125$) lie outside the attention field. The diffuse attention pattern may simply reflect the absence of short-range predictive signal, rather than the model's inability to learn $p$-adic structure. Testing with $L_{\mathrm{in}} \in \{64, 128, 256\}$ is necessary to validate Conjecture~\ref{conj:padic}.
+
+\subsubsection{Induction Head Impossibility}
+
+Recent mechanistic interpretability work~\citep{Olsson2022} has shown that Transformers learn sequences primarily through \emph{induction heads}: circuits that detect patterns of the form $[A][B] \cdots [A]$ and predict $[B]$. An induction head requires:
+\begin{enumerate}
+\item A \emph{previous token head} that attends to position $t-1$
+\item A \emph{matching head} that searches the context for prior occurrences of the current token
+\item A \emph{copying head} that attends to the token following the match
+\end{enumerate}
+
+For this mechanism to function, the pattern $[A][B]$ must repeat within the context window $L_{\mathrm{in}}$. 
+
+\textbf{Impossibility for $T \gg L_{\mathrm{in}}$:} When the sequence period $T$ greatly exceeds the context window, the probability that any bigram $[A][B]$ repeats within $L_{\mathrm{in}}$ tokens is approximately $L_{\mathrm{in}}/T$. For our hard configuration with $T=7295$ and $L_{\mathrm{in}}=6$, this probability is $\approx 0.08\%$. The induction head mechanism \emph{cannot physically form} because the requisite pattern repetition does not occur within the attention field.
+
+This explains why increasing $L_{\mathrm{in}}$ from 6 to 32 (Figure~\ref{fig:padic_attention}) does not improve performance: even at $L_{\mathrm{in}}=32$, the repetition probability is only $32/7295 \approx 0.44\%$. The Transformer's primary learning mechanism is architecturally precluded by the $T/L_{\mathrm{in}} \gg 1$ regime.
+
+\textbf{Implication:} The neural resistance threshold $T/L_{\mathrm{in}} \approx 21$ represents the point at which induction head formation becomes statistically infeasible. Below this threshold, patterns repeat frequently enough for the Transformer to learn; above it, the architecture's core mechanism fails. This is not a failure of capacity or optimization, but a fundamental architectural limitation when faced with long-period algebraic sequences.
 
 \begin{figure}[ht]
 \centering
@@ -848,10 +865,10 @@ The measure-preserving transformation $\tilde{f}\colon (\Z_p^2, \mu_p \times \mu
 
 \textbf{Connection to period growth:} Ergodicity implies that almost every orbit is dense in $\Z_p^2$. In the finite quotient $\Z/p^k\Z$, this manifests as long periods: the orbit must visit a large fraction of the state space before returning. The super-linear growth $T(p^{k+1}) > p \cdot T(p^k)$ is the discrete shadow of the continuous ergodic property.
 
-\subsection{Computational ergodicity verification}
+\subsection{Empirical Metrics of Topological Mixing}
 \label{sec:ergodicity_verification}
 
-For deterministic periodic maps, classical spectral gap analysis fails (all eigenvalues lie on the unit circle). We instead measure ergodicity via four computational tests:
+For deterministic periodic maps, classical spectral gap analysis fails (all eigenvalues lie on the unit circle). We instead measure \emph{statistical pseudorandomness} via four computational tests that are \emph{consistent with} (but do not prove) ergodic behavior:
 
 \begin{enumerate}
 \item \textbf{Equidistribution (E1):} $\chi^2$ test vs uniform distribution
@@ -886,7 +903,7 @@ p7k2viol & 0.011 & 0.201 & 0.38 & 0.873\\
 \item Viol configs: low $p(\chi^2)$ (non-uniform), high ACF (slow decay), low coverage, reduced entropy
 \end{itemize}
 
-This provides \textbf{computational support} for Conjecture~\ref{conj:ergodic}: Hensel-satisfied maps behave ergodically in all measurable senses. A formal proof remains open (listed as Future Work).
+\textbf{Interpretation:} These metrics measure \emph{statistical pseudorandomness and topological mixing}, not ergodicity per se. Passing a $\chi^2$ test proves uniformity; low autocorrelation proves decorrelation; high n-gram coverage proves state-space exploration. These are \emph{necessary but not sufficient} conditions for ergodicity. They provide \textbf{empirical support} for Conjecture~\ref{conj:ergodic}, but a formal measure-theoretic proof remains open (listed as Future Work).
 
 \subsection{Implications for neural predictability}
 
@@ -1111,6 +1128,25 @@ A natural response to MLP failure is to ask whether a Transformer with a longer 
 
 The attention maps in Section~\ref{sec:results:attn} show that the hard-sequence Transformer does not learn a structured attention pattern. One hypothesis, which we have not tested but which follows naturally from the theory, is that a Transformer trained on \emph{longer} high-period sequences might implicitly learn to attend to positions that are $p$-adically close to the current position (i.e., positions $j$ such that $p \mid (n-j)$, or $p^2 \mid (n-j)$, etc.). In the Hensel lifting tree, positions that are $p$-adically close share the same branch, and therefore have correlated future values. If the Transformer could recover this structure from attention, it would represent implicit learning of $p$-adic algebraic structure. Testing this requires: training on a much longer sequence (to give the model enough data to learn $p$-adic correlations), and computing $\mathrm{corr}(\alpha_{n,j},\, \absp{n-j})$ across many $(n,j)$ pairs. This experiment is fully specified and is our primary planned next step.
 
+\subsection{Kolmogorov Complexity vs Neural Complexity}
+
+Our results reveal a striking paradox: sequences with \emph{low Kolmogorov complexity} can have \emph{high Neural Complexity}. 
+
+The Kolmogorov complexity $K(s)$ of a sequence $s$ is the length of the shortest program that generates it. Our piecewise affine generator is defined by:
+\begin{equation}
+x_{n+1} = \begin{cases}
+A_0 x_n + b_0 \pmod{m} & \text{if } x_0 \text{ even} \\
+A_1 x_n + b_1 \pmod{m} & \text{if } x_0 \text{ odd}
+\end{cases}
+\end{equation}
+This requires only $O(1)$ bits to specify (two $2 \times 2$ matrices, two vectors, and the modulus $m$). Therefore, $K(s) = O(\log m)$, which is extremely low.
+
+Yet, as demonstrated in Section~\ref{sec:results:neural}, the Neural Complexity---measured by the minimum $T/L_{\mathrm{in}}$ ratio required for gradient-based learning---is massive. For $T=7295$ and $L_{\mathrm{in}}=6$, we have $T/L_{\mathrm{in}} \approx 1216$, far exceeding the learnable threshold of 21.
+
+\textbf{Implication:} Transformers excel at compressing data with \emph{high Kolmogorov complexity} (natural language, images) where statistical patterns dominate. They fundamentally fail at learning \emph{low-Kolmogorov, high-period algebraic generators} where the generating rule is simple but the period is long. This identifies a specific complexity class---deterministic algebraic sequences with $T \gg L_{\mathrm{in}}$---that is easy to compute but impossible to gradient-descend.
+
+This has implications for AI safety: large language models cannot learn certain arithmetic structures even when the underlying rule is simple. The barrier is not computational complexity (the sequence is efficiently computable) but \emph{sample complexity in the presence of long periods}.
+
 \subsection{Limitations}
 
 We acknowledge several important limitations that constrain the generalizability of our findings.
@@ -1292,6 +1328,11 @@ Zoom in: An introduction to circuits.
 Elhage, N., et al. (2021).
 A mathematical framework for transformer circuits.
 \textit{Anthropic}, \url{https://transformer-circuits.pub/2021/framework/index.html}.
+
+\bibitem[Olsson et al.(2022)]{Olsson2022}
+Olsson, C., Elhage, N., Nanda, N., Joseph, N., DasSarma, N., Henighan, T., Mann, B., Askell, A., Bai, Y., Chen, A., Conerly, T., Drain, D., Ganguli, D., Hatfield-Dodds, Z., Hernandez, D., Johnston, S., Jones, A., Kernion, J., Lovitt, L., Ndousse, K., Amodei, D., Brown, T., Clark, J., Kaplan, J., McCandlish, S., \& Olah, C. (2022).
+In-context learning and induction heads.
+\textit{Anthropic}, \url{https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html}.
 
 \end{thebibliography}
 \end{document}

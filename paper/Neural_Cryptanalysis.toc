@@ -38,37 +38,39 @@
 \contentsline {paragraph}{Accuracy decay with increasing $T/L_{\mathrm {in}}$.}{17}{table.caption.10}%
 \contentsline {subsection}{\numberline {8.4}LSTM and Transformer results}{17}{subsection.8.4}%
 \contentsline {subsection}{\numberline {8.5}State Space Model (SSM) experiments}{18}{subsection.8.5}%
-\contentsline {subsection}{\numberline {8.6}Optimal Prediction Bound (Theorem 11.1)}{19}{subsection.8.6}%
-\contentsline {subsection}{\numberline {8.7}LC-NC Separation (Theorem 12.1)}{20}{subsection.8.7}%
+\contentsline {subsection}{\numberline {8.6}Information-Theoretic Prediction Bound}{19}{subsection.8.6}%
+\contentsline {subsection}{\numberline {8.7}Linear Complexity vs Neural Complexity: An Empirical Separation}{20}{subsection.8.7}%
 \contentsline {subsection}{\numberline {8.8}Attention map analysis}{20}{subsection.8.8}%
+\contentsline {subsubsection}{\numberline {8.8.1}Induction Head Impossibility}{21}{subsubsection.8.8.1}%
 \contentsline {section}{\numberline {9}$p$-adic Measure Theory and Ergodic Interpretation}{21}{section.9}%
-\contentsline {subsection}{\numberline {9.1}The $p$-adic metric space}{21}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Measure-preserving dynamics}{21}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.1}The $p$-adic metric space}{22}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Measure-preserving dynamics}{22}{subsection.9.2}%
 \contentsline {subsection}{\numberline {9.3}Ergodic properties and mixing}{22}{subsection.9.3}%
-\contentsline {subsection}{\numberline {9.4}Computational ergodicity verification}{22}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.4}Empirical Metrics of Topological Mixing}{23}{subsection.9.4}%
 \contentsline {subsection}{\numberline {9.5}Implications for neural predictability}{23}{subsection.9.5}%
-\contentsline {section}{\numberline {10}Information-Theoretic Bounds and Heuristic Scaling Laws}{23}{section.10}%
-\contentsline {subsection}{\numberline {10.1}Information-theoretic lower bound}{23}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}VC dimension of neural architectures}{23}{subsection.10.2}%
-\contentsline {subsection}{\numberline {10.3}Deriving the critical threshold}{24}{subsection.10.3}%
-\contentsline {subsection}{\numberline {10.4}Refined bound via Rademacher complexity}{24}{subsection.10.4}%
-\contentsline {subsection}{\numberline {10.5}Empirical formula: The "21" law}{25}{subsection.10.5}%
-\contentsline {section}{\numberline {11}Testing Architectural Modifications: p-adic Positional Encoding}{25}{section.11}%
-\contentsline {subsection}{\numberline {11.1}Hypothesis}{25}{subsection.11.1}%
+\contentsline {section}{\numberline {10}Information-Theoretic Bounds and Heuristic Scaling Laws}{24}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Information-theoretic lower bound}{24}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}VC dimension of neural architectures}{24}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Deriving the critical threshold}{25}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Refined bound via Rademacher complexity}{25}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}Empirical formula: The "21" law}{26}{subsection.10.5}%
+\contentsline {section}{\numberline {11}Testing Architectural Modifications: p-adic Positional Encoding}{26}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Hypothesis}{26}{subsection.11.1}%
 \contentsline {subsection}{\numberline {11.2}$p$-adic positional encoding design}{26}{subsection.11.2}%
-\contentsline {subsection}{\numberline {11.3}Experimental validation}{26}{subsection.11.3}%
-\contentsline {subsection}{\numberline {11.4}Results}{26}{subsection.11.4}%
-\contentsline {subsection}{\numberline {11.5}Interpretation}{26}{subsection.11.5}%
+\contentsline {subsection}{\numberline {11.3}Experimental validation}{27}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}Results}{27}{subsection.11.4}%
+\contentsline {subsection}{\numberline {11.5}Interpretation}{27}{subsection.11.5}%
 \contentsline {subsection}{\numberline {11.6}Implications}{27}{subsection.11.6}%
-\contentsline {section}{\numberline {12}Discussion}{27}{section.12}%
-\contentsline {subsection}{\numberline {12.1}$T/L_{\mathrm {in}}$ as an operational hardness parameter}{27}{subsection.12.1}%
-\contentsline {subsection}{\numberline {12.2}Why the Transformer does not fix the problem}{27}{subsection.12.2}%
-\contentsline {subsection}{\numberline {12.3}The $p$-adic attention hypothesis}{27}{subsection.12.3}%
-\contentsline {subsection}{\numberline {12.4}Limitations}{28}{subsection.12.4}%
-\contentsline {section}{\numberline {13}Conclusion}{28}{section.13}%
-\contentsline {paragraph}{Priorities for future work.}{29}{section.13}%
-\contentsline {paragraph}{Acknowledgments.}{29}{Item.12}%
-\contentsline {section}{\numberline {A}Period Computation: Implementation}{30}{section.A}%
-\contentsline {section}{\numberline {B}Trajectory Period Verification}{30}{section.B}%
-\contentsline {section}{\numberline {C}MLP Hyperparameter Sensitivity}{30}{section.C}%
-\contentsline {section}{\numberline {D}Transformer Architecture Details}{30}{section.D}%
+\contentsline {section}{\numberline {12}Discussion}{28}{section.12}%
+\contentsline {subsection}{\numberline {12.1}$T/L_{\mathrm {in}}$ as an operational hardness parameter}{28}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Why the Transformer does not fix the problem}{28}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}The $p$-adic attention hypothesis}{28}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Kolmogorov Complexity vs Neural Complexity}{28}{subsection.12.4}%
+\contentsline {subsection}{\numberline {12.5}Limitations}{29}{subsection.12.5}%
+\contentsline {section}{\numberline {13}Conclusion}{30}{section.13}%
+\contentsline {paragraph}{Priorities for future work.}{30}{section.13}%
+\contentsline {paragraph}{Acknowledgments.}{30}{Item.15}%
+\contentsline {section}{\numberline {A}Period Computation: Implementation}{31}{section.A}%
+\contentsline {section}{\numberline {B}Trajectory Period Verification}{31}{section.B}%
+\contentsline {section}{\numberline {C}MLP Hyperparameter Sensitivity}{31}{section.C}%
+\contentsline {section}{\numberline {D}Transformer Architecture Details}{31}{section.D}%

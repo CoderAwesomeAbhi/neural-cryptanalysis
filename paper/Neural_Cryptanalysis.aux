@@ -98,70 +98,73 @@
 \newlabel{sec:results:ssm}{{8.5}{18}{State Space Model (SSM) experiments}{subsection.8.5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Noise robustness analysis across 6 noise levels ($\sigma \in [0, 0.5]$). Hensel-satisfied configurations maintain high periods even under additive Gaussian noise, while violated configurations degrade rapidly. This demonstrates that the period growth mechanism is robust to perturbations, a key property for cryptographic applications.}}{19}{figure.caption.12}\protected@file@percent }
 \newlabel{fig:noise_robustness}{{5}{19}{Noise robustness analysis across 6 noise levels ($\sigma \in [0, 0.5]$). Hensel-satisfied configurations maintain high periods even under additive Gaussian noise, while violated configurations degrade rapidly. This demonstrates that the period growth mechanism is robust to perturbations, a key property for cryptographic applications}{figure.caption.12}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.6}Optimal Prediction Bound (Theorem 11.1)}{19}{subsection.8.6}\protected@file@percent }
-\newlabel{sec:results:optimal}{{8.6}{19}{Optimal Prediction Bound (Theorem 11.1)}{subsection.8.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.6}Information-Theoretic Prediction Bound}{19}{subsection.8.6}\protected@file@percent }
+\newlabel{sec:results:optimal}{{8.6}{19}{Information-Theoretic Prediction Bound}{subsection.8.6}{}}
 \citation{Olah2020,Elhage2021}
+\citation{Olsson2022}
 \@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Optimal prediction bound verification ($N_{\mathrm  {train}}=3600$, $L_{\mathrm  {in}}=6$).}}{20}{table.caption.13}\protected@file@percent }
 \newlabel{tab:optimal_bound}{{8}{20}{Optimal prediction bound verification ($N_{\mathrm {train}}=3600$, $L_{\mathrm {in}}=6$)}{table.caption.13}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.7}LC-NC Separation (Theorem 12.1)}{20}{subsection.8.7}\protected@file@percent }
-\newlabel{sec:results:separation}{{8.7}{20}{LC-NC Separation (Theorem 12.1)}{subsection.8.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.7}Linear Complexity vs Neural Complexity: An Empirical Separation}{20}{subsection.8.7}\protected@file@percent }
+\newlabel{sec:results:separation}{{8.7}{20}{Linear Complexity vs Neural Complexity: An Empirical Separation}{subsection.8.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.8}Attention map analysis}{20}{subsection.8.8}\protected@file@percent }
 \newlabel{sec:results:attn}{{8.8}{20}{Attention map analysis}{subsection.8.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.8.1}Induction Head Impossibility}{21}{subsubsection.8.8.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Transformer attention analysis for $p=5$, $m=125$, $L_{\mathrm  {in}}=32$. Left: Attention heatmap showing diffuse, unstructured pattern. Right: Spearman correlation between attention weights and $p$-adic distance ($\rho = -0.255$, $p = 0.159$, not significant). The attention mechanism fails to correlate with $p$-adic structure, demonstrating architectural blindness to hierarchical mathematical patterns.}}{21}{figure.caption.14}\protected@file@percent }
 \newlabel{fig:padic_attention}{{6}{21}{Transformer attention analysis for $p=5$, $m=125$, $L_{\mathrm {in}}=32$. Left: Attention heatmap showing diffuse, unstructured pattern. Right: Spearman correlation between attention weights and $p$-adic distance ($\rho = -0.255$, $p = 0.159$, not significant). The attention mechanism fails to correlate with $p$-adic structure, demonstrating architectural blindness to hierarchical mathematical patterns}{figure.caption.14}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {9}$p$-adic Measure Theory and Ergodic Interpretation}{21}{section.9}\protected@file@percent }
 \newlabel{sec:padic_measure}{{9}{21}{$p$-adic Measure Theory and Ergodic Interpretation}{section.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}The $p$-adic metric space}{21}{subsection.9.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Measure-preserving dynamics}{21}{subsection.9.2}\protected@file@percent }
-\newlabel{thm:measure_preserving}{{9.2}{21}{Measure Preservation Under Hensel Condition}{theorem.9.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}The $p$-adic metric space}{22}{subsection.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Measure-preserving dynamics}{22}{subsection.9.2}\protected@file@percent }
+\newlabel{thm:measure_preserving}{{9.2}{22}{Measure Preservation Under Hensel Condition}{theorem.9.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Ergodic properties and mixing}{22}{subsection.9.3}\protected@file@percent }
 \newlabel{conj:ergodic}{{9.3}{22}{Ergodicity of $\tilde {f}$}{theorem.9.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Computational ergodicity verification}{22}{subsection.9.4}\protected@file@percent }
-\newlabel{sec:ergodicity_verification}{{9.4}{22}{Computational ergodicity verification}{subsection.9.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Ergodicity measures for Hensel-satisfied vs violated configurations.}}{22}{table.caption.15}\protected@file@percent }
-\newlabel{tab:ergodicity}{{9}{22}{Ergodicity measures for Hensel-satisfied vs violated configurations}{table.caption.15}{}}
-\citation{Bartlett1998}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Empirical Metrics of Topological Mixing}{23}{subsection.9.4}\protected@file@percent }
+\newlabel{sec:ergodicity_verification}{{9.4}{23}{Empirical Metrics of Topological Mixing}{subsection.9.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Ergodicity measures for Hensel-satisfied vs violated configurations.}}{23}{table.caption.15}\protected@file@percent }
+\newlabel{tab:ergodicity}{{9}{23}{Ergodicity measures for Hensel-satisfied vs violated configurations}{table.caption.15}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {9.5}Implications for neural predictability}{23}{subsection.9.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10}Information-Theoretic Bounds and Heuristic Scaling Laws}{23}{section.10}\protected@file@percent }
-\newlabel{sec:neural_theory}{{10}{23}{Information-Theoretic Bounds and Heuristic Scaling Laws}{section.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Information-theoretic lower bound}{23}{subsection.10.1}\protected@file@percent }
-\newlabel{thm:sample_complexity}{{10.1}{23}{Sample Complexity Lower Bound}{theorem.10.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}VC dimension of neural architectures}{23}{subsection.10.2}\protected@file@percent }
+\citation{Bartlett1998}
 \citation{Hahn2020}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Information-Theoretic Bounds and Heuristic Scaling Laws}{24}{section.10}\protected@file@percent }
+\newlabel{sec:neural_theory}{{10}{24}{Information-Theoretic Bounds and Heuristic Scaling Laws}{section.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Information-theoretic lower bound}{24}{subsection.10.1}\protected@file@percent }
+\newlabel{thm:sample_complexity}{{10.1}{24}{Sample Complexity Lower Bound}{theorem.10.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}VC dimension of neural architectures}{24}{subsection.10.2}\protected@file@percent }
 \citation{Neyshabur2017}
 \citation{Jiang2020}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Deriving the critical threshold}{24}{subsection.10.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Refined bound via Rademacher complexity}{24}{subsection.10.4}\protected@file@percent }
-\newlabel{thm:rademacher}{{10.2}{24}{Rademacher-based Sample Complexity}{theorem.10.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.5}Empirical formula: The "21" law}{25}{subsection.10.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {11}Testing Architectural Modifications: p-adic Positional Encoding}{25}{section.11}\protected@file@percent }
-\newlabel{sec:padic_encoding}{{11}{25}{Testing Architectural Modifications: p-adic Positional Encoding}{section.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Hypothesis}{25}{subsection.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Deriving the critical threshold}{25}{subsection.10.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Refined bound via Rademacher complexity}{25}{subsection.10.4}\protected@file@percent }
+\newlabel{thm:rademacher}{{10.2}{25}{Rademacher-based Sample Complexity}{theorem.10.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.5}Empirical formula: The "21" law}{26}{subsection.10.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Testing Architectural Modifications: p-adic Positional Encoding}{26}{section.11}\protected@file@percent }
+\newlabel{sec:padic_encoding}{{11}{26}{Testing Architectural Modifications: p-adic Positional Encoding}{section.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Hypothesis}{26}{subsection.11.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {11.2}$p$-adic positional encoding design}{26}{subsection.11.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Experimental validation}{26}{subsection.11.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.4}Results}{26}{subsection.11.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Validation accuracy for different positional encodings on hard sequence ($m=125$, $T=7295$, $T/L=228$). All encodings perform at random baseline, confirming the failure is information-theoretic.}}{26}{table.caption.16}\protected@file@percent }
-\newlabel{tab:padic_pe}{{10}{26}{Validation accuracy for different positional encodings on hard sequence ($m=125$, $T=7295$, $T/L=228$). All encodings perform at random baseline, confirming the failure is information-theoretic}{table.caption.16}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.5}Interpretation}{26}{subsection.11.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Experimental validation}{27}{subsection.11.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.4}Results}{27}{subsection.11.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Validation accuracy for different positional encodings on hard sequence ($m=125$, $T=7295$, $T/L=228$). All encodings perform at random baseline, confirming the failure is information-theoretic.}}{27}{table.caption.16}\protected@file@percent }
+\newlabel{tab:padic_pe}{{10}{27}{Validation accuracy for different positional encodings on hard sequence ($m=125$, $T=7295$, $T/L=228$). All encodings perform at random baseline, confirming the failure is information-theoretic}{table.caption.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.5}Interpretation}{27}{subsection.11.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {11.6}Implications}{27}{subsection.11.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {12}Discussion}{27}{section.12}\protected@file@percent }
-\newlabel{sec:discussion}{{12}{27}{Discussion}{section.12}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}$T/L_{\mathrm  {in}}$ as an operational hardness parameter}{27}{subsection.12.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}Why the Transformer does not fix the problem}{27}{subsection.12.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.3}The $p$-adic attention hypothesis}{27}{subsection.12.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.4}Limitations}{28}{subsection.12.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {13}Conclusion}{28}{section.13}\protected@file@percent }
-\newlabel{sec:conclusion}{{13}{28}{Conclusion}{section.13}{}}
-\@writefile{toc}{\contentsline {paragraph}{Priorities for future work.}{29}{section.13}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Acknowledgments.}{29}{Item.12}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A}Period Computation: Implementation}{30}{section.A}\protected@file@percent }
-\newlabel{app:period}{{A}{30}{Period Computation: Implementation}{section.A}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {B}Trajectory Period Verification}{30}{section.B}\protected@file@percent }
-\newlabel{app:traj}{{B}{30}{Trajectory Period Verification}{section.B}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {C}MLP Hyperparameter Sensitivity}{30}{section.C}\protected@file@percent }
-\newlabel{app:mlp}{{C}{30}{MLP Hyperparameter Sensitivity}{section.C}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {D}Transformer Architecture Details}{30}{section.D}\protected@file@percent }
-\newlabel{app:transformer}{{D}{30}{Transformer Architecture Details}{section.D}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12}Discussion}{28}{section.12}\protected@file@percent }
+\newlabel{sec:discussion}{{12}{28}{Discussion}{section.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}$T/L_{\mathrm  {in}}$ as an operational hardness parameter}{28}{subsection.12.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}Why the Transformer does not fix the problem}{28}{subsection.12.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.3}The $p$-adic attention hypothesis}{28}{subsection.12.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.4}Kolmogorov Complexity vs Neural Complexity}{28}{subsection.12.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.5}Limitations}{29}{subsection.12.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13}Conclusion}{30}{section.13}\protected@file@percent }
+\newlabel{sec:conclusion}{{13}{30}{Conclusion}{section.13}{}}
+\@writefile{toc}{\contentsline {paragraph}{Priorities for future work.}{30}{section.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Acknowledgments.}{30}{Item.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A}Period Computation: Implementation}{31}{section.A}\protected@file@percent }
+\newlabel{app:period}{{A}{31}{Period Computation: Implementation}{section.A}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Trajectory Period Verification}{31}{section.B}\protected@file@percent }
+\newlabel{app:traj}{{B}{31}{Trajectory Period Verification}{section.B}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C}MLP Hyperparameter Sensitivity}{31}{section.C}\protected@file@percent }
+\newlabel{app:mlp}{{C}{31}{MLP Hyperparameter Sensitivity}{section.C}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {D}Transformer Architecture Details}{31}{section.D}\protected@file@percent }
+\newlabel{app:transformer}{{D}{31}{Transformer Architecture Details}{section.D}{}}
 \bibstyle{plainnat}
 \bibcite{Berlekamp1968}{{1}{1968}{{Berlekamp}}{{}}}
 \bibcite{BM1984}{{2}{1984}{{Blum \& Micali}}{{}}}
@@ -181,4 +184,5 @@
 \bibcite{Jiang2020}{{16}{2020}{{Jiang et al.}}{{}}}
 \bibcite{Olah2020}{{17}{2020}{{Olah et al.}}{{}}}
 \bibcite{Elhage2021}{{18}{2021}{{Elhage et al.}}{{}}}
-\gdef \@abspage@last{31}
+\bibcite{Olsson2022}{{19}{2022}{{Olsson et al.}}{{}}}
+\gdef \@abspage@last{33}
