@@ -1,97 +1,97 @@
-\contentsline {section}{\numberline {1}Introduction}{7}{section.1}%
-\contentsline {subsection}{\numberline {1.1}The No Free Lunch Theorem and the Limits of Scaling}{7}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Motivation: Understanding neural limits}{7}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Background: Linear complexity and its limits}{7}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Our approach: Piecewise affine maps and Hensel lifting}{8}{subsection.1.4}%
-\contentsline {subsection}{\numberline {1.5}What this paper contributes}{8}{subsection.1.5}%
-\contentsline {subsection}{\numberline {1.6}Dataset and what the models are trained on}{9}{subsection.1.6}%
-\contentsline {subsection}{\numberline {1.7}Roadmap}{9}{subsection.1.7}%
-\contentsline {section}{\numberline {2}Mathematical Framework}{9}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Piecewise affine maps over residue rings}{9}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}The Hensel index}{10}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Canonical matrix families}{10}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Main Theoretical Results}{10}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Theorem 1: Monodromy-Controlled Lift Growth}{11}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Theorem 2: Totient Lower Bound for the Canonical Family}{11}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Observation: Neural Hardness Threshold}{12}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Observation: $p$-adic Attention Hypothesis (Tested)}{13}{subsection.3.4}%
-\contentsline {section}{\numberline {4}Algebraic Proof of $\mathrm {GL}_2$ Surjectivity}{13}{section.4}%
-\contentsline {section}{\numberline {5}Algebraic Attack Analysis}{14}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Polynomial System Attack}{14}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}CRT Decomposition Attack}{14}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Lattice-Based Attack}{15}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Summary}{16}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}NIST SP 800-22 Statistical Test Suite}{16}{subsection.5.5}%
-\contentsline {section}{\numberline {6}Hensel Lifting and Period Growth}{19}{section.6}%
-\contentsline {subsection}{\numberline {6.1}The fixed-point lifting theorem}{19}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Regime boundaries and the piecewise complication}{19}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}From fixed points to periods}{19}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Why a closed-form formula fails}{20}{subsection.6.4}%
-\contentsline {section}{\numberline {7}Functional Graph Structure}{20}{section.7}%
-\contentsline {section}{\numberline {8}Experimental Methods}{20}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Sequence generation}{20}{subsection.8.1}%
-\contentsline {paragraph}{Trajectory period.}{20}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Linear complexity}{21}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}MLP neural attack}{21}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}PyTorch Transformer}{22}{subsection.8.4}%
-\contentsline {subsection}{\numberline {8.5}Configurations}{22}{subsection.8.5}%
-\contentsline {section}{\numberline {9}Results}{22}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Cross-prime period table}{22}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Linear complexity}{23}{subsection.9.2}%
-\contentsline {subsection}{\numberline {9.3}Neural attack accuracy}{23}{subsection.9.3}%
-\contentsline {paragraph}{The Hensel-violated anomaly.}{23}{table.caption.11}%
-\contentsline {paragraph}{Accuracy decay with increasing $T/L_{\mathrm {in}}$.}{24}{table.caption.11}%
-\contentsline {paragraph}{Precise transition characterization.}{24}{table.caption.11}%
-\contentsline {paragraph}{Grokking experiments reveal optimization barrier (NEW).}{25}{table.caption.12}%
-\contentsline {subsection}{\numberline {9.4}LSTM and Transformer results}{25}{subsection.9.4}%
-\contentsline {subsection}{\numberline {9.5}State Space Model (SSM) experiments}{26}{subsection.9.5}%
-\contentsline {subsection}{\numberline {9.6}Information-Theoretic Prediction Bound}{27}{subsection.9.6}%
-\contentsline {subsection}{\numberline {9.7}Linear Complexity vs Neural Complexity: An Empirical Separation}{28}{subsection.9.7}%
-\contentsline {subsection}{\numberline {9.8}Attention map analysis}{28}{subsection.9.8}%
-\contentsline {subsubsection}{\numberline {9.8.1}Induction Head Impossibility}{29}{subsubsection.9.8.1}%
-\contentsline {section}{\numberline {10}$p$-adic Measure Theory and Ergodic Interpretation}{30}{section.10}%
-\contentsline {subsection}{\numberline {10.1}The $p$-adic metric space}{30}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Measure-preserving dynamics}{30}{subsection.10.2}%
-\contentsline {subsection}{\numberline {10.3}Ergodic properties and mixing}{31}{subsection.10.3}%
-\contentsline {subsection}{\numberline {10.4}Empirical Metrics of Topological Mixing}{31}{subsection.10.4}%
-\contentsline {subsection}{\numberline {10.5}Implications for neural predictability}{32}{subsection.10.5}%
-\contentsline {section}{\numberline {11}Information-Theoretic Bounds and Heuristic Scaling Laws}{32}{section.11}%
-\contentsline {subsection}{\numberline {11.1}Coverage bound (provable)}{32}{subsection.11.1}%
-\contentsline {subsection}{\numberline {11.2}Empirical gradient-memorization constant}{33}{subsection.11.2}%
-\contentsline {section}{\numberline {12}Testing Architectural Modifications: p-adic Positional Encoding}{33}{section.12}%
-\contentsline {subsection}{\numberline {12.1}Hypothesis}{33}{subsection.12.1}%
-\contentsline {subsection}{\numberline {12.2}$p$-adic positional encoding design}{33}{subsection.12.2}%
-\contentsline {subsection}{\numberline {12.3}Experimental validation}{33}{subsection.12.3}%
-\contentsline {subsection}{\numberline {12.4}Results}{34}{subsection.12.4}%
-\contentsline {subsection}{\numberline {12.5}Interpretation}{34}{subsection.12.5}%
-\contentsline {subsection}{\numberline {12.6}Implications}{35}{subsection.12.6}%
-\contentsline {section}{\numberline {13}Real Cipher Validation}{35}{section.13}%
-\contentsline {subsection}{\numberline {13.1}Experimental Setup}{35}{subsection.13.1}%
-\contentsline {subsection}{\numberline {13.2}Results}{35}{subsection.13.2}%
-\contentsline {subsection}{\numberline {13.3}Security Implications}{36}{subsection.13.3}%
-\contentsline {section}{\numberline {14}Discussion}{36}{section.14}%
-\contentsline {subsection}{\numberline {14.1}Three distinct failure layers}{36}{subsection.14.1}%
-\contentsline {subsection}{\numberline {14.2}$T/L_{\mathrm {in}}$ as an operational hardness parameter}{36}{subsection.14.2}%
-\contentsline {subsection}{\numberline {14.3}Why the Transformer does not fix the problem}{36}{subsection.14.3}%
-\contentsline {subsection}{\numberline {14.4}The Chain-of-Thought Computational Depth Limit}{37}{subsection.14.4}%
-\contentsline {subsection}{\numberline {14.5}Delayed Generalization and the Optimization Barrier}{38}{subsection.14.5}%
-\contentsline {subsection}{\numberline {14.6}The $p$-adic attention hypothesis}{38}{subsection.14.6}%
-\contentsline {subsection}{\numberline {14.7}Kolmogorov Complexity vs Neural Complexity}{38}{subsection.14.7}%
-\contentsline {subsection}{\numberline {14.8}Limitations}{39}{subsection.14.8}%
-\contentsline {section}{\numberline {15}Conclusion}{40}{section.15}%
-\contentsline {subsection}{\numberline {15.1}What we have shown}{40}{subsection.15.1}%
-\contentsline {subsection}{\numberline {15.2}What this means}{40}{subsection.15.2}%
-\contentsline {subsection}{\numberline {15.3}What remains open}{41}{subsection.15.3}%
-\contentsline {subsection}{\numberline {15.4}Priorities for future work}{41}{subsection.15.4}%
-\contentsline {subsection}{\numberline {15.5}Final thoughts}{42}{subsection.15.5}%
-\contentsline {paragraph}{Acknowledgments.}{42}{subsection.15.5}%
-\contentsline {section}{\numberline {A}Computational Evidence for Key Conjectures}{43}{section.A}%
-\contentsline {subsection}{\numberline {A.1}GL2 Surjectivity (Stronger than Irreducibility)}{43}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}p=17 Anomaly: Why Super-Linear Growth Holds Despite $\Lambda _{\max } < p$}{44}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}Irreducibility Verification (Original Result)}{44}{subsection.A.3}%
-\contentsline {subsection}{\numberline {A.4}Ergodicity Analysis (Conjecture 9.3 Partial Proof)}{45}{subsection.A.4}%
-\contentsline {subsection}{\numberline {A.5}Real Cipher Attack Results}{45}{subsection.A.5}%
-\contentsline {section}{\numberline {B}Period Computation: Implementation}{46}{section.B}%
-\contentsline {section}{\numberline {C}Trajectory Period Verification}{46}{section.C}%
-\contentsline {section}{\numberline {D}MLP Hyperparameter Sensitivity}{46}{section.D}%
-\contentsline {section}{\numberline {E}Transformer Architecture Details}{47}{section.E}%
+\contentsline {section}{\numberline {1}Introduction}{6}{section.1}%
+\contentsline {subsection}{\numberline {1.1}The No Free Lunch Theorem and the Limits of Scaling}{6}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Motivation: Understanding neural limits}{6}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Background: Linear complexity and its limits}{6}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Our approach: Piecewise affine maps and Hensel lifting}{7}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}What this paper contributes}{7}{subsection.1.5}%
+\contentsline {subsection}{\numberline {1.6}Dataset and what the models are trained on}{8}{subsection.1.6}%
+\contentsline {subsection}{\numberline {1.7}Roadmap}{8}{subsection.1.7}%
+\contentsline {section}{\numberline {2}Mathematical Framework}{8}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Piecewise affine maps over residue rings}{8}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}The Hensel index}{9}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Canonical matrix families}{9}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Main Theoretical Results}{9}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Theorem 1: Monodromy-Controlled Lift Growth}{10}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Theorem 2: Totient Lower Bound for the Canonical Family}{10}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Observation: Neural Hardness Threshold}{11}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Observation: $p$-adic Attention Hypothesis (Tested)}{12}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Algebraic Proof of $\mathrm {GL}_2$ Surjectivity}{12}{section.4}%
+\contentsline {section}{\numberline {5}Algebraic Attack Analysis}{13}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Polynomial System Attack}{13}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}CRT Decomposition Attack}{13}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Lattice-Based Attack}{14}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Summary}{15}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}NIST SP 800-22 Statistical Test Suite}{15}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Hensel Lifting and Period Growth}{18}{section.6}%
+\contentsline {subsection}{\numberline {6.1}The fixed-point lifting theorem}{18}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Regime boundaries and the piecewise complication}{18}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}From fixed points to periods}{18}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Why a closed-form formula fails}{19}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Functional Graph Structure}{19}{section.7}%
+\contentsline {section}{\numberline {8}Experimental Methods}{19}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Sequence generation}{19}{subsection.8.1}%
+\contentsline {paragraph}{Trajectory period.}{19}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Linear complexity}{20}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}MLP neural attack}{20}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}PyTorch Transformer}{21}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Configurations}{21}{subsection.8.5}%
+\contentsline {section}{\numberline {9}Results}{21}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Cross-prime period table}{21}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Linear complexity}{22}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Neural attack accuracy}{22}{subsection.9.3}%
+\contentsline {paragraph}{The Hensel-violated anomaly.}{22}{table.caption.11}%
+\contentsline {paragraph}{Accuracy decay with increasing $T/L_{\mathrm {in}}$.}{23}{table.caption.11}%
+\contentsline {paragraph}{Precise transition characterization.}{23}{table.caption.11}%
+\contentsline {paragraph}{Grokking experiments reveal optimization barrier (NEW).}{24}{table.caption.12}%
+\contentsline {subsection}{\numberline {9.4}LSTM and Transformer results}{24}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}State Space Model (SSM) experiments}{25}{subsection.9.5}%
+\contentsline {subsection}{\numberline {9.6}Information-Theoretic Prediction Bound}{26}{subsection.9.6}%
+\contentsline {subsection}{\numberline {9.7}Linear Complexity vs Neural Complexity: An Empirical Separation}{27}{subsection.9.7}%
+\contentsline {subsection}{\numberline {9.8}Attention map analysis}{27}{subsection.9.8}%
+\contentsline {subsubsection}{\numberline {9.8.1}Induction Head Impossibility}{28}{subsubsection.9.8.1}%
+\contentsline {section}{\numberline {10}$p$-adic Measure Theory and Ergodic Interpretation}{29}{section.10}%
+\contentsline {subsection}{\numberline {10.1}The $p$-adic metric space}{29}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Measure-preserving dynamics}{29}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Ergodic properties and mixing}{30}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Empirical Metrics of Topological Mixing}{30}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}Implications for neural predictability}{31}{subsection.10.5}%
+\contentsline {section}{\numberline {11}Information-Theoretic Bounds and Heuristic Scaling Laws}{31}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Coverage bound (provable)}{31}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Empirical gradient-memorization constant}{32}{subsection.11.2}%
+\contentsline {section}{\numberline {12}Testing Architectural Modifications: p-adic Positional Encoding}{32}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Hypothesis}{32}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}$p$-adic positional encoding design}{32}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}Experimental validation}{32}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Results}{33}{subsection.12.4}%
+\contentsline {subsection}{\numberline {12.5}Interpretation}{33}{subsection.12.5}%
+\contentsline {subsection}{\numberline {12.6}Implications}{34}{subsection.12.6}%
+\contentsline {section}{\numberline {13}Real Cipher Validation}{34}{section.13}%
+\contentsline {subsection}{\numberline {13.1}Experimental Setup}{34}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Results}{34}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}Security Implications}{35}{subsection.13.3}%
+\contentsline {section}{\numberline {14}Discussion}{35}{section.14}%
+\contentsline {subsection}{\numberline {14.1}Three distinct failure layers}{35}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}$T/L_{\mathrm {in}}$ as an operational hardness parameter}{35}{subsection.14.2}%
+\contentsline {subsection}{\numberline {14.3}Why the Transformer does not fix the problem}{35}{subsection.14.3}%
+\contentsline {subsection}{\numberline {14.4}The Chain-of-Thought Computational Depth Limit}{36}{subsection.14.4}%
+\contentsline {subsection}{\numberline {14.5}Delayed Generalization and the Optimization Barrier}{37}{subsection.14.5}%
+\contentsline {subsection}{\numberline {14.6}The $p$-adic attention hypothesis}{37}{subsection.14.6}%
+\contentsline {subsection}{\numberline {14.7}Kolmogorov Complexity vs Neural Complexity}{37}{subsection.14.7}%
+\contentsline {subsection}{\numberline {14.8}Limitations}{38}{subsection.14.8}%
+\contentsline {section}{\numberline {15}Conclusion}{39}{section.15}%
+\contentsline {subsection}{\numberline {15.1}What we have shown}{39}{subsection.15.1}%
+\contentsline {subsection}{\numberline {15.2}What this means}{39}{subsection.15.2}%
+\contentsline {subsection}{\numberline {15.3}What remains open}{40}{subsection.15.3}%
+\contentsline {subsection}{\numberline {15.4}Priorities for future work}{40}{subsection.15.4}%
+\contentsline {subsection}{\numberline {15.5}Final thoughts}{41}{subsection.15.5}%
+\contentsline {paragraph}{Acknowledgments.}{41}{subsection.15.5}%
+\contentsline {section}{\numberline {A}Computational Evidence for Key Conjectures}{42}{section.A}%
+\contentsline {subsection}{\numberline {A.1}GL2 Surjectivity (Stronger than Irreducibility)}{42}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}p=17 Anomaly: Why Super-Linear Growth Holds Despite $\Lambda _{\max } < p$}{43}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Irreducibility Verification (Original Result)}{43}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}Ergodicity Analysis (Conjecture 9.3 Partial Proof)}{44}{subsection.A.4}%
+\contentsline {subsection}{\numberline {A.5}Real Cipher Attack Results}{44}{subsection.A.5}%
+\contentsline {section}{\numberline {B}Period Computation: Implementation}{45}{section.B}%
+\contentsline {section}{\numberline {C}Trajectory Period Verification}{45}{section.C}%
+\contentsline {section}{\numberline {D}MLP Hyperparameter Sensitivity}{45}{section.D}%
+\contentsline {section}{\numberline {E}Transformer Architecture Details}{46}{section.E}%

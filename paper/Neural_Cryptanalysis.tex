@@ -50,7 +50,7 @@
 \newcommand{\NC}{\mathrm{NC}}
 
 % ════════════════════════════════════════════════════════════════════════════
-\title{Algebraic Surjectivity and Super-Linear Period Growth in $p$-Adic Piecewise Affine Maps}\\[7pt]
+\title{Algebraic Surjectivity and Super-Linear Period Growth in $p$-Adic Piecewise Affine Maps\\[7pt]
   \large Hensel Lifting, Irreducibility, Ergodicity,\\
   and Information-Theoretic Limits of Neural Learning
 }
@@ -150,7 +150,7 @@ The model is trained to predict the next output residue from a window of six con
 
 The paper is organized as follows. Sections~\ref{sec:framework}--\ref{sec:fgraph} develop the mathematical framework: piecewise affine maps, the Hensel index, and functional graph structure. Section~\ref{sec:theorems} presents four main theorems with complete proofs. Section~\ref{sec:algebraic} analyzes algebraic attacks (polynomial systems, CRT, lattice-based). Sections~\ref{sec:hensel}--\ref{sec:fgraph} explain the Hensel lifting mechanism and why it drives period growth.
 
-Section~\ref{sec:related} positions this work within six research communities. Section~\ref{sec:methods} describes the experimental pipeline: sequence generation, linear complexity computation, and neural architectures. Section~\ref{sec:results} presents all numerical results: cross-prime period validation (168 primes), linear complexity measurements, neural attack accuracy, SSM experiments, and attention analysis. Section~\ref{sec:padic_measure} develops the $p$-adic measure-theoretic interpretation and ergodic properties. Section~\ref{sec:neural_theory} derives information-theoretic bounds for the neural threshold. Section~\ref{sec:padic_encoding} tests whether $p$-adic positional encodings can overcome the failure. Section~\ref{sec:real_ciphers} validates the T/Lin threshold law on real cryptographic primitives.
+We position this work within the context of six related research communities. Section~\ref{sec:methods} describes the experimental pipeline: sequence generation, linear complexity computation, and neural architectures. Section~\ref{sec:results} presents all numerical results: cross-prime period validation (168 primes), linear complexity measurements, neural attack accuracy, SSM experiments, and attention analysis. Section~\ref{sec:padic_measure} develops the $p$-adic measure-theoretic interpretation and ergodic properties. Section~\ref{sec:neural_theory} derives information-theoretic bounds for the neural threshold. Section~\ref{sec:padic_encoding} tests whether $p$-adic positional encodings can overcome the failure. Section~\ref{sec:real_ciphers} validates the T/Lin threshold law on real cryptographic primitives.
 
 Section~\ref{sec:discussion} interprets the findings and explicitly states limitations. Section~\ref{sec:conclusion} concludes with priorities for future work. Appendices provide implementation details, hyperparameter sensitivity analysis, and strong computational evidence.
 
@@ -383,7 +383,9 @@ Therefore, $PG$ cannot be contained in any proper maximal subgroup, implying $PG
 \end{proof}
 
 This theorem provides the critical algebraic foundation for super-linear period growth. By establishing that the Markov chain of matrix products performs a random walk over $\mathrm{SL}_2(\mathbb{F}_p)$, the sequence of monodromy matrices forms an expander graph, guaranteeing that the algebraic constraints of the Hensel condition are uniformly met across the state space.
-\n\n\section{Algebraic Attack Analysis}
+
+
+\section{Algebraic Attack Analysis}
 \label{sec:algebraic}
 
 We analyze three algebraic attack vectors: polynomial system solving, Chinese Remainder Theorem (CRT) decomposition, and lattice-based state recovery. All attacks are implemented in the accompanying \texttt{algebraic\_attacks.py} module.
