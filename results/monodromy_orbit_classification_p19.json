@@ -1,0 +1,55 @@
+{
+  "prime": 19,
+  "num_cycles_mod_p": 6,
+  "max_cycle_len_mod_p": 312,
+  "lambda_max": 120,
+  "lambda_mean": 50.0,
+  "p_over_r": 9.5,
+  "satisfies_linear_lift_bound_condition": true,
+  "generated_group_size": 61560,
+  "has_common_invariant_line": false,
+  "cycle_summaries": [
+    {
+      "cycle_length": 312,
+      "monodromy_det": 17,
+      "monodromy_trace": 11,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 18
+    },
+    {
+      "cycle_length": 12,
+      "monodromy_det": 16,
+      "monodromy_trace": 11,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 120
+    },
+    {
+      "cycle_length": 21,
+      "monodromy_det": 5,
+      "monodromy_trace": 17,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 18
+    },
+    {
+      "cycle_length": 13,
+      "monodromy_det": 1,
+      "monodromy_trace": 16,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 45
+    },
+    {
+      "cycle_length": 2,
+      "monodromy_det": 7,
+      "monodromy_trace": 16,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 9
+    },
+    {
+      "cycle_length": 1,
+      "monodromy_det": 17,
+      "monodromy_trace": 2,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 90
+    }
+  ]
+}

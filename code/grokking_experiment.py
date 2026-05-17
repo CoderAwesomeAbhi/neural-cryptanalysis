@@ -43,7 +43,7 @@ def create_dataset(sequence, L_in=6):
         y.append(sequence[i+L_in])
     return np.array(X), np.array(y)
 
-def train_with_grokking(config, max_epochs=100000, log_every=1000):
+def train_with_grokking(config, max_epochs=100000, log_every=1000, checkpoint_every=10000):
     """
     Train with high weight decay for grokking
     
@@ -51,11 +51,17 @@ def train_with_grokking(config, max_epochs=100000, log_every=1000):
         config: Sequence configuration (p, k, hensel_satisfied)
         max_epochs: Maximum training epochs
         log_every: Log accuracy every N epochs
+        checkpoint_every: Save checkpoint every N epochs
     """
     print(f"\n{'='*80}")
     print(f"GROKKING EXPERIMENT: {config['name']}")
     print(f"Training for {max_epochs} epochs with weight decay")
     print(f"{'='*80}\n")
+    
+    # Setup checkpoint directory
+    results_dir = Path(__file__).parent.parent / 'results'
+    results_dir.mkdir(exist_ok=True)
+    checkpoint_path = results_dir / f"checkpoint_{config['name'].replace(' ', '_')}.pt"
     
     # Generate sequence
     m = config['p'] ** config['k']
@@ -96,6 +102,25 @@ def train_with_grokking(config, max_epochs=100000, log_every=1000):
     val_accs = []
     test_accs = []
     epochs_logged = []
+    start_epoch = 0
+    best_val_acc = 0.0
+    grokking_epoch = None
+    
+    # Resume from checkpoint if exists
+    if checkpoint_path.exists():
+        print(f"Found checkpoint at {checkpoint_path}")
+        checkpoint = torch.load(checkpoint_path)
+        model.load_state_dict(checkpoint['model_state_dict'])
+        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        start_epoch = checkpoint['epoch'] + 1
+        train_losses = checkpoint['train_losses']
+        val_accs = checkpoint['val_accs']
+        test_accs = checkpoint['test_accs']
+        epochs_logged = checkpoint['epochs_logged']
+        best_val_acc = checkpoint['best_val_acc']
+        grokking_epoch = checkpoint.get('grokking_epoch')
+        print(f"Resuming from epoch {start_epoch}")
+        print(f"Best val acc so far: {best_val_acc:.1%}\n")
     
     train_loader = DataLoader(
         TensorDataset(X_train, y_train),
@@ -108,10 +133,7 @@ def train_with_grokking(config, max_epochs=100000, log_every=1000):
     print(f"T/L_in = {config.get('period', 0) / 6:.1f}")
     print(f"T/N_train = {config.get('period', 0) / n_train:.2f}\n")
     
-    best_val_acc = 0.0
-    grokking_epoch = None
-    
-    for epoch in tqdm(range(max_epochs), desc="Training"):
+    for epoch in tqdm(range(start_epoch, max_epochs), desc="Training", initial=start_epoch, total=max_epochs):
         # Training
         model.train()
         epoch_loss = 0.0
@@ -153,6 +175,22 @@ def train_with_grokking(config, max_epochs=100000, log_every=1000):
                 if epoch % (log_every * 10) == 0:
                     print(f"Epoch {epoch:6d}: Loss={epoch_loss/len(train_loader):.4f}, "
                           f"Val={val_acc:.1%}, Test={test_acc:.1%}, Best={best_val_acc:.1%}")
+        
+        # Save checkpoint periodically
+        if epoch > 0 and epoch % checkpoint_every == 0:
+            torch.save({
+                'epoch': epoch,
+                'model_state_dict': model.state_dict(),
+                'optimizer_state_dict': optimizer.state_dict(),
+                'train_losses': train_losses,
+                'val_accs': val_accs,
+                'test_accs': test_accs,
+                'epochs_logged': epochs_logged,
+                'best_val_acc': best_val_acc,
+                'grokking_epoch': grokking_epoch,
+                'config': config
+            }, checkpoint_path)
+            print(f"Checkpoint saved at epoch {epoch}")
     
     # Final results
     print(f"\n{'='*80}")
@@ -164,6 +202,11 @@ def train_with_grokking(config, max_epochs=100000, log_every=1000):
     else:
         print(f"  No grokking detected (never reached >90% accuracy)")
     print(f"{'='*80}\n")
+    
+    # Clean up checkpoint on successful completion
+    if checkpoint_path.exists():
+        checkpoint_path.unlink()
+        print(f"Checkpoint removed (training completed successfully)")
     
     # Save results
     results = {

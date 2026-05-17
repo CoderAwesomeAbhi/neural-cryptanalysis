@@ -1,0 +1,296 @@
+{
+  "5": {
+    "prime": 5,
+    "num_cycles_mod_p": 1,
+    "max_cycle_len_mod_p": 25,
+    "lambda_max": 5,
+    "lambda_mean": 5.0,
+    "p_over_r": 2.5,
+    "satisfies_linear_lift_bound_condition": true,
+    "generated_group_size": 480,
+    "has_common_invariant_line": false,
+    "cycle_summaries": [
+      {
+        "cycle_length": 25,
+        "monodromy_det": 2,
+        "monodromy_trace": 4,
+        "fiber_fixed_points": 5,
+        "fiber_max_orbit": 5
+      }
+    ]
+  },
+  "7": {
+    "prime": 7,
+    "num_cycles_mod_p": 4,
+    "max_cycle_len_mod_p": 29,
+    "lambda_max": 48,
+    "lambda_mean": 27.0,
+    "p_over_r": 3.5,
+    "satisfies_linear_lift_bound_condition": true,
+    "generated_group_size": 2016,
+    "has_common_invariant_line": false,
+    "cycle_summaries": [
+      {
+        "cycle_length": 11,
+        "monodromy_det": 6,
+        "monodromy_trace": 6,
+        "fiber_fixed_points": 0,
+        "fiber_max_orbit": 42
+      },
+      {
+        "cycle_length": 29,
+        "monodromy_det": 5,
+        "monodromy_trace": 1,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 12
+      },
+      {
+        "cycle_length": 8,
+        "monodromy_det": 4,
+        "monodromy_trace": 0,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 48
+      },
+      {
+        "cycle_length": 1,
+        "monodromy_det": 5,
+        "monodromy_trace": 2,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 6
+      }
+    ]
+  },
+  "11": {
+    "prime": 11,
+    "num_cycles_mod_p": 5,
+    "max_cycle_len_mod_p": 40,
+    "lambda_max": 110,
+    "lambda_mean": 39.0,
+    "p_over_r": 5.5,
+    "satisfies_linear_lift_bound_condition": true,
+    "generated_group_size": 13200,
+    "has_common_invariant_line": false,
+    "cycle_summaries": [
+      {
+        "cycle_length": 25,
+        "monodromy_det": 9,
+        "monodromy_trace": 6,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 10
+      },
+      {
+        "cycle_length": 40,
+        "monodromy_det": 10,
+        "monodromy_trace": 6,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 10
+      },
+      {
+        "cycle_length": 31,
+        "monodromy_det": 2,
+        "monodromy_trace": 5,
+        "fiber_fixed_points": 0,
+        "fiber_max_orbit": 55
+      },
+      {
+        "cycle_length": 23,
+        "monodromy_det": 5,
+        "monodromy_trace": 9,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 110
+      },
+      {
+        "cycle_length": 2,
+        "monodromy_det": 10,
+        "monodromy_trace": 5,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 10
+      }
+    ]
+  },
+  "13": {
+    "prime": 13,
+    "num_cycles_mod_p": 5,
+    "max_cycle_len_mod_p": 74,
+    "lambda_max": 156,
+    "lambda_mean": 39.2,
+    "p_over_r": 6.5,
+    "satisfies_linear_lift_bound_condition": true,
+    "generated_group_size": 26208,
+    "has_common_invariant_line": false,
+    "cycle_summaries": [
+      {
+        "cycle_length": 74,
+        "monodromy_det": 12,
+        "monodromy_trace": 7,
+        "fiber_fixed_points": 0,
+        "fiber_max_orbit": 156
+      },
+      {
+        "cycle_length": 29,
+        "monodromy_det": 7,
+        "monodromy_trace": 0,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 12
+      },
+      {
+        "cycle_length": 52,
+        "monodromy_det": 3,
+        "monodromy_trace": 9,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 12
+      },
+      {
+        "cycle_length": 13,
+        "monodromy_det": 8,
+        "monodromy_trace": 8,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 12
+      },
+      {
+        "cycle_length": 1,
+        "monodromy_det": 11,
+        "monodromy_trace": 2,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 4
+      }
+    ]
+  },
+  "17": {
+    "prime": 17,
+    "num_cycles_mod_p": 3,
+    "max_cycle_len_mod_p": 281,
+    "lambda_max": 136,
+    "lambda_mean": 74.66666666666667,
+    "p_over_r": 8.5,
+    "satisfies_linear_lift_bound_condition": true,
+    "generated_group_size": 78336,
+    "has_common_invariant_line": false,
+    "cycle_summaries": [
+      {
+        "cycle_length": 281,
+        "monodromy_det": 10,
+        "monodromy_trace": 2,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 72
+      },
+      {
+        "cycle_length": 3,
+        "monodromy_det": 7,
+        "monodromy_trace": 10,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 136
+      },
+      {
+        "cycle_length": 5,
+        "monodromy_det": 1,
+        "monodromy_trace": 14,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 16
+      }
+    ]
+  },
+  "19": {
+    "prime": 19,
+    "num_cycles_mod_p": 6,
+    "max_cycle_len_mod_p": 312,
+    "lambda_max": 120,
+    "lambda_mean": 50.0,
+    "p_over_r": 9.5,
+    "satisfies_linear_lift_bound_condition": true,
+    "generated_group_size": 61560,
+    "has_common_invariant_line": false,
+    "cycle_summaries": [
+      {
+        "cycle_length": 312,
+        "monodromy_det": 17,
+        "monodromy_trace": 11,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 18
+      },
+      {
+        "cycle_length": 12,
+        "monodromy_det": 16,
+        "monodromy_trace": 11,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 120
+      },
+      {
+        "cycle_length": 21,
+        "monodromy_det": 5,
+        "monodromy_trace": 17,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 18
+      },
+      {
+        "cycle_length": 13,
+        "monodromy_det": 1,
+        "monodromy_trace": 16,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 45
+      },
+      {
+        "cycle_length": 2,
+        "monodromy_det": 7,
+        "monodromy_trace": 16,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 9
+      },
+      {
+        "cycle_length": 1,
+        "monodromy_det": 17,
+        "monodromy_trace": 2,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 90
+      }
+    ]
+  },
+  "23": {
+    "prime": 23,
+    "num_cycles_mod_p": 5,
+    "max_cycle_len_mod_p": 456,
+    "lambda_max": 528,
+    "lambda_mean": 250.8,
+    "p_over_r": 11.5,
+    "satisfies_linear_lift_bound_condition": true,
+    "generated_group_size": 267168,
+    "has_common_invariant_line": false,
+    "cycle_summaries": [
+      {
+        "cycle_length": 456,
+        "monodromy_det": 13,
+        "monodromy_trace": 11,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 176
+      },
+      {
+        "cycle_length": 41,
+        "monodromy_det": 19,
+        "monodromy_trace": 12,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 528
+      },
+      {
+        "cycle_length": 26,
+        "monodromy_det": 18,
+        "monodromy_trace": 13,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 264
+      },
+      {
+        "cycle_length": 2,
+        "monodromy_det": 11,
+        "monodromy_trace": 16,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 22
+      },
+      {
+        "cycle_length": 4,
+        "monodromy_det": 6,
+        "monodromy_trace": 9,
+        "fiber_fixed_points": 1,
+        "fiber_max_orbit": 264
+      }
+    ]
+  }
+}

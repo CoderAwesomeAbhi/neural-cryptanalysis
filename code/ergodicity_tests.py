@@ -1,5 +1,5 @@
 """
-ergodicity.py — Corrected Experiment 2 (replaces spectral_gap.py)
+ergodicity_tests.py — Empirical Tests for Ergodicity (Experiment 2)
 
 ERGODICITY ANALYSIS FOR DETERMINISTIC PERIODIC SYSTEMS
 
@@ -15,12 +15,11 @@ The correct ergodicity measures for deterministic systems are:
        Full coverage ⟺ maximal orbit size ⟺ supports Conjecture 9.3.
   (E4) ENTROPY CONCENTRATION: empirical H(first component) vs log2(m).
 
-Conjecture 9.3 restated computationally:
+Conjecture 9.3 (UNPROVEN):
   For Hensel-sat configs: all four measures indicate high randomness.
   For Hensel-viol configs: at least one measure deviates significantly.
 
-This gives rigorous COMPUTATIONAL support for Conjecture 9.3 without
-claiming a proof of the full ergodicity result.
+This provides EMPIRICAL EVIDENCE for Conjecture 9.3, not a proof.
 """
 
 import sys, os

@@ -1,0 +1,34 @@
+{
+  "prime": 17,
+  "num_cycles_mod_p": 3,
+  "max_cycle_len_mod_p": 281,
+  "lambda_max": 136,
+  "lambda_mean": 74.66666666666667,
+  "p_over_r": 8.5,
+  "satisfies_linear_lift_bound_condition": true,
+  "generated_group_size": 78336,
+  "has_common_invariant_line": false,
+  "cycle_summaries": [
+    {
+      "cycle_length": 281,
+      "monodromy_det": 10,
+      "monodromy_trace": 2,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 72
+    },
+    {
+      "cycle_length": 3,
+      "monodromy_det": 7,
+      "monodromy_trace": 10,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 136
+    },
+    {
+      "cycle_length": 5,
+      "monodromy_det": 1,
+      "monodromy_trace": 14,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 16
+    }
+  ]
+}

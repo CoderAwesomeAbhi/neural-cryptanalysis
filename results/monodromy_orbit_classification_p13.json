@@ -1,0 +1,48 @@
+{
+  "prime": 13,
+  "num_cycles_mod_p": 5,
+  "max_cycle_len_mod_p": 74,
+  "lambda_max": 156,
+  "lambda_mean": 39.2,
+  "p_over_r": 6.5,
+  "satisfies_linear_lift_bound_condition": true,
+  "generated_group_size": 26208,
+  "has_common_invariant_line": false,
+  "cycle_summaries": [
+    {
+      "cycle_length": 74,
+      "monodromy_det": 12,
+      "monodromy_trace": 7,
+      "fiber_fixed_points": 0,
+      "fiber_max_orbit": 156
+    },
+    {
+      "cycle_length": 29,
+      "monodromy_det": 7,
+      "monodromy_trace": 0,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 12
+    },
+    {
+      "cycle_length": 52,
+      "monodromy_det": 3,
+      "monodromy_trace": 9,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 12
+    },
+    {
+      "cycle_length": 13,
+      "monodromy_det": 8,
+      "monodromy_trace": 8,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 12
+    },
+    {
+      "cycle_length": 1,
+      "monodromy_det": 11,
+      "monodromy_trace": 2,
+      "fiber_fixed_points": 1,
+      "fiber_max_orbit": 4
+    }
+  ]
+}

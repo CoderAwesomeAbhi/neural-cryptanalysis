@@ -1,0 +1,96 @@
+[
+  {
+    "p": 5,
+    "k": 2,
+    "m": 25,
+    "config": "sat",
+    "bijective_finite_map": true,
+    "birkhoff": {
+      "x0_norm": {
+        "space_avg": 0.5,
+        "time_avg_mean": 0.49452734375,
+        "time_avg_std": 0.01230049552436229,
+        "abs_gap": 0.005472656249999985
+      },
+      "x1_norm": {
+        "space_avg": 0.5,
+        "time_avg_mean": 0.49683723958333337,
+        "time_avg_std": 0.019078056705375858,
+        "abs_gap": 0.0031627604166666323
+      },
+      "halfspace": {
+        "space_avg": 0.48,
+        "time_avg_mean": 0.49409375,
+        "time_avg_std": 0.030909883507342747,
+        "abs_gap": 0.014093750000000016
+      },
+      "diag_band": {
+        "space_avg": 0.2608,
+        "time_avg_mean": 0.2689375,
+        "time_avg_std": 0.03502047392240717,
+        "abs_gap": 0.00813750000000002
+      }
+    },
+    "mixing_correlations": {
+      "1": 0.026144753975764174,
+      "2": 0.21587571191727914,
+      "5": -0.005558223382679533,
+      "10": 0.024987691350891086,
+      "20": -0.04070966677565035,
+      "50": 0.05534200684564169,
+      "100": 0.05660986950859481
+    },
+    "symbolic_quality": {
+      "entropy_norm": 0.9673724446146252,
+      "bigram_coverage": 0.2
+    },
+    "disclaimer": "Empirical diagnostics only; not a formal ergodicity proof."
+  },
+  {
+    "p": 5,
+    "k": 2,
+    "m": 25,
+    "config": "viol",
+    "bijective_finite_map": false,
+    "birkhoff": {
+      "x0_norm": {
+        "space_avg": 0.5,
+        "time_avg_mean": 0.49321354166666664,
+        "time_avg_std": 0.0003756143694188099,
+        "abs_gap": 0.006786458333333356
+      },
+      "x1_norm": {
+        "space_avg": 0.5,
+        "time_avg_mean": 0.41383854166666667,
+        "time_avg_std": 0.0007232272987757468,
+        "abs_gap": 0.08616145833333333
+      },
+      "halfspace": {
+        "space_avg": 0.48,
+        "time_avg_mean": 0.49978125,
+        "time_avg_std": 0.000744117556236898,
+        "abs_gap": 0.019781250000000028
+      },
+      "diag_band": {
+        "space_avg": 0.2608,
+        "time_avg_mean": 0.23378125000000002,
+        "time_avg_std": 0.0004408354993645593,
+        "abs_gap": 0.027018749999999953
+      }
+    },
+    "mixing_correlations": {
+      "1": -0.06780070593212068,
+      "2": 0.20564067053012836,
+      "5": 0.07063765270393571,
+      "10": -0.2064373068560843,
+      "20": 0.20363324141439712,
+      "50": 0.2036064914079354,
+      "100": -0.20539371291915307
+    },
+    "symbolic_quality": {
+      "entropy_norm": 0.8789553024895128,
+      "bigram_coverage": 0.048
+    },
+    "disclaimer": "Empirical diagnostics only; not a formal ergodicity proof."
+  }
+]

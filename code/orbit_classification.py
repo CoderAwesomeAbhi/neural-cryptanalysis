@@ -1,0 +1,288 @@
+"""
+Monodromy and orbit classification for piecewise affine maps over Z/pZ.
+
+Purpose:
+1. Classify cycles modulo p.
+2. Compute cycle monodromy matrices M_O.
+3. Compute induced affine fiber dynamics u -> M_O u + c_O on lifts p -> p^2.
+4. Quantify lift factors Lambda_O = max orbit length of the fiber map.
+
+This script provides computational evidence and structural diagnostics.
+It does NOT claim a full proof of Conjecture 3.2.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+from dataclasses import asdict, dataclass
+from pathlib import Path
+from typing import Dict, Iterable, List, Sequence, Tuple
+
+import numpy as np
+
+from generator import A0_CANON, A1_CANON, b0_CANON, b1_CANON
+
+
+State = Tuple[int, int]
+Mat2 = np.ndarray
+
+
+def apply_piecewise(x: np.ndarray, modulus: int, A_list: Sequence[Mat2], b_list: Sequence[np.ndarray]) -> np.ndarray:
+    """Apply one piecewise-affine step modulo `modulus`."""
+    r = len(A_list)
+    regime = int(x[0]) % r
+    return (A_list[regime] @ x + b_list[regime]) % modulus
+
+
+def enumerate_cycles_mod_p(p: int, A_list: Sequence[Mat2], b_list: Sequence[np.ndarray]) -> List[List[State]]:
+    """Enumerate all directed cycles in (Z/pZ)^2."""
+    visited: Dict[State, bool] = {}
+    cycles: List[List[State]] = []
+
+    for a in range(p):
+        for b in range(p):
+            start = (a, b)
+            if start in visited:
+                continue
+
+            x = np.array(start, dtype=np.int64)
+            trajectory: List[State] = []
+            index: Dict[State, int] = {}
+
+            while True:
+                s = (int(x[0]), int(x[1]))
+                if s in index:
+                    cyc = trajectory[index[s] :]
+                    cycles.append(cyc)
+                    for t in trajectory:
+                        visited[t] = True
+                    break
+                if s in visited:
+                    for t in trajectory:
+                        visited[t] = True
+                    break
+                index[s] = len(trajectory)
+                trajectory.append(s)
+                x = apply_piecewise(x, p, A_list, b_list)
+
+    return cycles
+
+
+def monodromy_for_cycle(cycle: Sequence[State], p: int, A_list: Sequence[Mat2]) -> Mat2:
+    """Compute M_O = A_{phi(y_{T-1})} ... A_{phi(y_0)} mod p for one cycle O."""
+    m = np.eye(2, dtype=np.int64)
+    r = len(A_list)
+    for y in cycle:
+        regime = y[0] % r
+        m = (A_list[regime] @ m) % p
+    return m
+
+
+def induced_fiber_affine_map(cycle: Sequence[State], p: int, A_list: Sequence[Mat2], b_list: Sequence[np.ndarray]) -> Tuple[Mat2, np.ndarray]:
+    """
+    Compute affine fiber map for f_{p^2}^{|O|} over one base cycle O mod p:
+        u -> M u + c,  u in (Z/pZ)^2.
+    """
+    modulus_hi = p * p
+    t0 = len(cycle)
+    y0 = np.array(cycle[0], dtype=np.int64)
+
+    A_hi = [a % modulus_hi for a in A_list]
+    b_hi = [b % modulus_hi for b in b_list]
+
+    def lift_iter(u: np.ndarray) -> np.ndarray:
+        x = (y0 + p * u) % modulus_hi
+        for _ in range(t0):
+            x = apply_piecewise(x, modulus_hi, A_hi, b_hi)
+        diff = (x - y0) % modulus_hi
+        return ((diff // p) % p).astype(np.int64)
+
+    u0 = np.array([0, 0], dtype=np.int64)
+    e1 = np.array([1, 0], dtype=np.int64)
+    e2 = np.array([0, 1], dtype=np.int64)
+
+    c = lift_iter(u0)
+    col1 = (lift_iter(e1) - c) % p
+    col2 = (lift_iter(e2) - c) % p
+    m = np.column_stack([col1, col2]) % p
+    return m.astype(np.int64), c.astype(np.int64)
+
+
+def affine_orbit_lengths(p: int, m: Mat2, c: np.ndarray) -> List[int]:
+    """Enumerate all orbit lengths for u -> M u + c on (Z/pZ)^2."""
+    seen: Dict[State, bool] = {}
+    lengths: List[int] = []
+
+    for a in range(p):
+        for b in range(p):
+            start = (a, b)
+            if start in seen:
+                continue
+
+            x = np.array(start, dtype=np.int64)
+            first_idx: Dict[State, int] = {}
+            seq: List[State] = []
+            while True:
+                s = (int(x[0]), int(x[1]))
+                if s in first_idx:
+                    cyc = seq[first_idx[s] :]
+                    lengths.append(len(cyc))
+                    for t in seq:
+                        seen[t] = True
+                    break
+                if s in seen:
+                    for t in seq:
+                        seen[t] = True
+                    break
+                first_idx[s] = len(seq)
+                seq.append(s)
+                x = (m @ x + c) % p
+    return lengths
+
+
+def affine_fixed_point_count(p: int, m: Mat2, c: np.ndarray) -> int:
+    """Count fixed points of affine map u -> M u + c over (Z/pZ)^2."""
+    count = 0
+    for a in range(p):
+        for b in range(p):
+            u = np.array([a, b], dtype=np.int64)
+            if np.array_equal((m @ u + c) % p, u):
+                count += 1
+    return count
+
+
+def group_generated_size(p: int, generators: Sequence[Mat2]) -> int:
+    """Size of subgroup generated by matrices in GL(2, F_p)."""
+    key = lambda x: tuple(int(v) for v in x.reshape(-1).tolist())
+    identity = np.eye(2, dtype=np.int64) % p
+    frontier = [identity]
+    seen = {key(identity): identity}
+
+    while frontier:
+        cur = frontier.pop()
+        for g in generators:
+            nxt = (g @ cur) % p
+            k = key(nxt)
+            if k not in seen:
+                seen[k] = nxt
+                frontier.append(nxt)
+    return len(seen)
+
+
+def has_common_invariant_line(p: int, generators: Sequence[Mat2]) -> bool:
+    """Check if there exists a 1D subspace invariant under all generators."""
+
+    def normalize(v: np.ndarray) -> State:
+        x, y = int(v[0]) % p, int(v[1]) % p
+        if x == 0 and y == 0:
+            return (0, 0)
+        if x != 0:
+            inv = pow(x, -1, p)
+            return (1, (y * inv) % p)
+        return (0, 1)
+
+    lines = set()
+    for a in range(p):
+        for b in range(p):
+            if a == 0 and b == 0:
+                continue
+            lines.add(normalize(np.array([a, b], dtype=np.int64)))
+
+    for line in lines:
+        v = np.array(line, dtype=np.int64)
+        if np.array_equal(v, np.array([0, 0], dtype=np.int64)):
+            continue
+        ok = True
+        for g in generators:
+            w = (g @ v) % p
+            if normalize(w) != line:
+                ok = False
+                break
+        if ok:
+            return True
+    return False
+
+
+@dataclass
+class CycleSummary:
+    cycle_length: int
+    monodromy_det: int
+    monodromy_trace: int
+    fiber_fixed_points: int
+    fiber_max_orbit: int
+
+
+def analyze_prime(p: int) -> Dict[str, object]:
+    """Run full cycle/monodromy/fiber analysis for one prime p."""
+    A_list = [A0_CANON % p, A1_CANON % p]
+    b_list = [b0_CANON % p, b1_CANON % p]
+    r = len(A_list)
+
+    cycles = enumerate_cycles_mod_p(p, A_list, b_list)
+    summaries: List[CycleSummary] = []
+    lambda_values: List[int] = []
+
+    for cyc in cycles:
+        mon = monodromy_for_cycle(cyc, p, A_list)
+        m_fib, c_fib = induced_fiber_affine_map(cyc, p, [A0_CANON, A1_CANON], [b0_CANON, b1_CANON])
+        lengths = affine_orbit_lengths(p, m_fib, c_fib)
+        lam = max(lengths) if lengths else 0
+        lambda_values.append(lam)
+        det_mon = int((int(mon[0, 0]) * int(mon[1, 1]) - int(mon[0, 1]) * int(mon[1, 0])) % p)
+        summaries.append(
+            CycleSummary(
+                cycle_length=len(cyc),
+                monodromy_det=det_mon,
+                monodromy_trace=int(np.trace(mon) % p),
+                fiber_fixed_points=affine_fixed_point_count(p, m_fib, c_fib),
+                fiber_max_orbit=lam,
+            )
+        )
+
+    gens = [A0_CANON % p, A1_CANON % p]
+    result = {
+        "prime": p,
+        "num_cycles_mod_p": len(cycles),
+        "max_cycle_len_mod_p": max((len(c) for c in cycles), default=0),
+        "lambda_max": max(lambda_values, default=0),
+        "lambda_mean": float(np.mean(lambda_values)) if lambda_values else 0.0,
+        "p_over_r": float(p) / float(r),
+        "satisfies_linear_lift_bound_condition": max(lambda_values, default=0) >= (p / r),
+        "generated_group_size": group_generated_size(p, gens),
+        "has_common_invariant_line": has_common_invariant_line(p, gens),
+        "cycle_summaries": [asdict(s) for s in summaries],
+    }
+    return result
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Monodromy and orbit classification diagnostics")
+    parser.add_argument("--primes", type=int, nargs="+", default=[5, 7, 11, 13], help="Primes to analyze")
+    args = parser.parse_args()
+
+    results_dir = Path(__file__).resolve().parents[1] / "results"
+    results_dir.mkdir(exist_ok=True)
+
+    all_results: Dict[int, Dict[str, object]] = {}
+    for p in args.primes:
+        res = analyze_prime(p)
+        all_results[p] = res
+        out_file = results_dir / f"monodromy_orbit_classification_p{p}.json"
+        with out_file.open("w", encoding="utf-8") as f:
+            json.dump(res, f, indent=2)
+        print(
+            f"p={p}: cycles={res['num_cycles_mod_p']}, "
+            f"lambda_max={res['lambda_max']}, p/r={res['p_over_r']:.2f}, "
+            f"group_size={res['generated_group_size']}, "
+            f"invariant_line={res['has_common_invariant_line']}"
+        )
+
+    merged_file = results_dir / "monodromy_orbit_classification_all.json"
+    with merged_file.open("w", encoding="utf-8") as f:
+        json.dump(all_results, f, indent=2)
+    print(f"Saved analysis to {merged_file}")
+
+
+if __name__ == "__main__":
+    main()

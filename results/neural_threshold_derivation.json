@@ -1,0 +1,99 @@
+{
+  "model": "coverage_bound + empirical_gradient_constant",
+  "notes": "c_grad is fitted from data, not a theorem.",
+  "thresholds_baseline": {
+    "c_grad": 12.155663915978995,
+    "t_crit": 296.1582374178418,
+    "t_over_l_crit": 49.35970623630697
+  },
+  "rows": [
+    {
+      "name": "PW-3R m=35",
+      "m": 35,
+      "T": 10,
+      "L": 6,
+      "N": 3600,
+      "rho": 360.0,
+      "observed_acc": 1.0,
+      "coverage_upper_bound": 1.0,
+      "fitted_model_acc": 0.9999999999998664
+    },
+    {
+      "name": "Linear m=5",
+      "m": 5,
+      "T": 25,
+      "L": 6,
+      "N": 3600,
+      "rho": 144.0,
+      "observed_acc": 1.0,
+      "coverage_upper_bound": 1.0,
+      "fitted_model_acc": 0.9999942681547622
+    },
+    {
+      "name": "H-viol m=25",
+      "m": 25,
+      "T": 30,
+      "L": 6,
+      "N": 3600,
+      "rho": 120.0,
+      "observed_acc": 1.0,
+      "coverage_upper_bound": 1.0,
+      "fitted_model_acc": 0.9999504616401371
+    },
+    {
+      "name": "H-sat m=25",
+      "m": 25,
+      "T": 125,
+      "L": 6,
+      "N": 3600,
+      "rho": 28.8,
+      "observed_acc": 1.0,
+      "coverage_upper_bound": 1.0,
+      "fitted_model_acc": 0.9101925992940316
+    },
+    {
+      "name": "H-sat m=49",
+      "m": 49,
+      "T": 1083,
+      "L": 6,
+      "N": 3600,
+      "rho": 3.3240997229916895,
+      "observed_acc": 0.163,
+      "coverage_upper_bound": 1.0,
+      "fitted_model_acc": 0.25478332471631304
+    },
+    {
+      "name": "H-sat m=121",
+      "m": 121,
+      "T": 4912,
+      "L": 6,
+      "N": 3600,
+      "rho": 0.7328990228013029,
+      "observed_acc": 0.073,
+      "coverage_upper_bound": 0.7351064688938541,
+      "fitted_model_acc": 0.06629207481384299
+    },
+    {
+      "name": "H-sat m=125",
+      "m": 125,
+      "T": 7295,
+      "L": 6,
+      "N": 3600,
+      "rho": 0.49348869088416725,
+      "observed_acc": 0.026,
+      "coverage_upper_bound": 0.4975407813570939,
+      "fitted_model_acc": 0.04746611681743612
+    },
+    {
+      "name": "H-sat m=169",
+      "m": 169,
+      "T": 20475,
+      "L": 6,
+      "N": 3600,
+      "rho": 0.17582417582417584,
+      "observed_acc": 0.022,
+      "coverage_upper_bound": 0.18070095584888485,
+      "fitted_model_acc": 0.02019246386089522
+    }
+  ]
+}

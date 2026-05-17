@@ -1,0 +1,112 @@
+[
+  {
+    "name": "LFSR-3bit (T=7)",
+    "T_estimate": "7",
+    "T_over_L": "1.2",
+    "mean_accuracy": 1.0,
+    "mean_advantage": 1.0,
+    "std_advantage": 0.0,
+    "distinguishable": true,
+    "prediction": "LEARNABLE",
+    "correct": true
+  },
+  {
+    "name": "LFSR-7bit (T=127)",
+    "T_estimate": "127",
+    "T_over_L": "21.2",
+    "mean_accuracy": 1.0,
+    "mean_advantage": 1.0,
+    "std_advantage": 0.0,
+    "distinguishable": true,
+    "prediction": "LEARNABLE",
+    "correct": true
+  },
+  {
+    "name": "LFSR-15bit (T=32767)",
+    "T_estimate": "32767",
+    "T_over_L": "5461",
+    "mean_accuracy": 1.0,
+    "mean_advantage": 1.0,
+    "std_advantage": 0.0,
+    "distinguishable": true,
+    "prediction": "UNLEARNABLE",
+    "correct": false
+  },
+  {
+    "name": "LFSR-31bit (T=2^31)",
+    "T_estimate": "2147483647",
+    "T_over_L": "360000000.0",
+    "mean_accuracy": 1.0,
+    "mean_advantage": 1.0,
+    "std_advantage": 0.0,
+    "distinguishable": true,
+    "prediction": "UNLEARNABLE",
+    "correct": false
+  },
+  {
+    "name": "p-adic easy (p=5,k=1)",
+    "T_estimate": "25",
+    "T_over_L": "4.2",
+    "mean_accuracy": 1.0,
+    "mean_advantage": 1.0,
+    "std_advantage": 0.0,
+    "distinguishable": true,
+    "prediction": "LEARNABLE",
+    "correct": true
+  },
+  {
+    "name": "p-adic med (p=5,k=2)",
+    "T_estimate": "125",
+    "T_over_L": "20.8",
+    "mean_accuracy": 1.0,
+    "mean_advantage": 1.0,
+    "std_advantage": 0.0,
+    "distinguishable": true,
+    "prediction": "LEARNABLE",
+    "correct": true
+  },
+  {
+    "name": "p-adic hard (p=5,k=3)",
+    "T_estimate": "7295",
+    "T_over_L": "1216",
+    "mean_accuracy": 0.9941666523615519,
+    "mean_advantage": 0.9883333047231039,
+    "std_advantage": 0.0026246809186043817,
+    "distinguishable": true,
+    "prediction": "UNLEARNABLE",
+    "correct": false
+  },
+  {
+    "name": "p-adic hard (p=7,k=2)",
+    "T_estimate": "1083",
+    "T_over_L": "180.5",
+    "mean_accuracy": 1.0,
+    "mean_advantage": 1.0,
+    "std_advantage": 0.0,
+    "distinguishable": true,
+    "prediction": "UNLEARNABLE",
+    "correct": false
+  },
+  {
+    "name": "Trivium",
+    "T_estimate": "497323236409786642155382248146820840100456150797347717440463976893159497012533375533056",
+    "T_over_L": ">>",
+    "mean_accuracy": 1.0,
+    "mean_advantage": 1.0,
+    "std_advantage": 0.0,
+    "distinguishable": true,
+    "prediction": "UNLEARNABLE",
+    "correct": false
+  },
+  {
+    "name": "ChaCha20-4r",
+    "T_estimate": "18446744073709551616",
+    "T_over_L": ">>",
+    "mean_accuracy": 1.0,
+    "mean_advantage": 1.0,
+    "std_advantage": 0.0,
+    "distinguishable": true,
+    "prediction": "UNLEARNABLE",
+    "correct": false
+  }
+]

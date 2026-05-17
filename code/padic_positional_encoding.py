@@ -8,6 +8,10 @@ import torch.nn as nn
 import numpy as np
 from generator import PiecewiseAffineGenerator
 
+# Set random seeds for reproducibility
+torch.manual_seed(42)
+np.random.seed(42)
+
 class PadicPositionalEncoding(nn.Module):
     """
     p-adic positional encoding that respects p-adic distance.
@@ -32,9 +36,11 @@ class PadicPositionalEncoding(nn.Module):
             temp = pos
             for i in range(min(k_max, d_model)):
                 digit = temp % p
-                # Encode digit with sine/cosine for smoothness
-                pe[pos, i*2] = np.sin(2 * np.pi * digit / p) if i*2 < d_model else 0
-                pe[pos, i*2+1] = np.cos(2 * np.pi * digit / p) if i*2+1 < d_model else 0
+                # Encode digit with sine/cosine for smoothness (with proper bounds checking)
+                if i*2 < d_model:
+                    pe[pos, i*2] = np.sin(2 * np.pi * digit / p)
+                if i*2+1 < d_model:
+                    pe[pos, i*2+1] = np.cos(2 * np.pi * digit / p)
                 temp //= p
         
         self.register_buffer('pe', pe)
@@ -78,9 +84,11 @@ class HybridPositionalEncoding(nn.Module):
             temp = pos
             for i in range(min(k_max, d_model)):
                 digit = temp % p
-                # Encode digit with sine/cosine
-                pe_padic[pos, i*2] = np.sin(2 * np.pi * digit / p) if i*2 < d_model else 0
-                pe_padic[pos, i*2+1] = np.cos(2 * np.pi * digit / p) if i*2+1 < d_model else 0
+                # Encode digit with sine/cosine (with proper bounds checking)
+                if i*2 < d_model:
+                    pe_padic[pos, i*2] = np.sin(2 * np.pi * digit / p)
+                if i*2+1 < d_model:
+                    pe_padic[pos, i*2+1] = np.cos(2 * np.pi * digit / p)
                 temp //= p
         self.register_buffer('pe_padic', pe_padic)
         

@@ -115,8 +115,12 @@ def hensel_index(A: np.ndarray, p: int) -> int:
 
     Returns 0  if det(A-I) ≢ 0 (mod p)   [Hensel-satisfied]
     Returns k>=1 if p^k | det(A-I) but p^{k+1} ∤ det(A-I)
-    Returns infinity  (represented as 999) if det(A-I) = 0 (practically impossible
-              for our matrices away from trivial cases)
+    Returns 999 (representing ∞) if det(A-I) = 0 over ℤ
+    
+    NOTE: For A0_VIOL = [[2,1],[1,2]], we have:
+          det(A0_VIOL - I) = det([[1,1],[1,1]]) = 0 over ℤ
+          This means δ(A0_VIOL) = ∞ (not just ≡ 0 mod p for some p).
+          We represent ∞ as 999 since it's not a valid p-adic valuation.
     """
     I2 = np.eye(2, dtype=np.int64)
     val = int(det2x2_mod((A - I2).astype(np.int64), p))
@@ -385,7 +389,7 @@ def compute_max_period(
     m: int,
     A_list: List[np.ndarray],
     b_list: List[np.ndarray],
-    n_starts: int = 500,
+    n_starts: int = 15,
     seed: int = 42,
     exhaustive_threshold: int = 2500,
 ) -> int:

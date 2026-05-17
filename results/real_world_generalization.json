@@ -1,0 +1,57 @@
+{
+  "seed": 42,
+  "ciphers": {
+    "trivium": [
+      {
+        "l_in": 6,
+        "n_train": 3600,
+        "n_test": 1000,
+        "accuracy": 0.52,
+        "baseline": 0.519,
+        "advantage": 0.0010000000000000009
+      },
+      {
+        "l_in": 24,
+        "n_train": 3600,
+        "n_test": 1000,
+        "accuracy": 0.494,
+        "baseline": 0.523,
+        "advantage": -0.029000000000000026
+      },
+      {
+        "l_in": 64,
+        "n_train": 3600,
+        "n_test": 1000,
+        "accuracy": 0.514,
+        "baseline": 0.524,
+        "advantage": -0.010000000000000009
+      }
+    ],
+    "chacha20": [
+      {
+        "l_in": 6,
+        "n_train": 3600,
+        "n_test": 1000,
+        "accuracy": 0.486,
+        "baseline": 0.521,
+        "advantage": -0.03500000000000003
+      },
+      {
+        "l_in": 24,
+        "n_train": 3600,
+        "n_test": 1000,
+        "accuracy": 0.522,
+        "baseline": 0.519,
+        "advantage": 0.0030000000000000027
+      },
+      {
+        "l_in": 64,
+        "n_train": 3600,
+        "n_test": 1000,
+        "accuracy": 0.461,
+        "baseline": 0.524,
+        "advantage": -0.063
+      }
+    ]
+  }
+}
