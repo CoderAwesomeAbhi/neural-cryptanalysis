@@ -329,7 +329,15 @@ The sequence has period $T$, so there are exactly $T$ distinct transitions. The 
 
 For a neural network to learn a transition, it must see it multiple times to distinguish signal from noise. Empirical observation (Table~\ref{tab:neural}) shows that MLPs and Transformers require $\approx 20$--$30$ examples per transition to achieve $>90\%$ accuracy. This gives $c \approx 25$.
 
-When $T > N_{\mathrm{train}}/c$, we have $\rho < c$, so most transitions appear fewer than $c$ times. The network cannot reliably learn the mapping, and accuracy collapses to near-random baseline. This is precisely what we observe in Figure~\ref{fig:phase_transition}: all configurations with $T/L_{\mathrm{in}} > 180$ (equivalently $T > 1080 \approx N_{\mathrm{train}}/3.3$) achieve $\leq 16.3\%$ accuracy.
+When $T > N_{\mathrm{train}}/c$, we have $\rho < c$, so most transitions appear fewer than $c$ times. The network cannot reliably learn the mapping, and accuracy collapses to near-random baseline.
+
+\textbf{The Three-Regime Transition View:}
+Rather than a single discrete threshold point, the transition is a continuous statistical phase transition characterized by three distinct physical regimes:
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Fully Learnable Regime ($T/L_{\mathrm{in}} < 21$):} Here, $T \le N_{\mathrm{train}}/28.8$, giving a repetition ratio $\rho \ge 28.8$. Perfect predictability (100\% validation accuracy) is achieved because the network has ample repeating examples to map the transition graph.
+\item \textbf{The Degradation Region ($T/L_{\mathrm{in}} \in [35, 150]$):} Here, $\rho$ falls in $[4.0, 17.0]$. The network is in a transitional state: it can learn some recurring sub-patterns but lacks the sample coverage to generalize fully, causing validation accuracy to decay smoothly from 85\% down to 18\% as a function of the under-sampling.
+\item \textbf{Complete Collapse Regime ($T/L_{\mathrm{in}} \ge 200$):} Here, $\rho \le 2.8$. Almost all transitions are unique or seen only once. The network cannot extract generalizable rules, and performance collapses entirely to the random guess baseline.
+\end{itemize}
 
 \textbf{Note:} This is an empirical sample-complexity law, not a universal constant. In the notation of Definition~\ref{def:neural_complexity}, the observed $c\approx 25$ is the practical repetition budget needed to reach $\mathrm{Acc}\ge 0.9$ under our architecture/training protocol.
 
@@ -490,7 +498,7 @@ Composite $5 \times 7$ & 35 & LOW & MEDIUM & MEDIUM & LOW\\
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.85\textwidth]{../results/aes_comparison.png}
+\includegraphics[width=0.85\textwidth]{figures/aes_comparison.png}
 \caption{Comparison of piecewise affine generator (Hensel-satisfied, $p=5$, $k=3$, $m=125$) with AES-128 in CTR mode. Both generators produce sequences with high entropy and pass basic randomness tests, but the piecewise generator has provable period bounds via Hensel lifting theory.}
 \label{fig:aes_comparison}
 \end{figure}
@@ -637,7 +645,7 @@ The \emph{functional graph} $G_f$ of $f\colon S \to S$ has vertex set $S$ and ed
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.95\textwidth]{../results/lifting_tree.png}
+\includegraphics[width=0.95\textwidth]{figures/lifting_tree.png}
 \caption{$p$-adic lifting tree visualization for $p \in \{5,7,11,13\}$ across extension levels $k \in \{1,2,3\}$. \textbf{Left panel:} Hensel-satisfied configuration shows unique lifting with period multipliers $8.5\times$ and $34.4\times$ for $p=5$. \textbf{Right panel:} Hensel-violated configuration exhibits collapsed lifting with slower growth ($10\times$ and $15.6\times$). The hierarchical structure demonstrates how solutions lift from $\Z/5\Z \to \Z/25\Z \to \Z/125\Z$ under the Hensel condition. \textbf{Note:} For $p=11$, the computed values are $T(11)=40$, $T(11^2)=4{,}912$ (ratio $122.8\times$), $T(11^3)=14{,}801$ (ratio $3.0\times$); the non-monotone ratio at $k=3$ is an inter-regime boundary effect (see Appendix~\ref{app:gl2}).}
 \label{fig:lifting_tree}
 \end{figure}
@@ -716,7 +724,7 @@ Table~\ref{tab:periods} presents the main period data. Three patterns hold witho
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.95\textwidth]{../results/prime_sweep_results.png}
+\includegraphics[width=0.95\textwidth]{figures/prime_sweep_results.png}
 \caption{Period growth across 168 primes ($p \in [2, 997]$) for Hensel-satisfied (blue) and Hensel-violated (orange) configurations at $k=2$. Mean growth ratio: $26.94\times$ (max $79.42\times$). The super-linear scaling is evident in the accelerating gap between satisfied and violated configurations.}
 \label{fig:prime_sweep}
 \end{figure}
@@ -812,7 +820,12 @@ $p=13$ H-sat, $m=169$        & 169 & 20{,}475      & 3{,}413 & $2.2\% \pm 0.5\%$
 \end{tabular}
 \end{table}
 
-The data divide cleanly into two regimes: configurations with $T/L_{\mathrm{in}} \leq 20.8$ all achieve perfect accuracy, while configurations with $T/L_{\mathrm{in}} \geq 180.5$ fall below $17\%$ accuracy. The transition region lies in $(20.8, 180.5)$.
+The data divide cleanly into three regimes representing a continuous phase transition, rather than a single sharp step:
+\begin{enumerate}[leftmargin=2em,itemsep=2pt]
+\item \textbf{Fully Learnable Regime ($T/L_{\mathrm{in}} < 21$):} Every configuration achieves perfect top-1 validation accuracy ($100.0\% \pm 0.0\%$). At these ratios (e.g., $T/L_{\mathrm{in}} = 20.8$ for $m=25$), the sequence period is small enough relative to $L_{\mathrm{in}}$ and $N_{\mathrm{train}}$ that the network easily memorizes the state transition graph.
+\item \textbf{The Degradation Region ($T/L_{\mathrm{in}} \in [35, 150]$):} Validation accuracy declines smoothly and continuously without any sharp discontinuities. The onset of degradation begins near $T/L_{\mathrm{in}} \approx 35.3$ (validation accuracy drops to $85.1\%$) and slides down to $18.2\%$ at ratio $118.8$.
+\item \textbf{Complete Collapse Regime ($T/L_{\mathrm{in}} \ge 200$):} The period is so long that transition coverage is extremely poor ($N_{\mathrm{train}}/T \ll 1$), preventing gradient descent from finding any generalizable structure. The validation accuracy collapses entirely to the random guess baseline (e.g., $2.6\%$ for $m=125$, and $2.2\%$ for $m=169$).
+\end{enumerate}
 
 \paragraph{The Hensel-violated anomaly.} The H-viol $m=25$ configuration is perhaps the most important single row in the table. Its linear complexity ($\LC = 27$) is nine times larger than the trivial linear baseline ($\LC = 3$), yet the MLP predicts it to $100\%$ accuracy. The reason: the trajectory period is only $T = 30 = 5 L_{\mathrm{in}}$, giving the model five full cycles of training examples. This result shows directly that linear complexity and MLP predictability are different measures of sequence hardness. High LC does not imply neural unpredictability when the period is short.
 
@@ -842,20 +855,20 @@ $p=7$, $k=2$ & 49 & 1083 & 180.5 & $16.3 \pm 1.1$\\
 \end{tabular}
 \end{table}
 
-The transition is \emph{gradual rather than sharp}: accuracy declines smoothly from $\sim$85\% at $T/L_{\mathrm{in}}=35$ to $\sim$18\% at ratio 119, with no discontinuity. Near-random performance ($<20\%$) is reached in the range $T/L_{\mathrm{in}} \approx 100$--150. This places the operational threshold at roughly $T/L_{\mathrm{in}} \approx 35$--150.
+This detailed sweep confirms that the learnability boundary is a \emph{continuous statistical phase transition} rather than a sharp step function. The operational transition region spans $T/L_{\mathrm{in}} \approx 35$--$150$, where the network's capacity to predict transitions degrades monotonically as a function of under-sampling. By dividing the system into the three distinct regimes defined above (fully learnable, degradation, and complete collapse), we resolve any ambiguity regarding a single "threshold" number, demonstrating instead a physical transition governed by sample coverage.
 
 \paragraph{Grokking experiments reveal optimization barrier (NEW).} When trained for 2000 epochs with full period coverage ($N_{\mathrm{train}} = T$), networks achieve 100\% test accuracy for $T \in \{25, 50, 100\}$ (corresponding to $T/L_{\mathrm{in}} \in \{4.2, 8.3, 16.7\}$). All three configurations grokked from $\approx$20-40\% initial accuracy to 100\% by epoch 500, maintaining perfect accuracy through epoch 2000. This demonstrates that networks \emph{can} learn periodic structure when given sufficient training time and full period coverage. The barrier is primarily \emph{optimization} (insufficient training or data coverage) rather than information-theoretic impossibility. The mechanistic barrier (induction head formation) becomes dominant only at much higher $T/L_{\mathrm{in}}$ ratios where even full coverage fails.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.85\textwidth]{../results/phase_portrait.png}
+\includegraphics[width=0.85\textwidth]{figures/phase_portrait.png}
 \caption{Gradual transition in neural predictability. MLP accuracy declines from $100\%$ at $T/L_{\mathrm{in}}=4.8$ through $85\%$ at 35.3, $66\%$ at 46.8, $36\%$ at 76.0, and $18\%$ at 118.8, reaching near-random performance above ratio $\sim$150. The transition is gradual over $T/L_{\mathrm{in}} \approx 35$--150, not a sharp discontinuity. Ablation studies confirm stability across training sizes (1800--7200), model capacities (64--256 hidden), and context lengths (6--24), with $L_{\mathrm{in}}$ the primary bottleneck.}
 \label{fig:phase_transition}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.85\textwidth]{../results/noise_robustness.png}
+\includegraphics[width=0.85\textwidth]{figures/noise_robustness.png}
 \caption{Noise robustness analysis across 6 noise levels ($\sigma \in [0, 0.5]$). Hensel-satisfied configurations maintain high periods even under additive Gaussian noise, while violated configurations degrade rapidly. This demonstrates that the period growth mechanism is robust to perturbations, a key property for cryptographic applications.}
 \label{fig:noise_robustness}
 \end{figure}
@@ -992,7 +1005,7 @@ This mechanistic bound is a \emph{local-window} constraint and complements (rath
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.95\textwidth]{../results/padic_attention_analysis.png}
+\includegraphics[width=0.95\textwidth]{figures/padic_attention_analysis.png}
 \caption{Transformer attention analysis for $p=5$, $m=125$, $L_{\mathrm{in}}=32$. Left: Attention heatmap showing diffuse, unstructured pattern. Right: Spearman correlation between attention weights and $p$-adic distance ($\rho = -0.255$, $p = 0.159$, not significant). The attention mechanism fails to correlate with $p$-adic structure, demonstrating architectural blindness to hierarchical mathematical patterns.}
 \label{fig:padic_attention}
 \end{figure}
@@ -1372,7 +1385,7 @@ A_1 x_n + b_1 \pmod{m} & \text{if } x_0 \text{ odd}
 \end{equation}
 This requires only $O(1)$ bits to specify (two $2 \times 2$ matrices, two vectors, and the modulus $m$). Therefore, $K(s) = O(\log m)$, which is extremely low.
 
-Yet, as demonstrated in Section~\ref{sec:results:neural}, the Neural Complexity---measured by the minimum $T/L_{\mathrm{in}}$ ratio required for gradient-based learning---is massive. For $T=7295$ and $L_{\mathrm{in}}=6$, we have $T/L_{\mathrm{in}} \approx 1216$, far exceeding the learnable threshold of 21.
+Yet, as demonstrated in Section~\ref{sec:results:neural}, the Neural Complexity---measured by the minimum $T/L_{\mathrm{in}}$ ratio required for gradient-based learning---is massive. For $T=7295$ and $L_{\mathrm{in}}=6$, we have $T/L_{\mathrm{in}} \approx 1216$, far exceeding the learnable boundary (where perfect learning requires $T/L_{\mathrm{in}} < 21$, and complete collapse occurs for $T/L_{\mathrm{in}} \ge 200$).
 
 \textbf{The Paradox:} Transformers excel at compressing data with \emph{high local statistical redundancy} (natural language, images) even when the underlying Kolmogorov complexity is moderate. Natural language has relatively low $K(s)$ (it follows grammatical rules), but high local redundancy (words predict nearby words). Conversely, our algebraic sequences have \emph{low Kolmogorov complexity} ($K(s) = O(\log m)$) but \emph{zero local statistical redundancy}---each symbol is determined by a global period $T \gg L_{\mathrm{in}}$, not by local context.
 
@@ -1394,7 +1407,7 @@ We acknowledge several important limitations that constrain the generalizability
 
 \textit{(i) Single sequence evaluation for attention invariance.} The attention invariance to $p$-adic structure (Observation~\ref{obs:padic}) was evaluated on a single high-period sequence ($p=5$, $k=3$, $m=125$, $T=7295$) at a fixed context window ($L_{\mathrm{in}}=32$). While we validated period growth across 168 primes, the attention analysis requires extensive ablations across multiple primes ($p \in \{5, 7, 11\}$) and varying context lengths ($L_{\mathrm{in}} \in \{32, 64, 128, 256\}$) to fully establish this as a general architectural limitation rather than a configuration-specific observation.
 
-\textit{(ii) Single-seed neural threshold.} The neural resistance threshold $T/L_{\mathrm{in}} \approx 35$ was determined using a single random seed (seed=42) per configuration. While we report mean $\pm$ std over 5 seeds for accuracy measurements, the threshold location itself was not validated across multiple trajectory realizations. Appendix~\ref{app:traj} shows that seed choice affects trajectory period (e.g., seed=42 gives period 125 vs.\ state-space maximum 212 for $p=5$, $m=25$), which could shift the threshold boundary.
+\textit{(ii) Single-seed neural transition boundaries.} The transition boundaries ($T/L_{\mathrm{in}} \approx 35$--$150$) were determined using a single random seed (seed=42) per configuration. While we report mean $\pm$ std over 5 seeds for accuracy measurements, the boundary locations themselves were not validated across multiple trajectory realizations. Appendix~\ref{app:traj} shows that seed choice affects trajectory period (e.g., seed=42 gives period 125 vs.\ state-space maximum 212 for $p=5$, $m=25$), which could shift the transition zones.
 
 \textit{(iii) Synthetic sequences only.} All experiments use purely synthetic sequences generated by deterministic mathematical functions. There are no external datasets, no real-world noise, and no stochastic elements. Any claims about "neural predictability" are strictly confined to this specific mathematical setting. Whether these findings generalize to real-world cryptographic systems or noisy data remains an open question.
 
@@ -1410,7 +1423,7 @@ This paper establishes both mathematical and empirical limits for neural learnin
 
 \textbf{Mathematically:} The Hensel index $\delta_i = \vp(\det(A_i - \Id))$ controls period growth in piecewise affine systems. We prove a monodromy-based lift-growth theorem and a totient lower bound for the canonical family. Across 168 primes, Hensel-satisfied configurations achieve mean growth ratios of $27\times$ per extension (maximum $79\times$), outperforming violated configurations by factors up to $136\times$. Strict super-linear growth is strongly supported empirically but remains conjectural.
 
-\textbf{Computationally:} We quantify a sharp neural resistance threshold at $T/L_{\mathrm{in}} \approx 35$. Every configuration below this threshold achieves $100\%$ accuracy across all tested architectures (MLP, LSTM, Transformer, SSM). Every configuration above it collapses to near-random performance ($\leq 17\%$). This threshold is consistent across standard architectures and cannot be overcome through positional encoding modifications. Testing $p$-adic encodings designed to capture hierarchical structure yields no improvement (1.0\% vs 1.0\% baseline).
+\textbf{Computationally:} We characterize the learnability boundary as a continuous phase transition with three regimes: a fully learnable regime ($T/L_{\mathrm{in}} < 21$), a degradation region ($T/L_{\mathrm{in}} \in [35, 150]$), and a complete collapse regime ($T/L_{\mathrm{in}} \ge 200$). Every configuration below the degradation onset achieves $100\%$ accuracy across all tested architectures (MLP, LSTM, Transformer, SSM), whereas configurations in the collapse regime degrade to the random baseline ($\le 17\%$). This transition behavior is consistent across standard architectures and cannot be overcome through positional encoding modifications; testing $p$-adic encodings designed to capture hierarchical structure yields no improvement (1.5\% vs 1.0\% baseline).
 
 \textbf{Theoretically:} Failure has three layers: (i) information-theoretic transition coverage, (ii) gradient memorization requirements, and (iii) mechanistic local-repeat scarcity for induction heads. We prove the coverage bound and the bigram-repeat formula $\mathbb{E}[R_t]=\binom{L_{\mathrm{in}}}{2}/T$. For our hard configuration, this gives $15/7295\approx 0.21\%$ expected repeat mass per window, so induction-head evidence is negligible.
 
@@ -1430,7 +1443,7 @@ We acknowledge several important open problems:
 
 \textbf{2. Formal ergodicity proof.} Conjecture~\ref{conj:ergodic} proposes that Hensel-satisfied maps are ergodic on $\Z_p^2$ with respect to the Haar measure. We provide strong computational evidence (uniformity, decorrelation, state-space coverage), but a formal measure-theoretic proof requires techniques from symbolic dynamics and is left as future work.
 
-\textbf{3. Theoretical derivation of the neural threshold.} The $T/L_{\mathrm{in}} \approx 35$ threshold is empirical. While our information-theoretic argument (requiring $\rho \geq c$ repetitions per transition) explains the phenomenon, deriving the specific constant $c \approx 25$ from first principles using sample complexity theory remains open.
+\textbf{3. Theoretical derivation of the transition boundaries.} The transition boundaries (such as the onset of degradation at $T/L_{\mathrm{in}} \approx 35$) are empirical. While our information-theoretic argument (requiring $\rho \geq c$ repetitions per transition) explains the phenomenon, deriving the specific constant $c \approx 25$ from first principles using sample complexity theory remains open.
 
 \textbf{4. Generalization beyond synthetic sequences.} All experiments use purely synthetic sequences generated by deterministic mathematical functions. Whether these findings generalize to real-world cryptographic systems (Trivium, Grain, ChaCha) or noisy data requires further validation.
 
